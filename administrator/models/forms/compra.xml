@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset>
+    <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
+    <field name="ordering"/>
+    <field name="state" default="1" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1">
+      <option value="1">JPUBLISHED</option>
+      <option value="0">JUNPUBLISHED</option>
+      <option value="2">JARCHIVED</option>
+      <option value="-2">JTRASHED</option>
+    </field>
+    <field name="checked_out" type="hidden" filter="unset"/>
+    <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
+    <field name="created_by" type="createdby" default="0" label="COM_SERVIN2_FORM_LBL_COMPRA_CREATED_BY" description="COM_SERVIN2_FORM_DESC_COMPRA_CREATED_BY" hidden="true" hint="COM_SERVIN2_FORM_LBL_COMPRA_CREATED_BY"/>
+    <field name="modified_by" type="modifiedby" default="0" label="COM_SERVIN2_FORM_LBL_COMPRA_MODIFIED_BY" description="COM_SERVIN2_FORM_DESC_COMPRA_MODIFIED_BY" hidden="true" hint="COM_SERVIN2_FORM_LBL_COMPRA_MODIFIED_BY"/>
+    <field name="created_at" type="timecreated" label="COM_SERVIN2_FORM_LBL_COMPRA_CREATED_AT" description="COM_SERVIN2_FORM_DESC_COMPRA_CREATED_AT" hidden="true" hint="COM_SERVIN2_FORM_LBL_COMPRA_CREATED_AT"/>
+    <field name="modified_at" type="timecreated" label="COM_SERVIN2_FORM_LBL_COMPRA_MODIFIED_AT" description="COM_SERVIN2_FORM_DESC_COMPRA_MODIFIED_AT" hidden="true" hint="COM_SERVIN2_FORM_LBL_COMPRA_MODIFIED_AT"/>
+    <field name="fecha" class="inputbox" timeformat="12" filter="user_utc" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" label="COM_SERVIN2_FORM_LBL_COMPRA_FECHA" description="COM_SERVIN2_FORM_DESC_COMPRA_FECHA" hint="COM_SERVIN2_FORM_LBL_COMPRA_FECHA"/>
+    <field name="proveedor" type="foreignkey" label="COM_SERVIN2_FORM_LBL_COMPRA_PROVEEDOR" description="COM_SERVIN2_FORM_DESC_COMPRA_PROVEEDOR" class="inputbox" input_type="list" table="#__servin_proveedores2" key_field="id" value_multiple="1" value_field_multiple="empresa,nombre" value_field="fk_value" separator=" |" hide_trashed="1" default="0"/>
+    <field name="pieza" type="foreignkey" label="COM_SERVIN2_FORM_LBL_COMPRA_PIEZA" description="COM_SERVIN2_FORM_DESC_COMPRA_PIEZA" class="inputbox" input_type="list" table="#__servin_piezas2" key_field="id" value_multiple="1" value_field_multiple="descripcion,hechura" value_field="fk_value" separator=" " hide_trashed="1" default="0"/>
+    <field name="cantidad" filter="safehtml" min="0" step="1" type="number" required="true" default="0" label="COM_SERVIN2_FORM_LBL_COMPRA_CANTIDAD" description="COM_SERVIN2_FORM_DESC_COMPRA_CANTIDAD" hint="COM_SERVIN2_FORM_LBL_COMPRA_CANTIDAD"/>
+    <field name="total" filter="safehtml" min="0" step="0.01" type="number" label="COM_SERVIN2_FORM_LBL_COMPRA_TOTAL" description="COM_SERVIN2_FORM_DESC_COMPRA_TOTAL" hint="COM_SERVIN2_FORM_LBL_COMPRA_TOTAL"/>
+    <field name="abonado" filter="safehtml" min="0" step="0.01" type="number" label="COM_SERVIN2_FORM_LBL_COMPRA_ABONADO" description="COM_SERVIN2_FORM_DESC_COMPRA_ABONADO" hint="COM_SERVIN2_FORM_LBL_COMPRA_ABONADO"/>
+    <field name="pagada" type="checkbox" default="0" label="COM_SERVIN2_FORM_LBL_COMPRA_PAGADA" description="COM_SERVIN2_FORM_DESC_COMPRA_PAGADA" hint="COM_SERVIN2_FORM_LBL_COMPRA_PAGADA"/>
+    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+  </fieldset>
+</form>

@@ -1,0 +1,148 @@
+.icon-48-materiales {
+      background-image: url(../images/l_materiales.png);
+      padding-left:60px!important;
+}
+
+.icon-48-material {
+      background-image: url(../images/l_materiales.png);
+      padding-left:60px!important;
+}
+
+.color-box-materiales { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-kilatajes {
+      background-image: url(../images/l_kilatajes.png);
+      padding-left:60px!important;
+}
+
+.icon-48-kilataje {
+      background-image: url(../images/l_kilatajes.png);
+      padding-left:60px!important;
+}
+
+.color-box-kilatajes { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-ubicaciones {
+      background-image: url(../images/l_ubicaciones.png);
+      padding-left:60px!important;
+}
+
+.icon-48-ubicacione {
+      background-image: url(../images/l_ubicaciones.png);
+      padding-left:60px!important;
+}
+
+.color-box-ubicaciones { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-hechuras {
+      background-image: url(../images/l_hechuras.png);
+      padding-left:60px!important;
+}
+
+.icon-48-hechura {
+      background-image: url(../images/l_hechuras.png);
+      padding-left:60px!important;
+}
+
+.color-box-hechuras { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-piezas {
+      background-image: url(../images/l_piezas.png);
+      padding-left:60px!important;
+}
+
+.icon-48-pieza {
+      background-image: url(../images/l_piezas.png);
+      padding-left:60px!important;
+}
+
+.color-box-piezas { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-proveedores {
+      background-image: url(../images/l_proveedores.png);
+      padding-left:60px!important;
+}
+
+.icon-48-proveedor {
+      background-image: url(../images/l_proveedores.png);
+      padding-left:60px!important;
+}
+
+.color-box-proveedores { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-clientes {
+      background-image: url(../images/l_clientes.png);
+      padding-left:60px!important;
+}
+
+.icon-48-cliente {
+      background-image: url(../images/l_clientes.png);
+      padding-left:60px!important;
+}
+
+.color-box-clientes { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-compras {
+      background-image: url(../images/l_compras.png);
+      padding-left:60px!important;
+}
+
+.icon-48-compra {
+      background-image: url(../images/l_compras.png);
+      padding-left:60px!important;
+}
+
+.color-box-compras { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-ventas {
+      background-image: url(../images/l_ventas.png);
+      padding-left:60px!important;
+}
+
+.icon-48-venta {
+      background-image: url(../images/l_ventas.png);
+      padding-left:60px!important;
+}
+
+.color-box-ventas { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-consignaciones {
+      background-image: url(../images/l_consignaciones.png);
+      padding-left:60px!important;
+}
+
+.icon-48-consignacion {
+      background-image: url(../images/l_consignaciones.png);
+      padding-left:60px!important;
+}
+
+.color-box-consignaciones { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+.icon-48-pagos {
+      background-image: url(../images/l_pagos.png);
+      padding-left:60px!important;
+}
+
+.icon-48-pago {
+      background-image: url(../images/l_pagos.png);
+      padding-left:60px!important;
+}
+
+.color-box-pagos { 
+      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
+
+
+
+.other-filters{
+    padding: 0 14px;
+}

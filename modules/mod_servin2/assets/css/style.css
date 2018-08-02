@@ -1,0 +1,38 @@
+/**
+ * @version     CVS: 1.0.0
+ * @package     com_servin2
+ * @subpackage  mod_servin2
+ * @copyright   2018 Aldo Ulises
+ * @license     Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
+ * @author      Aldo Ulises <aldouli6@gmail.com>
+ */
+
+.field_name{
+    width: 16.66666666666667%;
+    display: inline-block;
+    float: left;
+}
+
+.field_value{
+    width: 83.33333333333333%;
+    display: inline-block;
+    float:left;
+}
+
+.table{
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.table tr{
+    border: none;
+}
+
+.table td, .table th{
+    padding: 8px;
+    line-height: 18px;
+    text-align: left;
+    vertical-align: top;
+    border: none;
+    border-top: 1px solid #ddd;
+}

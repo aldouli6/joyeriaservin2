@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset>
+    <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
+    <field name="ordering"/>
+    <field name="state" default="1" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1">
+      <option value="1">JPUBLISHED</option>
+      <option value="0">JUNPUBLISHED</option>
+      <option value="2">JARCHIVED</option>
+      <option value="-2">JTRASHED</option>
+    </field>
+    <field name="checked_out" type="hidden" filter="unset"/>
+    <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
+    <field name="created_by" type="createdby" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_CREATED_BY" description="COM_SERVIN2_FORM_DESC_PIEZA_CREATED_BY" hidden="true" hint="COM_SERVIN2_FORM_LBL_PIEZA_CREATED_BY"/>
+    <field name="modified_by" type="modifiedby" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_MODIFIED_BY" description="COM_SERVIN2_FORM_DESC_PIEZA_MODIFIED_BY" hidden="true" hint="COM_SERVIN2_FORM_LBL_PIEZA_MODIFIED_BY"/>
+    <field name="modified_at" type="timecreated" label="COM_SERVIN2_FORM_LBL_PIEZA_MODIFIED_AT" description="COM_SERVIN2_FORM_DESC_PIEZA_MODIFIED_AT" hidden="true" hint="COM_SERVIN2_FORM_LBL_PIEZA_MODIFIED_AT"/>
+    <field name="created_at" type="timecreated" label="COM_SERVIN2_FORM_LBL_PIEZA_CREATED_AT" description="COM_SERVIN2_FORM_DESC_PIEZA_CREATED_AT" hidden="true" hint="COM_SERVIN2_FORM_LBL_PIEZA_CREATED_AT"/>
+    <field name="descripcion" filter="safehtml" type="textarea" label="COM_SERVIN2_FORM_LBL_PIEZA_DESCRIPCION" description="COM_SERVIN2_FORM_DESC_PIEZA_DESCRIPCION" hint="COM_SERVIN2_FORM_LBL_PIEZA_DESCRIPCION"/>
+    <field name="material" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PIEZA_MATERIAL" description="COM_SERVIN2_FORM_DESC_PIEZA_MATERIAL" class="inputbox" input_type="list" table="#__servin_materiales2" key_field="id" value_field="nombre" hide_trashed="1" required="true" default=""/>
+    <field name="kilataje" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PIEZA_KILATAJE" description="COM_SERVIN2_FORM_DESC_PIEZA_KILATAJE" class="inputbox" input_type="list" table="#__servin_kilatajes2" key_field="id" value_field="kilataje" hide_trashed="1" default="0"/>
+    <field name="ubicacion" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PIEZA_UBICACION" description="COM_SERVIN2_FORM_DESC_PIEZA_UBICACION" class="inputbox" input_type="list" table="#__servin_ubicaciones2" key_field="id" value_field="nombre" hide_trashed="1" required="true" default=""/>
+    <field name="hechura" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PIEZA_HECHURA" description="COM_SERVIN2_FORM_DESC_PIEZA_HECHURA" class="inputbox" input_type="list" table="#__servin_hechuras2" key_field="id" value_field="numero" hide_trashed="1" required="true" default=""/>
+    <field name="tipo" default="0" type="radio" required="true" label="COM_SERVIN2_FORM_LBL_PIEZA_TIPO" description="COM_SERVIN2_FORM_DESC_PIEZA_TIPO" hint="COM_SERVIN2_FORM_LBL_PIEZA_TIPO">
+      <option value="0">COM_SERVIN2_PIEZAS_TIPO_OPTION_0</option>
+      <option value="1">COM_SERVIN2_PIEZAS_TIPO_OPTION_1</option>
+    </field>
+    <field name="gramos" filter="safehtml" min="0" step="0.01" type="number" required="true" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_GRAMOS" description="COM_SERVIN2_FORM_DESC_PIEZA_GRAMOS" hint="COM_SERVIN2_FORM_LBL_PIEZA_GRAMOS" showon="tipo:0"/>
+    <field name="cantidad" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_CANTIDAD" description="COM_SERVIN2_FORM_DESC_PIEZA_CANTIDAD" hint="COM_SERVIN2_FORM_LBL_PIEZA_CANTIDAD" showon="tipo:1"/>
+    <field name="estatus" default="1" type="radio" required="true" label="COM_SERVIN2_FORM_LBL_PIEZA_ESTATUS" description="COM_SERVIN2_FORM_DESC_PIEZA_ESTATUS" hint="COM_SERVIN2_FORM_LBL_PIEZA_ESTATUS">
+      <option value="1">COM_SERVIN2_PIEZAS_ESTATUS_OPTION_1</option>
+      <option value="2">COM_SERVIN2_PIEZAS_ESTATUS_OPTION_2</option>
+      <option value="3">COM_SERVIN2_PIEZAS_ESTATUS_OPTION_3</option>
+    </field>
+    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+  </fieldset>
+</form>

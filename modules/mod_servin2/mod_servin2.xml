@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" method="upgrade" client="site">
+    <name>MOD_SERVIN2_NAME</name>
+    <creationDate>2018-06-21</creationDate>
+    <copyright>2018 Aldo Ulises</copyright>
+    <license>Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt</license>
+    <author>Aldo Ulises</author>
+    <authorEmail>aldouli6@gmail.com</authorEmail>
+    <authorUrl></authorUrl>
+    <version>CVS: 1.0.0</version>
+    <description>MOD_SERVIN2_DESCRIPTION</description>
+    
+    <files>
+        <filename module="mod_servin2">mod_servin2.php</filename>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <folder>tmpl</folder>
+    </files>
+    <languages folder="languages">
+        
+			<language tag="en-US">en-US/en-US.mod_servin2.ini</language>
+			<language tag="en-US">en-US/en-US.mod_servin2.sys.ini</language>
+			<language tag="es-ES">es-ES/es-ES.mod_servin2.ini</language>
+			<language tag="es-ES">es-ES/es-ES.mod_servin2.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset 
+                name="content_type" 
+                label="MOD_SERVIN2_CONTENT_TYPE_TAB_LBL"
+                description="MOD_SERVIN2_CONTENT_TYPE_TAB_DESC">
+                <field
+                    name="content_type" type="list"
+                    label="MOD_SERVIN2_CONTENT_TYPE_LBL"
+                    description="MOD_SERVIN2_CONTENT_TYPE_DESC">
+                    <option value="blank">MOD_SERVIN2_CUSTOM_CONTENT</option>
+                    <option value="list">MOD_SERVIN2_LIST</option>
+                    <option value="item">MOD_SERVIN2_ITEM</option>
+                </field>
+            </fieldset>
+            <fieldset 
+                name="blank_content" 
+                label="MOD_SERVIN2_CUSTOM_CONTENT_TAB_LBL"
+                description="MOD_SERVIN2_CUSTOM_CONTENT_TAB_DESC">
+                <field 
+                    name="html_content" type="editor" filter="safehtml"
+                    label="MOD_SERVIN2_HTML_LBL"
+                    description="MOD_SERVIN2_HTML_DESC" />
+            </fieldset>
+            <fieldset 
+                name="list_content" 
+                label="MOD_SERVIN2_LIST_CONTENT_TAB_LBL"
+                description="MOD_SERVIN2_LIST_CONTENT_TAB_DESC">
+                <field
+                    name="table" type="list"
+                    label="MOD_SERVIN2_TABLE_LBL"
+                    description="MOD_SERVIN2_TABLE_DESC">
+                    
+	<option value="#__servin_materiales2">#__servin_materiales2</option>
+	<option value="#__servin_kilatajes2">#__servin_kilatajes2</option>
+	<option value="#__servin_ubicaciones2">#__servin_ubicaciones2</option>
+	<option value="#__servin_hechuras2">#__servin_hechuras2</option>
+	<option value="#__servin_piezas2">#__servin_piezas2</option>
+	<option value="#__servin_proveedores2">#__servin_proveedores2</option>
+	<option value="#__servin_clientes2">#__servin_clientes2</option>
+	<option value="#__servin_compras2">#__servin_compras2</option>
+	<option value="#__servin_ventas2">#__servin_ventas2</option>
+	<option value="#__servin_consignaciones2">#__servin_consignaciones2</option>
+	<option value="#__servin2_pagos">#__servin2_pagos</option>
+                </field>
+                <field 
+                    name="field" type="groupedlist" default=""
+                    label="MOD_SERVIN2_FIELD_LBL"
+                    description="MOD_SERVIN2_FIELD_DESC">
+                    
+	<group label="#__servin_materiales2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="nombre">nombre</option>
+	</group>
+	<group label="#__servin_kilatajes2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="kilataje">kilataje</option>
+	</group>
+	<group label="#__servin_ubicaciones2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="nombre">nombre</option>
+		<option value="direccion">direccion</option>
+	</group>
+	<group label="#__servin_hechuras2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="numero">numero</option>
+		<option value="costo">costo</option>
+		<option value="tipo_ganancia">tipo_ganancia</option>
+		<option value="ganancia">ganancia</option>
+	</group>
+	<group label="#__servin_piezas2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="modified_at">modified_at</option>
+		<option value="created_at">created_at</option>
+		<option value="descripcion">descripcion</option>
+		<option value="material">material</option>
+		<option value="kilataje">kilataje</option>
+		<option value="ubicacion">ubicacion</option>
+		<option value="hechura">hechura</option>
+		<option value="tipo">tipo</option>
+		<option value="gramos">gramos</option>
+		<option value="cantidad">cantidad</option>
+		<option value="estatus">estatus</option>
+	</group>
+	<group label="#__servin_proveedores2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="empresa">empresa</option>
+		<option value="nombre">nombre</option>
+		<option value="direccion">direccion</option>
+		<option value="telefono">telefono</option>
+		<option value="correo">correo</option>
+	</group>
+	<group label="#__servin_clientes2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="nombre">nombre</option>
+		<option value="direccion">direccion</option>
+		<option value="telefono">telefono</option>
+		<option value="correo">correo</option>
+		<option value="fotoine">fotoine</option>
+		<option value="fotocomprobante">fotocomprobante</option>
+	</group>
+	<group label="#__servin_compras2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="created_at">created_at</option>
+		<option value="modified_at">modified_at</option>
+		<option value="fecha">fecha</option>
+		<option value="proveedor">proveedor</option>
+		<option value="pieza">pieza</option>
+		<option value="cantidad">cantidad</option>
+		<option value="total">total</option>
+		<option value="abonado">abonado</option>
+		<option value="pagada">pagada</option>
+	</group>
+	<group label="#__servin_ventas2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="created_at">created_at</option>
+		<option value="modified_at">modified_at</option>
+		<option value="pieza">pieza</option>
+		<option value="fecha">fecha</option>
+		<option value="tipo">tipo</option>
+		<option value="gramos">gramos</option>
+		<option value="cantidad">cantidad</option>
+		<option value="cliente">cliente</option>
+		<option value="total">total</option>
+		<option value="metodo_pago">metodo_pago</option>
+	</group>
+	<group label="#__servin_consignaciones2">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="created_at">created_at</option>
+		<option value="modified_at">modified_at</option>
+		<option value="no_folio_pagare">no_folio_pagare</option>
+		<option value="foto_pagare">foto_pagare</option>
+		<option value="piezas">piezas</option>
+		<option value="para">para</option>
+		<option value="cliente">cliente</option>
+		<option value="proveedor">proveedor</option>
+		<option value="total">total</option>
+		<option value="abono">abono</option>
+		<option value="abo_dev">abo_dev</option>
+		<option value="devoluciones">devoluciones</option>
+		<option value="adeudo">adeudo</option>
+		<option value="fecha_emision">fecha_emision</option>
+		<option value="fecha_limite">fecha_limite</option>
+		<option value="devolucion">devolucion</option>
+		<option value="fecha_devolucion">fecha_devolucion</option>
+		<option value="estatus">estatus</option>
+	</group>
+	<group label="#__servin2_pagos">
+		<option value="id">id</option>
+		<option value="created_by">created_by</option>
+		<option value="modified_by">modified_by</option>
+		<option value="consignacion">consignacion</option>
+		<option value="pago">pago</option>
+		<option value="metodo">metodo</option>
+		<option value="fecha">fecha</option>
+	</group>
+                </field>
+                <field 
+                    name="offset" type="text" default="0" filter="uint" class="input-small"
+                    label="MOD_SERVIN2_OFFSET_LBL"
+                    description="MOD_SERVIN2_OFFSET_DESC" />
+                <field 
+                    name="limit" type="text" default="10" filter="uint" class="input-small"
+                    label="MOD_SERVIN2_LIMIT_LBL"
+                    description="MOD_SERVIN2_LIMIT_DESC" />
+            </fieldset>
+            <fieldset 
+                name="item_content" 
+                label="MOD_SERVIN2_ITEM_CONTENT_TAB"
+                description="MOD_SERVIN2_ITEM_CONTENT_TAB_DESC">
+                <field
+                    name="item_table" type="list"
+                    label="MOD_SERVIN2_TABLE_LBL"
+                    description="MOD_SERVIN2_TABLE_DESC">
+                    
+	<option value="#__servin_materiales2">#__servin_materiales2</option>
+	<option value="#__servin_kilatajes2">#__servin_kilatajes2</option>
+	<option value="#__servin_ubicaciones2">#__servin_ubicaciones2</option>
+	<option value="#__servin_hechuras2">#__servin_hechuras2</option>
+	<option value="#__servin_piezas2">#__servin_piezas2</option>
+	<option value="#__servin_proveedores2">#__servin_proveedores2</option>
+	<option value="#__servin_clientes2">#__servin_clientes2</option>
+	<option value="#__servin_compras2">#__servin_compras2</option>
+	<option value="#__servin_ventas2">#__servin_ventas2</option>
+	<option value="#__servin_consignaciones2">#__servin_consignaciones2</option>
+	<option value="#__servin2_pagos">#__servin2_pagos</option>
+                </field>
+                <field 
+                    name="item_id" type="text" filter="uint" class="input-small"
+                    label="MOD_SERVIN2_ITEM_ID_LBL"
+                    description="MOD_SERVIN2_ITEM_ID_DESC"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

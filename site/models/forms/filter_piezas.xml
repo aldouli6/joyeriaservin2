@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="filter">
+        <field name="search" type="text" hint="COM_SERVIN2_SEARCH_FILTER_SUBMIT"
+               label="COM_USERS_FILTER_SEARCH_DESC"
+               class="js-stools-search-string" />
+
+        <field name="material" type="sql" label="COM_SERVIN2_FORM_LBL_PIEZA_MATERIAL" query="SELECT '' AS `id`, 'COM_SERVIN2_PIEZAS_MATERIAL_FILTER' AS `val` UNION SELECT `id` AS `id`, `nombre` AS val FROM `#__servin_materiales2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="kilataje" type="sql" label="COM_SERVIN2_FORM_LBL_PIEZA_KILATAJE" query="SELECT '' AS `id`, 'COM_SERVIN2_PIEZAS_KILATAJE_FILTER' AS `val` UNION SELECT `id` AS `id`, `kilataje` AS val FROM `#__servin_kilatajes2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="ubicacion" type="sql" label="COM_SERVIN2_FORM_LBL_PIEZA_UBICACION" query="SELECT '' AS `id`, 'COM_SERVIN2_PIEZAS_UBICACION_FILTER' AS `val` UNION SELECT `id` AS `id`, `nombre` AS val FROM `#__servin_ubicaciones2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="hechura" type="sql" label="COM_SERVIN2_FORM_LBL_PIEZA_HECHURA" query="SELECT '' AS `id`, 'COM_SERVIN2_PIEZAS_HECHURA_FILTER' AS `val` UNION SELECT `id` AS `id`, `numero` AS val FROM `#__servin_hechuras2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+
+
+    </fields>
+</form>

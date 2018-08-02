@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="filter">
+        <field name="search" type="text" hint="COM_SERVIN2_SEARCH_FILTER_SUBMIT"
+               label="COM_USERS_FILTER_SEARCH_DESC"
+               class="js-stools-search-string" />
+
+        <field name="state"
+               type="status"
+               label="COM_SERVIN2_FILTER_STATE"
+               description="COM_SERVIN2_FILTER_STATE_DESC"
+               onchange="this.form.submit();"
+        >
+            <option value="">JOPTION_SELECT_PUBLISHED</option>
+        </field>
+
+        <field name="fecha.from" label="COM_SERVIN2_COMPRAS_FECHA_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_COMPRAS_FECHA_FILTER_FROM"/>
+<field name="fecha.to" label="COM_SERVIN2_COMPRAS_FECHA_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_COMPRAS_FECHA_FILTER_TO"/>
+<field name="proveedor" type="sql" label="COM_SERVIN2_FORM_LBL_COMPRA_PROVEEDOR" query="SELECT '' AS `id`, 'COM_SERVIN2_COMPRAS_PROVEEDOR_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`empresa`, ' ', `nombre`) AS val FROM `#__servin_proveedores2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="pieza" type="sql" label="COM_SERVIN2_FORM_LBL_COMPRA_PIEZA" query="SELECT '' AS `id`, 'COM_SERVIN2_COMPRAS_PIEZA_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`descripcion`, ' ', `hechura`) AS val FROM `#__servin_piezas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+
+
+    </fields>
+
+    <fields name="list">
+
+        <field name="fullordering"
+               type="list"
+               label="COM_CONTENT_LIST_FULL_ORDERING"
+               description="COM_CONTENT_LIST_FULL_ORDERING_DESC"
+               onchange="this.form.submit();"
+               default="a.id DESC"
+        >
+            <option value="">JGLOBAL_SORT_BY</option>
+            <option value="a.`id` ASC">ID Ascending</option><option value="a.`id` DESC">ID Descending</option><option value="a.`ordering` ASC">Order Ascending</option><option value="a.`ordering` DESC">Order Descending</option><option value="a.`state` ASC">State Ascending</option><option value="a.`state` DESC">State Descending</option><option value="a.`fecha` ASC">Fechas Ascending</option><option value="a.`fecha` DESC">Fechas Descending</option><option value="a.`proveedor` ASC">Proveedors Ascending</option><option value="a.`proveedor` DESC">Proveedors Descending</option><option value="a.`pieza` ASC">Piezas Ascending</option><option value="a.`pieza` DESC">Piezas Descending</option><option value="a.`cantidad` ASC">Cantidades Ascending</option><option value="a.`cantidad` DESC">Cantidades Descending</option><option value="a.`total` ASC">Totales Ascending</option><option value="a.`total` DESC">Totales Descending</option><option value="a.`abonado` ASC">Abonos Ascending</option><option value="a.`abonado` DESC">Abonos Descending</option><option value="a.`pagada` ASC">Pagadas Ascending</option><option value="a.`pagada` DESC">Pagadas Descending</option>
+
+        </field>
+
+        <field name="limit"
+               type="limitbox"
+               class="input-mini"
+               default="25"
+               onchange="this.form.submit();"
+        />
+
+    </fields>
+
+</form>

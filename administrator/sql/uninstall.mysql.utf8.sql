@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS `#__servin_materiales2`;
+DROP TABLE IF EXISTS `#__servin_kilatajes2`;
+DROP TABLE IF EXISTS `#__servin_ubicaciones2`;
+DROP TABLE IF EXISTS `#__servin_hechuras2`;
+DROP TABLE IF EXISTS `#__servin_piezas2`;
+DROP TABLE IF EXISTS `#__servin_proveedores2`;
+DROP TABLE IF EXISTS `#__servin_clientes2`;
+DROP TABLE IF EXISTS `#__servin_compras2`;
+DROP TABLE IF EXISTS `#__servin_ventas2`;
+DROP TABLE IF EXISTS `#__servin_consignaciones2`;
+DROP TABLE IF EXISTS `#__servin2_pagos`;

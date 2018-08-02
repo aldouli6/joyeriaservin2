@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="filter">
+        <field name="search" type="text" hint="COM_SERVIN2_SEARCH_FILTER_SUBMIT"
+               label="COM_USERS_FILTER_SEARCH_DESC"
+               class="js-stools-search-string" />
+
+        <field name="piezas" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_PIEZAS" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_PIEZAS_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`descripcion`, ' ', `hechura`) AS val FROM `#__servin_piezas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="cliente" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_CLIENTE" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_CLIENTE_FILTER' AS `val` UNION SELECT `id` AS `id`, `nombre` AS val FROM `#__servin_clientes2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="proveedor" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_PROVEEDOR" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_PROVEEDOR_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`empresa`, ' ', `nombre`) AS val FROM `#__servin_proveedores2`" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="fecha_emision.from" label="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_FROM"/>
+<field name="fecha_emision.to" label="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_TO"/>
+<field name="fecha_limite.from" label="COM_SERVIN2_CONSIGNACIONES_FECHA_LIMITE_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_LIMITE_FILTER_FROM"/>
+<field name="fecha_limite.to" label="COM_SERVIN2_CONSIGNACIONES_FECHA_LIMITE_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_LIMITE_FILTER_TO"/>
+<field name="fecha_devolucion.from" label="COM_SERVIN2_CONSIGNACIONES_FECHA_DEVOLUCION_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_DEVOLUCION_FILTER_FROM"/>
+<field name="fecha_devolucion.to" label="COM_SERVIN2_CONSIGNACIONES_FECHA_DEVOLUCION_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_DEVOLUCION_FILTER_TO"/>
+
+
+    </fields>
+</form>

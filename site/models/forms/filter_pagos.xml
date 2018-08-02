@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="filter">
+        <field name="search" type="text" hint="COM_SERVIN2_SEARCH_FILTER_SUBMIT"
+               label="COM_USERS_FILTER_SEARCH_DESC"
+               class="js-stools-search-string" />
+
+        <field name="consignacion" type="sql" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" query="SELECT '' AS `id`, 'COM_SERVIN2_PAGOS_CONSIGNACION_FILTER' AS `val` UNION SELECT `id` AS `id`, `foto_pagare` AS val FROM `#__servin_consignaciones2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="metodo" label="COM_SERVIN2_FORM_LBL_PAGO_METODO" type="list" onchange="this.form.submit();" default="COM_SERVIN2_PAGOS_METODO_FILTER">
+  <option value="">COM_SERVIN2_PAGOS_METODO_FILTER</option>
+  <option value="0">COM_SERVIN2_PAGOS_METODO_OPTION_0</option>
+  <option value="1">COM_SERVIN2_PAGOS_METODO_OPTION_1</option>
+  <option value="2">COM_SERVIN2_PAGOS_METODO_OPTION_2</option>
+  <option value="3">COM_SERVIN2_PAGOS_METODO_OPTION_3</option>
+  <option value="4">COM_SERVIN2_PAGOS_METODO_OPTION_4</option>
+  <option value="5">COM_SERVIN2_PAGOS_METODO_OPTION_5</option>
+</field>
+<field name="fecha.from" label="COM_SERVIN2_PAGOS_FECHA_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_PAGOS_FECHA_FILTER_FROM"/>
+<field name="fecha.to" label="COM_SERVIN2_PAGOS_FECHA_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_PAGOS_FECHA_FILTER_TO"/>
+
+
+    </fields>
+</form>
