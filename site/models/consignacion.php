@@ -131,15 +131,17 @@ class Servin2ModelConsignacion extends JModelItem
 		{
 			$this->_item->modified_by_name = Factory::getUser($this->_item->modified_by)->name;
 		}
+					$this->_item->tipo_transaccion = JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_' . $this->_item->tipo_transaccion);
+					$this->_item->tipo = JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_OPTION_' . $this->_item->tipo);
 
-		if (isset($this->_item->piezas) && $this->_item->piezas != '')
+		if (isset($this->_item->pieza) && $this->_item->pieza != '')
 		{
-			if (is_object($this->_item->piezas))
+			if (is_object($this->_item->pieza))
 			{
-				$this->_item->piezas = ArrayHelper::fromObject($this->_item->piezas);
+				$this->_item->pieza = ArrayHelper::fromObject($this->_item->pieza);
 			}
 
-			$values = (is_array($this->_item->piezas)) ? $this->_item->piezas : explode(',',$this->_item->piezas);
+			$values = (is_array($this->_item->pieza)) ? $this->_item->pieza : explode(',',$this->_item->pieza);
 
 			$textValue = array();
 
@@ -162,10 +164,9 @@ class Servin2ModelConsignacion extends JModelItem
 				}
 			}
 
-			$this->_item->piezas = !empty($textValue) ? implode(', ', $textValue) : $this->_item->piezas;
+			$this->_item->pieza = !empty($textValue) ? implode(', ', $textValue) : $this->_item->pieza;
 
 		}
-					$this->_item->para = JText::_('COM_SERVIN2_CONSIGNACIONES_PARA_OPTION_' . $this->_item->para);
 
 		if (isset($this->_item->cliente) && $this->_item->cliente != '')
 		{

@@ -75,7 +75,19 @@ $sortFields = $this->getSortFields();
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_NO_FOLIO_PAGARE', 'a.`no_folio_pagare`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION', 'a.`tipo_transaccion`', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_TIPO', 'a.`tipo`', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_PIEZA', 'a.`pieza`', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_PIEZAS', 'a.`piezas`', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_GRAMOS', 'a.`gramos`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_CLIENTE', 'a.`cliente`', $listDirn, $listOrder); ?>
@@ -173,7 +185,19 @@ $sortFields = $this->getSortFields();
 
 				</td>				<td>
 
+					<?php echo $item->tipo_transaccion; ?>
+				</td>				<td>
+
+					<?php echo $item->tipo; ?>
+				</td>				<td>
+
+					<?php echo $item->pieza; ?>
+				</td>				<td>
+
 					<?php echo $item->piezas; ?>
+				</td>				<td>
+
+					<?php echo $item->gramos; ?>
 				</td>				<td>
 
 					<?php echo $item->cliente; ?>

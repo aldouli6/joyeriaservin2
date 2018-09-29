@@ -13,24 +13,18 @@
     <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
     <field name="created_at" type="timecreated" label="COM_SERVIN2_FORM_LBL_VENTA_CREATED_AT" description="COM_SERVIN2_FORM_DESC_VENTA_CREATED_AT" hidden="true" hint="COM_SERVIN2_FORM_LBL_VENTA_CREATED_AT"/>
     <field name="modified_at" type="timecreated" label="COM_SERVIN2_FORM_LBL_VENTA_MODIFIED_AT" description="COM_SERVIN2_FORM_DESC_VENTA_MODIFIED_AT" hidden="true" hint="COM_SERVIN2_FORM_LBL_VENTA_MODIFIED_AT"/>
-    <field name="pieza" type="foreignkey" label="COM_SERVIN2_FORM_LBL_VENTA_PIEZA" description="COM_SERVIN2_FORM_DESC_VENTA_PIEZA" class="inputbox" input_type="list" table="#__servin_piezas2" key_field="id" value_multiple="1" value_field_multiple="descripcion,hechura" value_field="fk_value" separator=" " hide_trashed="1" required="true" default=""/>
-    <field name="fecha" class="inputbox" timeformat="12" filter="user_utc" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" label="COM_SERVIN2_FORM_LBL_VENTA_FECHA" description="COM_SERVIN2_FORM_DESC_VENTA_FECHA" hint="COM_SERVIN2_FORM_LBL_VENTA_FECHA"/>
+    <field name="cliente" type="foreignkey" label="COM_SERVIN2_FORM_LBL_VENTA_CLIENTE" description="COM_SERVIN2_FORM_DESC_VENTA_CLIENTE" class="inputbox" input_type="list" table="#__servin_clientes2" key_field="id" value_field="nombre" hide_trashed="1" default="0"/>
     <field name="tipo" default="0" type="radio" required="true" label="COM_SERVIN2_FORM_LBL_VENTA_TIPO" description="COM_SERVIN2_FORM_DESC_VENTA_TIPO" hint="COM_SERVIN2_FORM_LBL_VENTA_TIPO">
       <option value="0">COM_SERVIN2_VENTAS_TIPO_OPTION_0</option>
       <option value="1">COM_SERVIN2_VENTAS_TIPO_OPTION_1</option>
     </field>
-    <field name="gramos" filter="safehtml" min="0" step="0.01" type="number" default="0" label="COM_SERVIN2_FORM_LBL_VENTA_GRAMOS" description="COM_SERVIN2_FORM_DESC_VENTA_GRAMOS" hint="COM_SERVIN2_FORM_LBL_VENTA_GRAMOS" showon="tipo:0"/>
-    <field name="cantidad" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_VENTA_CANTIDAD" description="COM_SERVIN2_FORM_DESC_VENTA_CANTIDAD" hint="COM_SERVIN2_FORM_LBL_VENTA_CANTIDAD" showon="tipo:1"/>
-    <field name="cliente" type="foreignkey" label="COM_SERVIN2_FORM_LBL_VENTA_CLIENTE" description="COM_SERVIN2_FORM_DESC_VENTA_CLIENTE" class="inputbox" input_type="list" table="#__servin_clientes2" key_field="id" value_field="nombre" hide_trashed="1" default="0"/>
-    <field name="total" filter="safehtml" step="0.01" type="number" label="COM_SERVIN2_FORM_LBL_VENTA_TOTAL" description="COM_SERVIN2_FORM_DESC_VENTA_TOTAL" hint="COM_SERVIN2_FORM_LBL_VENTA_TOTAL"/>
-    <field name="metodo_pago" default="1" type="list" label="COM_SERVIN2_FORM_LBL_VENTA_METODO_PAGO" description="COM_SERVIN2_FORM_DESC_VENTA_METODO_PAGO" hint="COM_SERVIN2_FORM_LBL_VENTA_METODO_PAGO">
-      <option value="1">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_1</option>
-      <option value="2">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_2</option>
-      <option value="3">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_3</option>
-      <option value="4">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_4</option>
-      <option value="5">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_5</option>
-      <option value="6">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_6</option>
-    </field>
+    <field name="pieza" type="foreignkey" label="COM_SERVIN2_FORM_LBL_VENTA_PIEZA" description="COM_SERVIN2_FORM_DESC_VENTA_PIEZA" class="inputbox" input_type="list" table="#__servin_piezas2" key_field="id" value_multiple="1" value_field_multiple="descripcion,hechura" value_field="fk_value" separator=" " hide_trashed="1" required="true" default=""/>
+    <field name="piezas" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_VENTA_PIEZAS" description="COM_SERVIN2_FORM_DESC_VENTA_PIEZAS" hint="COM_SERVIN2_FORM_LBL_VENTA_PIEZAS" showon="tipo:1"/>
+    <field name="gramos" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_VENTA_GRAMOS" description="COM_SERVIN2_FORM_DESC_VENTA_GRAMOS" hint="COM_SERVIN2_FORM_LBL_VENTA_GRAMOS" showon="tipo:0"/>
+    <field name="fecha" class="inputbox" timeformat="12" filter="user_utc" translateformat="false" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" required="true" label="COM_SERVIN2_FORM_LBL_VENTA_FECHA" description="COM_SERVIN2_FORM_DESC_VENTA_FECHA" hint="COM_SERVIN2_FORM_LBL_VENTA_FECHA"/>
+    <field name="total" filter="safehtml" step="0.01" type="number" required="true" label="COM_SERVIN2_FORM_LBL_VENTA_TOTAL" description="COM_SERVIN2_FORM_DESC_VENTA_TOTAL" hint="COM_SERVIN2_FORM_LBL_VENTA_TOTAL"/>
+    <field name="abonado" filter="safehtml" min="0" step="0.01" type="number" default="0" disabled="true" label="COM_SERVIN2_FORM_LBL_VENTA_ABONADO" description="COM_SERVIN2_FORM_DESC_VENTA_ABONADO" hint="COM_SERVIN2_FORM_LBL_VENTA_ABONADO"/>
+    <field name="pagada" type="checkbox" default="0" label="COM_SERVIN2_FORM_LBL_VENTA_PAGADA" description="COM_SERVIN2_FORM_DESC_VENTA_PAGADA" hint="COM_SERVIN2_FORM_LBL_VENTA_PAGADA"/>
     <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
   </fieldset>
 </form>

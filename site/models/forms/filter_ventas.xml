@@ -5,19 +5,15 @@
                label="COM_USERS_FILTER_SEARCH_DESC"
                class="js-stools-search-string" />
 
-        <field name="pieza" type="sql" label="COM_SERVIN2_FORM_LBL_VENTA_PIEZA" query="SELECT '' AS `id`, 'COM_SERVIN2_VENTAS_PIEZA_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`descripcion`, ' ', `hechura`) AS val FROM `#__servin_piezas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+        <field name="cliente" type="sql" label="COM_SERVIN2_FORM_LBL_VENTA_CLIENTE" query="SELECT '' AS `id`, 'COM_SERVIN2_VENTAS_CLIENTE_FILTER' AS `val` UNION SELECT `id` AS `id`, `nombre` AS val FROM `#__servin_clientes2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="tipo" label="COM_SERVIN2_FORM_LBL_VENTA_TIPO" type="list" onchange="this.form.submit();" default="COM_SERVIN2_VENTAS_TIPO_FILTER">
+  <option value="">COM_SERVIN2_VENTAS_TIPO_FILTER</option>
+  <option value="0">COM_SERVIN2_VENTAS_TIPO_OPTION_0</option>
+  <option value="1">COM_SERVIN2_VENTAS_TIPO_OPTION_1</option>
+</field>
+<field name="pieza" type="sql" label="COM_SERVIN2_FORM_LBL_VENTA_PIEZA" query="SELECT '' AS `id`, 'COM_SERVIN2_VENTAS_PIEZA_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`descripcion`, ' ', `hechura`) AS val FROM `#__servin_piezas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="fecha.from" label="COM_SERVIN2_VENTAS_FECHA_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_VENTAS_FECHA_FILTER_FROM"/>
 <field name="fecha.to" label="COM_SERVIN2_VENTAS_FECHA_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_VENTAS_FECHA_FILTER_TO"/>
-<field name="cliente" type="sql" label="COM_SERVIN2_FORM_LBL_VENTA_CLIENTE" query="SELECT '' AS `id`, 'COM_SERVIN2_VENTAS_CLIENTE_FILTER' AS `val` UNION SELECT `id` AS `id`, `nombre` AS val FROM `#__servin_clientes2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
-<field name="metodo_pago" label="COM_SERVIN2_FORM_LBL_VENTA_METODO_PAGO" type="list" onchange="this.form.submit();" default="COM_SERVIN2_VENTAS_METODO_PAGO_FILTER">
-  <option value="">COM_SERVIN2_VENTAS_METODO_PAGO_FILTER</option>
-  <option value="1">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_1</option>
-  <option value="2">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_2</option>
-  <option value="3">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_3</option>
-  <option value="4">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_4</option>
-  <option value="5">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_5</option>
-  <option value="6">COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_6</option>
-</field>
 
 
     </fields>

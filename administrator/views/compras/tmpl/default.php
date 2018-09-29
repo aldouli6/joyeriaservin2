@@ -72,16 +72,22 @@ $sortFields = $this->getSortFields();
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_ID', 'a.`id`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_PROVEEDOR', 'a.`proveedor`', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_FECHA', 'a.`fecha`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_PROVEEDOR', 'a.`proveedor`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_TIPO', 'a.`tipo`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_PIEZA', 'a.`pieza`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_CANTIDAD', 'a.`cantidad`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_PIEZAS', 'a.`piezas`', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_GRAMOS', 'a.`gramos`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_COMPRAS_TOTAL', 'a.`total`', $listDirn, $listOrder); ?>
@@ -150,16 +156,22 @@ $sortFields = $this->getSortFields();
 					<?php echo $item->id; ?>
 				</td>				<td>
 
+					<?php echo $item->proveedor; ?>
+				</td>				<td>
+
 					<?php echo $item->fecha; ?>
 				</td>				<td>
 
-					<?php echo $item->proveedor; ?>
+					<?php echo $item->tipo; ?>
 				</td>				<td>
 
 					<?php echo $item->pieza; ?>
 				</td>				<td>
 
-					<?php echo $item->cantidad; ?>
+					<?php echo $item->piezas; ?>
+				</td>				<td>
+
+					<?php echo $item->gramos; ?>
 				</td>				<td>
 
 					<?php echo $item->total; ?>

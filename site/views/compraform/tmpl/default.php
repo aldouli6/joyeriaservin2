@@ -56,8 +56,6 @@ $canEdit = Servin2HelpersServin2::canUserEdit($this->item, $user);
 				<?php echo $this->form->getInput('modified_by'); ?>
 				<?php echo $this->form->getInput('created_at'); ?>
 				<?php echo $this->form->getInput('modified_at'); ?>
-	<?php echo $this->form->renderField('fecha'); ?>
-
 	<?php echo $this->form->renderField('proveedor'); ?>
 
 	<?php foreach((array)$this->item->proveedor as $value): ?>
@@ -65,6 +63,10 @@ $canEdit = Servin2HelpersServin2::canUserEdit($this->item, $user);
 			<input type="hidden" class="proveedor" name="jform[proveedorhidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
 		<?php endif; ?>
 	<?php endforeach; ?>
+	<?php echo $this->form->renderField('fecha'); ?>
+
+	<?php echo $this->form->renderField('tipo'); ?>
+
 	<?php echo $this->form->renderField('pieza'); ?>
 
 	<?php foreach((array)$this->item->pieza as $value): ?>
@@ -72,7 +74,9 @@ $canEdit = Servin2HelpersServin2::canUserEdit($this->item, $user);
 			<input type="hidden" class="pieza" name="jform[piezahidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
 		<?php endif; ?>
 	<?php endforeach; ?>
-	<?php echo $this->form->renderField('cantidad'); ?>
+	<?php echo $this->form->renderField('piezas'); ?>
+
+	<?php echo $this->form->renderField('gramos'); ?>
 
 	<?php echo $this->form->renderField('total'); ?>
 

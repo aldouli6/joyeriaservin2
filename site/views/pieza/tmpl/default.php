@@ -58,13 +58,8 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_PIEZA_CANTIDAD'); ?></th>
-			<td><?php if( $this->item->tipo == 1 ) echo $this->item->cantidad; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_PIEZA_ESTATUS'); ?></th>
-			<td><?php echo $this->item->estatus; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_PIEZA_PIEZAS'); ?></th>
+			<td><?php if( $this->item->tipo == 1 ) echo $this->item->piezas; ?></td>
 		</tr>
 
 	</table>

@@ -30,6 +30,20 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 		}
 	});
 	js("#jform_consignacion").trigger("liszt:updated");
+	js('input:hidden.compra').each(function(){
+		var name = js(this).attr('name');
+		if(name.indexOf('comprahidden')){
+			js('#jform_compra option[value="'+js(this).val()+'"]').attr('selected',true);
+		}
+	});
+	js("#jform_compra").trigger("liszt:updated");
+	js('input:hidden.venta').each(function(){
+		var name = js(this).attr('name');
+		if(name.indexOf('ventahidden')){
+			js('#jform_venta option[value="'+js(this).val()+'"]').attr('selected',true);
+		}
+	});
+	js("#jform_venta").trigger("liszt:updated");
 	});
 
 	Joomla.submitbutton = function (task) {

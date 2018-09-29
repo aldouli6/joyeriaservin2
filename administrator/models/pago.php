@@ -203,6 +203,30 @@ class Servin2ModelPago extends JModelAdmin
 					$table->consignacion = '';
 				}
 
+				if (!empty($table->compra))
+				{
+					if (is_array($table->compra))
+					{
+						$table->compra = implode(',', $table->compra);
+					}
+				}
+				else
+				{
+					$table->compra = '';
+				}
+
+				if (!empty($table->venta))
+				{
+					if (is_array($table->venta))
+					{
+						$table->venta = implode(',', $table->venta);
+					}
+				}
+				else
+				{
+					$table->venta = '';
+				}
+
 
 				// Trigger the before save event.
 				$result = $dispatcher->trigger($this->event_before_save, array($context, &$table, true));

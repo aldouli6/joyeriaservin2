@@ -13,7 +13,14 @@
     <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
     <field name="created_by" type="createdby" default="0" label="COM_SERVIN2_FORM_LBL_PAGO_CREATED_BY" description="COM_SERVIN2_FORM_DESC_PAGO_CREATED_BY" hidden="true" hint="COM_SERVIN2_FORM_LBL_PAGO_CREATED_BY"/>
     <field name="modified_by" type="modifiedby" default="0" label="COM_SERVIN2_FORM_LBL_PAGO_MODIFIED_BY" description="COM_SERVIN2_FORM_DESC_PAGO_MODIFIED_BY" hidden="true" hint="COM_SERVIN2_FORM_LBL_PAGO_MODIFIED_BY"/>
-    <field name="consignacion" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" description="COM_SERVIN2_FORM_DESC_PAGO_CONSIGNACION" class="inputbox" input_type="list" table="#__servin_consignaciones2" key_field="id" value_field="foto_pagare" hide_trashed="1" required="true" default=""/>
+    <field name="tipo" type="radio" required="true" label="COM_SERVIN2_FORM_LBL_PAGO_TIPO" description="COM_SERVIN2_FORM_DESC_PAGO_TIPO" hint="COM_SERVIN2_FORM_LBL_PAGO_TIPO">
+      <option value="1">COM_SERVIN2_PAGOS_TIPO_OPTION_1</option>
+      <option value="2">COM_SERVIN2_PAGOS_TIPO_OPTION_2</option>
+      <option value="3">COM_SERVIN2_PAGOS_TIPO_OPTION_3</option>
+    </field>
+    <field name="consignacion" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" description="COM_SERVIN2_FORM_DESC_PAGO_CONSIGNACION" class="inputbox" input_type="list" table="#__servin_consignaciones2" key_field="id" value_field="pieza" hide_trashed="1" required="true" default="" showon="tipo:1"/>
+    <field name="compra" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PAGO_COMPRA" description="COM_SERVIN2_FORM_DESC_PAGO_COMPRA" class="inputbox" input_type="list" table="#__servin_compras2" key_field="id" value_field="pieza" hide_trashed="1" required="true" default="" showon="tipo:2"/>
+    <field name="venta" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PAGO_VENTA" description="COM_SERVIN2_FORM_DESC_PAGO_VENTA" class="inputbox" input_type="list" table="#__servin_ventas2" key_field="id" value_field="pieza" hide_trashed="1" required="true" default="" showon="tipo:3"/>
     <field name="pago" filter="safehtml" min="0" step="0.01" type="number" required="true" default="0" label="COM_SERVIN2_FORM_LBL_PAGO_PAGO" description="COM_SERVIN2_FORM_DESC_PAGO_PAGO" hint="COM_SERVIN2_FORM_LBL_PAGO_PAGO"/>
     <field name="metodo" default="0" type="list" label="COM_SERVIN2_FORM_LBL_PAGO_METODO" description="COM_SERVIN2_FORM_DESC_PAGO_METODO" hint="COM_SERVIN2_FORM_LBL_PAGO_METODO">
       <option value="0">COM_SERVIN2_PAGOS_METODO_OPTION_0</option>
@@ -23,7 +30,7 @@
       <option value="4">COM_SERVIN2_PAGOS_METODO_OPTION_4</option>
       <option value="5">COM_SERVIN2_PAGOS_METODO_OPTION_5</option>
     </field>
-    <field name="fecha" class="inputbox" format="&quot;Y-m-d H:i:s&quot;" timeformat="12" filter="user_utc" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" required="true" label="COM_SERVIN2_FORM_LBL_PAGO_FECHA" description="COM_SERVIN2_FORM_DESC_PAGO_FECHA" hint="COM_SERVIN2_FORM_LBL_PAGO_FECHA"/>
+    <field name="fecha" class="inputbox" format="&quot;Y-m-d H:i:s&quot;" timeformat="12" filter="user_utc" translateformat="false" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" required="true" label="COM_SERVIN2_FORM_LBL_PAGO_FECHA" description="COM_SERVIN2_FORM_DESC_PAGO_FECHA" hint="COM_SERVIN2_FORM_LBL_PAGO_FECHA"/>
     <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
   </fieldset>
 </form>

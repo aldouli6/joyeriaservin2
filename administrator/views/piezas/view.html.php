@@ -159,8 +159,7 @@ class Servin2ViewPiezas extends JViewLegacy
 			'a.`hechura`' => JText::_('COM_SERVIN2_PIEZAS_HECHURA'),
 			'a.`tipo`' => JText::_('COM_SERVIN2_PIEZAS_TIPO'),
 			'a.`gramos`' => JText::_('COM_SERVIN2_PIEZAS_GRAMOS'),
-			'a.`cantidad`' => JText::_('COM_SERVIN2_PIEZAS_CANTIDAD'),
-			'a.`estatus`' => JText::_('COM_SERVIN2_PIEZAS_ESTATUS'),
+			'a.`piezas`' => JText::_('COM_SERVIN2_PIEZAS_PIEZAS'),
 		);
 	}
 

@@ -41,23 +41,38 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_PIEZAS'); ?></th>
-			<td><?php echo $this->item->piezas; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_TIPO_TRANSACCION'); ?></th>
+			<td><?php echo $this->item->tipo_transaccion; ?></td>
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_PARA'); ?></th>
-			<td><?php echo $this->item->para; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_TIPO'); ?></th>
+			<td><?php echo $this->item->tipo; ?></td>
+		</tr>
+
+		<tr>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_PIEZA'); ?></th>
+			<td><?php echo $this->item->pieza; ?></td>
+		</tr>
+
+		<tr>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_PIEZAS'); ?></th>
+			<td><?php if( $this->item->tipo == 1 ) echo $this->item->piezas; ?></td>
+		</tr>
+
+		<tr>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_GRAMOS'); ?></th>
+			<td><?php if( $this->item->tipo == 0 ) echo $this->item->gramos; ?></td>
 		</tr>
 
 		<tr>
 			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_CLIENTE'); ?></th>
-			<td><?php if( $this->item->para == 0 ) echo $this->item->cliente; ?></td>
+			<td><?php if( $this->item->tipo_transaccion == 0 ) echo $this->item->cliente; ?></td>
 		</tr>
 
 		<tr>
 			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_CONSIGNACION_PROVEEDOR'); ?></th>
-			<td><?php if( $this->item->para == 1 ) echo $this->item->proveedor; ?></td>
+			<td><?php if( $this->item->tipo_transaccion == 1 ) echo $this->item->proveedor; ?></td>
 		</tr>
 
 		<tr>

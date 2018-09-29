@@ -126,8 +126,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 				endforeach;
 			?>				<?php echo $this->form->renderField('tipo'); ?>
 				<?php echo $this->form->renderField('gramos'); ?>
-				<?php echo $this->form->renderField('cantidad'); ?>
-				<?php echo $this->form->renderField('estatus'); ?>
+				<?php echo $this->form->renderField('piezas'); ?>
 
 
 					<?php if ($this->state->params->get('save_history', 1)) : ?>

@@ -190,16 +190,16 @@ class Servin2ModelConsignacion extends JModelAdmin
 					$table->foto_pagare = '';
 				}
 
-				if (!empty($table->piezas))
+				if (!empty($table->pieza))
 				{
-					if (is_array($table->piezas))
+					if (is_array($table->pieza))
 					{
-						$table->piezas = implode(',', $table->piezas);
+						$table->pieza = implode(',', $table->pieza);
 					}
 				}
 				else
 				{
-					$table->piezas = '';
+					$table->pieza = '';
 				}
 
 				if (!empty($table->cliente))

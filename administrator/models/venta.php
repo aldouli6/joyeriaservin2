@@ -112,19 +112,6 @@ class Servin2ModelVenta extends JModelAdmin
 
 			$data = $this->item;
                         
-
-			// Support for multiple or not foreign key field: metodo_pago
-			$array = array();
-
-			foreach ((array) $data->metodo_pago as $value)
-			{
-				if (!is_array($value))
-				{
-					$array[] = $value;
-				}
-			}
-
-			$data->metodo_pago = $array;
 		}
 
 		return $data;
@@ -191,18 +178,6 @@ class Servin2ModelVenta extends JModelAdmin
 					throw new Exception($table->getError());
 				}
 				
-				if (!empty($table->pieza))
-				{
-					if (is_array($table->pieza))
-					{
-						$table->pieza = implode(',', $table->pieza);
-					}
-				}
-				else
-				{
-					$table->pieza = '';
-				}
-
 				if (!empty($table->cliente))
 				{
 					if (is_array($table->cliente))
@@ -213,6 +188,18 @@ class Servin2ModelVenta extends JModelAdmin
 				else
 				{
 					$table->cliente = '';
+				}
+
+				if (!empty($table->pieza))
+				{
+					if (is_array($table->pieza))
+					{
+						$table->pieza = implode(',', $table->pieza);
+					}
+				}
+				else
+				{
+					$table->pieza = '';
 				}
 
 

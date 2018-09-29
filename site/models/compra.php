@@ -165,6 +165,7 @@ class Servin2ModelCompra extends JModelItem
 			$this->_item->proveedor = !empty($textValue) ? implode(', ', $textValue) : $this->_item->proveedor;
 
 		}
+					$this->_item->tipo = JText::_('COM_SERVIN2_COMPRAS_TIPO_OPTION_' . $this->_item->tipo);
 
 		if (isset($this->_item->pieza) && $this->_item->pieza != '')
 		{

@@ -132,41 +132,6 @@ class Servin2ModelVenta extends JModelItem
 			$this->_item->modified_by_name = Factory::getUser($this->_item->modified_by)->name;
 		}
 
-		if (isset($this->_item->pieza) && $this->_item->pieza != '')
-		{
-			if (is_object($this->_item->pieza))
-			{
-				$this->_item->pieza = ArrayHelper::fromObject($this->_item->pieza);
-			}
-
-			$values = (is_array($this->_item->pieza)) ? $this->_item->pieza : explode(',',$this->_item->pieza);
-
-			$textValue = array();
-
-			foreach ($values as $value)
-			{
-				$db    = Factory::getDbo();
-				$query = $db->getQuery(true);
-
-				$query
-					->select('CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) AS `fk_value`')
-					->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025077'))
-					->where($db->quoteName('id') . ' = ' . $db->quote($value));
-
-				$db->setQuery($query);
-				$results = $db->loadObject();
-
-				if ($results)
-				{
-					$textValue[] = $results->fk_value;
-				}
-			}
-
-			$this->_item->pieza = !empty($textValue) ? implode(', ', $textValue) : $this->_item->pieza;
-
-		}
-					$this->_item->tipo = JText::_('COM_SERVIN2_VENTAS_TIPO_OPTION_' . $this->_item->tipo);
-
 		if (isset($this->_item->cliente) && $this->_item->cliente != '')
 		{
 			if (is_object($this->_item->cliente))
@@ -200,10 +165,40 @@ class Servin2ModelVenta extends JModelItem
 			$this->_item->cliente = !empty($textValue) ? implode(', ', $textValue) : $this->_item->cliente;
 
 		}
+					$this->_item->tipo = JText::_('COM_SERVIN2_VENTAS_TIPO_OPTION_' . $this->_item->tipo);
 
-		if (!empty($this->_item->metodo_pago))
+		if (isset($this->_item->pieza) && $this->_item->pieza != '')
 		{
-			$this->_item->metodo_pago = JText::_('COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_' . $this->_item->metodo_pago);
+			if (is_object($this->_item->pieza))
+			{
+				$this->_item->pieza = ArrayHelper::fromObject($this->_item->pieza);
+			}
+
+			$values = (is_array($this->_item->pieza)) ? $this->_item->pieza : explode(',',$this->_item->pieza);
+
+			$textValue = array();
+
+			foreach ($values as $value)
+			{
+				$db    = Factory::getDbo();
+				$query = $db->getQuery(true);
+
+				$query
+					->select('CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) AS `fk_value`')
+					->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025077'))
+					->where($db->quoteName('id') . ' = ' . $db->quote($value));
+
+				$db->setQuery($query);
+				$results = $db->loadObject();
+
+				if ($results)
+				{
+					$textValue[] = $results->fk_value;
+				}
+			}
+
+			$this->_item->pieza = !empty($textValue) ? implode(', ', $textValue) : $this->_item->pieza;
+
 		}
 
             return $this->_item;

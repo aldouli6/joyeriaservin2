@@ -43,8 +43,11 @@ class Servin2ModelConsignaciones extends JModelList
 				'modified_at', 'a.modified_at',
 				'no_folio_pagare', 'a.no_folio_pagare',
 				'foto_pagare', 'a.foto_pagare',
+				'tipo_transaccion', 'a.tipo_transaccion',
+				'tipo', 'a.tipo',
+				'pieza', 'a.pieza',
 				'piezas', 'a.piezas',
-				'para', 'a.para',
+				'gramos', 'a.gramos',
 				'cliente', 'a.cliente',
 				'proveedor', 'a.proveedor',
 				'total', 'a.total',
@@ -149,9 +152,9 @@ class Servin2ModelConsignaciones extends JModelList
 
 		// Join over the created by field 'modified_by'
 		$query->join('LEFT', '#__users AS modified_by ON modified_by.id = a.modified_by');
-		// Join over the foreign key 'piezas'
+		// Join over the foreign key 'pieza'
 		$query->select('CONCAT(`#__servin_piezas2_3025094`.`descripcion`, \' \', `#__servin_piezas2_3025094`.`hechura`) AS piezas_fk_value_3025094');
-		$query->join('LEFT', '#__servin_piezas2 AS #__servin_piezas2_3025094 ON #__servin_piezas2_3025094.`id` = a.`piezas`');
+		$query->join('LEFT', '#__servin_piezas2 AS #__servin_piezas2_3025094 ON #__servin_piezas2_3025094.`id` = a.`pieza`');
 		// Join over the foreign key 'cliente'
 		$query->select('`#__servin_clientes2_3025091`.`nombre` AS clientes_fk_value_3025091');
 		$query->join('LEFT', '#__servin_clientes2 AS #__servin_clientes2_3025091 ON #__servin_clientes2_3025091.`id` = a.`cliente`');
@@ -184,12 +187,28 @@ class Servin2ModelConsignaciones extends JModelList
             }
             
 
-		// Filtering piezas
-		$filter_piezas = $this->state->get("filter.piezas");
+		// Filtering tipo_transaccion
+		$filter_tipo_transaccion = $this->state->get("filter.tipo_transaccion");
 
-		if ($filter_piezas)
+		if ($filter_tipo_transaccion !== null && (is_numeric($filter_tipo_transaccion) || !empty($filter_tipo_transaccion)))
 		{
-			$query->where("a.`piezas` = '".$db->escape($filter_piezas)."'");
+			$query->where("a.`tipo_transaccion` = '".$db->escape($filter_tipo_transaccion)."'");
+		}
+
+		// Filtering tipo
+		$filter_tipo = $this->state->get("filter.tipo");
+
+		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
+		{
+			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
+		}
+
+		// Filtering pieza
+		$filter_pieza = $this->state->get("filter.pieza");
+
+		if ($filter_pieza)
+		{
+			$query->where("a.`pieza` = '".$db->escape($filter_pieza)."'");
 		}
 
 		// Filtering cliente
@@ -209,62 +228,50 @@ class Servin2ModelConsignaciones extends JModelList
 		}
 
 		// Filtering fecha_emision
-		// Checking "_dateformat"
-		$filter_fecha_emision_from = $this->state->get("filter.fecha_emision_from_dateformat");
-		$filter_Qfecha_emision_from = (!empty($filter_fecha_emision_from)) ? $this->isValidDate($filter_fecha_emision_from) : null;
+		$filter_fecha_emision_from = $this->state->get("filter.fecha_emision.from");
 
-		if ($filter_Qfecha_emision_from != null)
+		if ($filter_fecha_emision_from !== null && !empty($filter_fecha_emision_from))
 		{
-			$query->where("a.fecha_emision >= '" . $db->escape($filter_Qfecha_emision_from) . "'");
+			$query->where("a.`fecha_emision` >= '".$db->escape($filter_fecha_emision_from)."'");
 		}
+		$filter_fecha_emision_to = $this->state->get("filter.fecha_emision.to");
 
-		$filter_fecha_emision_to = $this->state->get("filter.fecha_emision_to_dateformat");
-		$filter_Qfecha_emision_to = (!empty($filter_fecha_emision_to)) ? $this->isValidDate($filter_fecha_emision_to) : null ;
-
-		if ($filter_Qfecha_emision_to != null)
+		if ($filter_fecha_emision_to !== null  && !empty($filter_fecha_emision_to))
 		{
-			$query->where("a.fecha_emision <= '" . $db->escape($filter_Qfecha_emision_to) . "'");
+			$query->where("a.`fecha_emision` <= '".$db->escape($filter_fecha_emision_to)."'");
 		}
 
 		// Filtering fecha_limite
-		// Checking "_dateformat"
-		$filter_fecha_limite_from = $this->state->get("filter.fecha_limite_from_dateformat");
-		$filter_Qfecha_limite_from = (!empty($filter_fecha_limite_from)) ? $this->isValidDate($filter_fecha_limite_from) : null;
+		$filter_fecha_limite_from = $this->state->get("filter.fecha_limite.from");
 
-		if ($filter_Qfecha_limite_from != null)
+		if ($filter_fecha_limite_from !== null && !empty($filter_fecha_limite_from))
 		{
-			$query->where("a.fecha_limite >= '" . $db->escape($filter_Qfecha_limite_from) . "'");
+			$query->where("a.`fecha_limite` >= '".$db->escape($filter_fecha_limite_from)."'");
 		}
+		$filter_fecha_limite_to = $this->state->get("filter.fecha_limite.to");
 
-		$filter_fecha_limite_to = $this->state->get("filter.fecha_limite_to_dateformat");
-		$filter_Qfecha_limite_to = (!empty($filter_fecha_limite_to)) ? $this->isValidDate($filter_fecha_limite_to) : null ;
-
-		if ($filter_Qfecha_limite_to != null)
+		if ($filter_fecha_limite_to !== null  && !empty($filter_fecha_limite_to))
 		{
-			$query->where("a.fecha_limite <= '" . $db->escape($filter_Qfecha_limite_to) . "'");
+			$query->where("a.`fecha_limite` <= '".$db->escape($filter_fecha_limite_to)."'");
 		}
 
 		// Filtering fecha_devolucion
-		// Checking "_dateformat"
-		$filter_fecha_devolucion_from = $this->state->get("filter.fecha_devolucion_from_dateformat");
-		$filter_Qfecha_devolucion_from = (!empty($filter_fecha_devolucion_from)) ? $this->isValidDate($filter_fecha_devolucion_from) : null;
+		$filter_fecha_devolucion_from = $this->state->get("filter.fecha_devolucion.from");
 
-		if ($filter_Qfecha_devolucion_from != null)
+		if ($filter_fecha_devolucion_from !== null && !empty($filter_fecha_devolucion_from))
 		{
-			$query->where("a.fecha_devolucion >= '" . $db->escape($filter_Qfecha_devolucion_from) . "'");
+			$query->where("a.`fecha_devolucion` >= '".$db->escape($filter_fecha_devolucion_from)."'");
 		}
+		$filter_fecha_devolucion_to = $this->state->get("filter.fecha_devolucion.to");
 
-		$filter_fecha_devolucion_to = $this->state->get("filter.fecha_devolucion_to_dateformat");
-		$filter_Qfecha_devolucion_to = (!empty($filter_fecha_devolucion_to)) ? $this->isValidDate($filter_fecha_devolucion_to) : null ;
-
-		if ($filter_Qfecha_devolucion_to != null)
+		if ($filter_fecha_devolucion_to !== null  && !empty($filter_fecha_devolucion_to))
 		{
-			$query->where("a.fecha_devolucion <= '" . $db->escape($filter_Qfecha_devolucion_to) . "'");
+			$query->where("a.`fecha_devolucion` <= '".$db->escape($filter_fecha_devolucion_to)."'");
 		}
 
             // Add the list ordering clause.
-            $orderCol  = $this->state->get('list.ordering');
-            $orderDirn = $this->state->get('list.direction');
+            $orderCol  = $this->state->get('list.ordering', "a.id");
+            $orderDirn = $this->state->get('list.direction', "ASC");
 
             if ($orderCol && $orderDirn)
             {
@@ -285,11 +292,13 @@ class Servin2ModelConsignaciones extends JModelList
 		
 		foreach ($items as $item)
 		{
+				$item->tipo_transaccion = empty($item->tipo_transaccion) ? '' : JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_' . strtoupper($item->tipo_transaccion));
+				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_OPTION_' . strtoupper($item->tipo));
 
-			if (isset($item->piezas))
+			if (isset($item->pieza))
 			{
 
-				$values    = explode(',', $item->piezas);
+				$values    = explode(',', $item->pieza);
 				$textValue = array();
 
 				foreach ($values as $value)
@@ -299,7 +308,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('CONCAT(`#__servin_piezas2_3025094`.`descripcion`, \' \', `#__servin_piezas2_3025094`.`hechura`) AS `fk_value`')
 						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025094'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_piezas2_3025094.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -310,10 +319,9 @@ class Servin2ModelConsignaciones extends JModelList
 					}
 				}
 
-				$item->piezas = !empty($textValue) ? implode(', ', $textValue) : $item->piezas;
+				$item->pieza = !empty($textValue) ? implode(', ', $textValue) : $item->pieza;
 			}
 
-				$item->para = empty($item->para) ? '' : JText::_('COM_SERVIN2_CONSIGNACIONES_PARA_OPTION_' . strtoupper($item->para));
 
 			if (isset($item->cliente))
 			{
@@ -328,7 +336,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('`#__servin_clientes2_3025091`.`nombre`')
 						->from($db->quoteName('#__servin_clientes2', '#__servin_clientes2_3025091'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_clientes2_3025091.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -356,7 +364,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('CONCAT(`#__servin_proveedores2_3026599`.`empresa`, \' \', `#__servin_proveedores2_3026599`.`nombre`) AS `fk_value`')
 						->from($db->quoteName('#__servin_proveedores2', '#__servin_proveedores2_3026599'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_proveedores2_3026599.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -385,7 +393,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('`#__servin_consignaciones2_3025097`.`no_folio_pagare`')
 						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3025097'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_consignaciones2_3025097.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();

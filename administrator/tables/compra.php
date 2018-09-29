@@ -74,12 +74,6 @@ class Servin2Tablecompra extends JTable
 			$array['modified_at'] = $date->toSql();
 		}
 
-		// Support for empty date field: fecha
-		if($array['fecha'] == '0000-00-00' )
-		{
-			$array['fecha'] = '';
-		}
-
 		// Support for multiple or not foreign key field: proveedor
 			if(!empty($array['proveedor']))
 			{
@@ -93,6 +87,12 @@ class Servin2Tablecompra extends JTable
 			else {
 				$array['proveedor'] = '';
 			}
+
+		// Support for empty date field: fecha
+		if($array['fecha'] == '0000-00-00' )
+		{
+			$array['fecha'] = '';
+		}
 
 		// Support for multiple or not foreign key field: pieza
 			if(!empty($array['pieza']))

@@ -40,14 +40,15 @@ class Servin2ModelVentas extends JModelList
 				'modified_by', 'a.`modified_by`',
 				'created_at', 'a.`created_at`',
 				'modified_at', 'a.`modified_at`',
-				'pieza', 'a.`pieza`',
-				'fecha', 'a.`fecha`',
-				'tipo', 'a.`tipo`',
-				'gramos', 'a.`gramos`',
-				'cantidad', 'a.`cantidad`',
 				'cliente', 'a.`cliente`',
+				'tipo', 'a.`tipo`',
+				'pieza', 'a.`pieza`',
+				'piezas', 'a.`piezas`',
+				'gramos', 'a.`gramos`',
+				'fecha', 'a.`fecha`',
 				'total', 'a.`total`',
-				'metodo_pago', 'a.`metodo_pago`',
+				'abonado', 'a.`abonado`',
+				'pagada', 'a.`pagada`',
 			);
 		}
 
@@ -81,6 +82,12 @@ class Servin2ModelVentas extends JModelList
 
 		$published = $app->getUserStateFromRequest($this->context . '.filter.state', 'filter_published', '', 'string');
 		$this->setState('filter.state', $published);
+		// Filtering cliente
+		$this->setState('filter.cliente', $app->getUserStateFromRequest($this->context.'.filter.cliente', 'filter_cliente', '', 'string'));
+
+		// Filtering tipo
+		$this->setState('filter.tipo', $app->getUserStateFromRequest($this->context.'.filter.tipo', 'filter_tipo', '', 'string'));
+
 		// Filtering pieza
 		$this->setState('filter.pieza', $app->getUserStateFromRequest($this->context.'.filter.pieza', 'filter_pieza', '', 'string'));
 
@@ -88,19 +95,13 @@ class Servin2ModelVentas extends JModelList
 		$this->setState('filter.fecha.from', $app->getUserStateFromRequest($this->context.'.filter.fecha.from', 'filter_from_fecha', '', 'string'));
 		$this->setState('filter.fecha.to', $app->getUserStateFromRequest($this->context.'.filter.fecha.to', 'filter_to_fecha', '', 'string'));
 
-		// Filtering cliente
-		$this->setState('filter.cliente', $app->getUserStateFromRequest($this->context.'.filter.cliente', 'filter_cliente', '', 'string'));
-
-		// Filtering metodo_pago
-		$this->setState('filter.metodo_pago', $app->getUserStateFromRequest($this->context.'.filter.metodo_pago', 'filter_metodo_pago', '', 'string'));
-
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_servin2');
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::populateState('a.pieza', 'asc');
+		parent::populateState('a.cliente', 'asc');
 	}
 
 	/**
@@ -156,12 +157,12 @@ class Servin2ModelVentas extends JModelList
 		// Join over the user field 'modified_by'
 		$query->select('`modified_by`.name AS `modified_by`');
 		$query->join('LEFT', '#__users AS `modified_by` ON `modified_by`.id = a.`modified_by`');
-		// Join over the foreign key 'pieza'
-		$query->select('CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) AS piezas_fk_value_3025077');
-		$query->join('LEFT', '#__servin_piezas2 AS #__servin_piezas2_3025077 ON #__servin_piezas2_3025077.`id` = a.`pieza`');
 		// Join over the foreign key 'cliente'
 		$query->select('`#__servin_clientes2_3025079`.`nombre` AS clientes_fk_value_3025079');
 		$query->join('LEFT', '#__servin_clientes2 AS #__servin_clientes2_3025079 ON #__servin_clientes2_3025079.`id` = a.`cliente`');
+		// Join over the foreign key 'pieza'
+		$query->select('CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) AS piezas_fk_value_3025077');
+		$query->join('LEFT', '#__servin_piezas2 AS #__servin_piezas2_3025077 ON #__servin_piezas2_3025077.`id` = a.`pieza`');
                 
 
 		// Filter by published state
@@ -188,10 +189,26 @@ class Servin2ModelVentas extends JModelList
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('(CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) LIKE ' . $search . '  OR  a.fecha LIKE ' . $search . '  OR #__servin_clientes2_3025079.nombre LIKE ' . $search . '  OR  a.total LIKE ' . $search . '  OR  a.metodo_pago LIKE ' . $search . ' )');
+				$query->where('(#__servin_clientes2_3025079.nombre LIKE ' . $search . '  OR CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) LIKE ' . $search . '  OR  a.fecha LIKE ' . $search . '  OR  a.total LIKE ' . $search . ' )');
 			}
 		}
                 
+
+		// Filtering cliente
+		$filter_cliente = $this->state->get("filter.cliente");
+
+		if ($filter_cliente !== null && !empty($filter_cliente))
+		{
+			$query->where("a.`cliente` = '".$db->escape($filter_cliente)."'");
+		}
+
+		// Filtering tipo
+		$filter_tipo = $this->state->get("filter.tipo");
+
+		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
+		{
+			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
+		}
 
 		// Filtering pieza
 		$filter_pieza = $this->state->get("filter.pieza");
@@ -214,25 +231,9 @@ class Servin2ModelVentas extends JModelList
 		{
 			$query->where("a.`fecha` <= '".$db->escape($filter_fecha_to)."'");
 		}
-
-		// Filtering cliente
-		$filter_cliente = $this->state->get("filter.cliente");
-
-		if ($filter_cliente !== null && !empty($filter_cliente))
-		{
-			$query->where("a.`cliente` = '".$db->escape($filter_cliente)."'");
-		}
-
-		// Filtering metodo_pago
-		$filter_metodo_pago = $this->state->get("filter.metodo_pago");
-
-		if ($filter_metodo_pago !== null && (is_numeric($filter_metodo_pago) || !empty($filter_metodo_pago)))
-		{
-			$query->where("a.`metodo_pago` = '".$db->escape($filter_metodo_pago)."'");
-		}
 		// Add the list ordering clause.
-		$orderCol  = $this->state->get('list.ordering');
-		$orderDirn = $this->state->get('list.direction');
+		$orderCol  = $this->state->get('list.ordering', "a.id");
+		$orderDirn = $this->state->get('list.direction', "ASC");
 
 		if ($orderCol && $orderDirn)
 		{
@@ -254,33 +255,6 @@ class Servin2ModelVentas extends JModelList
 		foreach ($items as $oneItem)
 		{
 
-			if (isset($oneItem->pieza))
-			{
-				$values    = explode(',', $oneItem->pieza);
-				$textValue = array();
-
-				foreach ($values as $value)
-				{
-					$db    = JFactory::getDbo();
-					$query = $db->getQuery(true);
-					$query
-						->select('CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) AS `fk_value`')
-						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025077'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
-
-					$db->setQuery($query);
-					$results = $db->loadObject();
-
-					if ($results)
-					{
-						$textValue[] = $results->fk_value;
-					}
-				}
-
-				$oneItem->pieza = !empty($textValue) ? implode(', ', $textValue) : $oneItem->pieza;
-			}
-					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_VENTAS_TIPO_OPTION_' . strtoupper($oneItem->tipo));
-
 			if (isset($oneItem->cliente))
 			{
 				$values    = explode(',', $oneItem->cliente);
@@ -293,7 +267,7 @@ class Servin2ModelVentas extends JModelList
 					$query
 						->select('`#__servin_clientes2_3025079`.`nombre`')
 						->from($db->quoteName('#__servin_clientes2', '#__servin_clientes2_3025079'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_clientes2_3025079.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -306,7 +280,33 @@ class Servin2ModelVentas extends JModelList
 
 				$oneItem->cliente = !empty($textValue) ? implode(', ', $textValue) : $oneItem->cliente;
 			}
-					$oneItem->metodo_pago = JText::_('COM_SERVIN2_VENTAS_METODO_PAGO_OPTION_' . strtoupper($oneItem->metodo_pago));
+					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_VENTAS_TIPO_OPTION_' . strtoupper($oneItem->tipo));
+
+			if (isset($oneItem->pieza))
+			{
+				$values    = explode(',', $oneItem->pieza);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) AS `fk_value`')
+						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025077'))
+						->where($db->quoteName('#__servin_piezas2_3025077.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->fk_value;
+					}
+				}
+
+				$oneItem->pieza = !empty($textValue) ? implode(', ', $textValue) : $oneItem->pieza;
+			}
 		}
 
 		return $items;

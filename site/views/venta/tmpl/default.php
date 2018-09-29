@@ -23,13 +23,8 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_PIEZA'); ?></th>
-			<td><?php echo $this->item->pieza; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_FECHA'); ?></th>
-			<td><?php echo $this->item->fecha; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_CLIENTE'); ?></th>
+			<td><?php echo $this->item->cliente; ?></td>
 		</tr>
 
 		<tr>
@@ -38,18 +33,23 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		</tr>
 
 		<tr>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_PIEZA'); ?></th>
+			<td><?php echo $this->item->pieza; ?></td>
+		</tr>
+
+		<tr>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_PIEZAS'); ?></th>
+			<td><?php if( $this->item->tipo == 1 ) echo $this->item->piezas; ?></td>
+		</tr>
+
+		<tr>
 			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_GRAMOS'); ?></th>
 			<td><?php if( $this->item->tipo == 0 ) echo $this->item->gramos; ?></td>
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_CANTIDAD'); ?></th>
-			<td><?php if( $this->item->tipo == 1 ) echo $this->item->cantidad; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_CLIENTE'); ?></th>
-			<td><?php echo $this->item->cliente; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_FECHA'); ?></th>
+			<td><?php echo $this->item->fecha; ?></td>
 		</tr>
 
 		<tr>
@@ -58,8 +58,13 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_METODO_PAGO'); ?></th>
-			<td><?php echo $this->item->metodo_pago; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_ABONADO'); ?></th>
+			<td><?php echo $this->item->abonado; ?></td>
+		</tr>
+
+		<tr>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_PAGADA'); ?></th>
+			<td><?php echo $this->item->pagada; ?></td>
 		</tr>
 
 	</table>

@@ -42,28 +42,31 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_PIEZA', 'a.pieza', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_FECHA', 'a.fecha', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_CLIENTE', 'a.cliente', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_TIPO', 'a.tipo', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_PIEZA', 'a.pieza', $listDirn, $listOrder); ?>
+				</th>
+				<th class=''>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_PIEZAS', 'a.piezas', $listDirn, $listOrder); ?>
+				</th>
+				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_GRAMOS', 'a.gramos', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_CANTIDAD', 'a.cantidad', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_CLIENTE', 'a.cliente', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_FECHA', 'a.fecha', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_TOTAL', 'a.total', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_METODO_PAGO', 'a.metodo_pago', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_ABONADO', 'a.abonado', $listDirn, $listOrder); ?>
+				</th>
+				<th class=''>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_PAGADA', 'a.pagada', $listDirn, $listOrder); ?>
 				</th>
 
 
@@ -111,11 +114,7 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				</td>
 				<td>
 
-					<?php echo $item->pieza; ?>
-				</td>
-				<td>
-
-					<?php echo $item->fecha; ?>
+					<?php echo $item->cliente; ?>
 				</td>
 				<td>
 				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
@@ -126,15 +125,19 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				</td>
 				<td>
 
+					<?php echo $item->pieza; ?>
+				</td>
+				<td>
+
+					<?php echo $item->piezas; ?>
+				</td>
+				<td>
+
 					<?php echo $item->gramos; ?>
 				</td>
 				<td>
 
-					<?php echo $item->cantidad; ?>
-				</td>
-				<td>
-
-					<?php echo $item->cliente; ?>
+					<?php echo $item->fecha; ?>
 				</td>
 				<td>
 
@@ -142,7 +145,11 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				</td>
 				<td>
 
-					<?php echo $item->metodo_pago; ?>
+					<?php echo $item->abonado; ?>
+				</td>
+				<td>
+
+					<?php echo $item->pagada; ?>
 				</td>
 
 

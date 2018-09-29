@@ -152,14 +152,15 @@ class Servin2ViewVentas extends JViewLegacy
 			'a.`id`' => JText::_('JGRID_HEADING_ID'),
 			'a.`ordering`' => JText::_('JGRID_HEADING_ORDERING'),
 			'a.`state`' => JText::_('JSTATUS'),
-			'a.`pieza`' => JText::_('COM_SERVIN2_VENTAS_PIEZA'),
-			'a.`fecha`' => JText::_('COM_SERVIN2_VENTAS_FECHA'),
-			'a.`tipo`' => JText::_('COM_SERVIN2_VENTAS_TIPO'),
-			'a.`gramos`' => JText::_('COM_SERVIN2_VENTAS_GRAMOS'),
-			'a.`cantidad`' => JText::_('COM_SERVIN2_VENTAS_CANTIDAD'),
 			'a.`cliente`' => JText::_('COM_SERVIN2_VENTAS_CLIENTE'),
+			'a.`tipo`' => JText::_('COM_SERVIN2_VENTAS_TIPO'),
+			'a.`pieza`' => JText::_('COM_SERVIN2_VENTAS_PIEZA'),
+			'a.`piezas`' => JText::_('COM_SERVIN2_VENTAS_PIEZAS'),
+			'a.`gramos`' => JText::_('COM_SERVIN2_VENTAS_GRAMOS'),
+			'a.`fecha`' => JText::_('COM_SERVIN2_VENTAS_FECHA'),
 			'a.`total`' => JText::_('COM_SERVIN2_VENTAS_TOTAL'),
-			'a.`metodo_pago`' => JText::_('COM_SERVIN2_VENTAS_METODO_PAGO'),
+			'a.`abonado`' => JText::_('COM_SERVIN2_VENTAS_ABONADO'),
+			'a.`pagada`' => JText::_('COM_SERVIN2_VENTAS_PAGADA'),
 		);
 	}
 

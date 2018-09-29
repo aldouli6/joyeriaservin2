@@ -42,16 +42,22 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_PROVEEDOR', 'a.proveedor', $listDirn, $listOrder); ?>
+				</th>
+				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_FECHA', 'a.fecha', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_PROVEEDOR', 'a.proveedor', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_TIPO', 'a.tipo', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_PIEZA', 'a.pieza', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_CANTIDAD', 'a.cantidad', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_PIEZAS', 'a.piezas', $listDirn, $listOrder); ?>
+				</th>
+				<th class=''>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_GRAMOS', 'a.gramos', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_COMPRAS_TOTAL', 'a.total', $listDirn, $listOrder); ?>
@@ -108,11 +114,18 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				</td>
 				<td>
 
-					<?php echo $item->fecha; ?>
+					<?php echo $item->proveedor; ?>
 				</td>
 				<td>
 
-					<?php echo $item->proveedor; ?>
+					<?php echo $item->fecha; ?>
+				</td>
+				<td>
+				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
+					<?php echo JHtml::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'compras.', $canCheckin); ?>
+				<?php endif; ?>
+				<a href="<?php echo JRoute::_('index.php?option=com_servin2&view=compra&id='.(int) $item->id); ?>">
+				<?php echo $this->escape($item->tipo); ?></a>
 				</td>
 				<td>
 
@@ -120,7 +133,11 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				</td>
 				<td>
 
-					<?php echo $item->cantidad; ?>
+					<?php echo $item->piezas; ?>
+				</td>
+				<td>
+
+					<?php echo $item->gramos; ?>
 				</td>
 				<td>
 

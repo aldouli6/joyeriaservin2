@@ -23,13 +23,6 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	js = jQuery.noConflict();
 	js(document).ready(function () {
 		
-	js('input:hidden.pieza').each(function(){
-		var name = js(this).attr('name');
-		if(name.indexOf('piezahidden')){
-			js('#jform_pieza option[value="'+js(this).val()+'"]').attr('selected',true);
-		}
-	});
-	js("#jform_pieza").trigger("liszt:updated");
 	js('input:hidden.cliente').each(function(){
 		var name = js(this).attr('name');
 		if(name.indexOf('clientehidden')){
@@ -37,6 +30,13 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 		}
 	});
 	js("#jform_cliente").trigger("liszt:updated");
+	js('input:hidden.pieza').each(function(){
+		var name = js(this).attr('name');
+		if(name.indexOf('piezahidden')){
+			js('#jform_pieza option[value="'+js(this).val()+'"]').attr('selected',true);
+		}
+	});
+	js("#jform_pieza").trigger("liszt:updated");
 	});
 
 	Joomla.submitbutton = function (task) {
@@ -77,19 +77,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 				<?php echo $this->form->renderField('created_by'); ?>
 				<?php echo $this->form->renderField('modified_by'); ?>
 				<?php echo $this->form->renderField('created_at'); ?>
-				<?php echo $this->form->renderField('modified_at'); ?>				<?php echo $this->form->renderField('pieza'); ?>
-
-			<?php
-				foreach((array)$this->item->pieza as $value): 
-					if(!is_array($value)):
-						echo '<input type="hidden" class="pieza" name="jform[piezahidden]['.$value.']" value="'.$value.'" />';
-					endif;
-				endforeach;
-			?>				<?php echo $this->form->renderField('fecha'); ?>
-				<?php echo $this->form->renderField('tipo'); ?>
-				<?php echo $this->form->renderField('gramos'); ?>
-				<?php echo $this->form->renderField('cantidad'); ?>
-				<?php echo $this->form->renderField('cliente'); ?>
+				<?php echo $this->form->renderField('modified_at'); ?>				<?php echo $this->form->renderField('cliente'); ?>
 
 			<?php
 				foreach((array)$this->item->cliente as $value): 
@@ -97,8 +85,21 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						echo '<input type="hidden" class="cliente" name="jform[clientehidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('total'); ?>
-				<?php echo $this->form->renderField('metodo_pago'); ?>
+			?>				<?php echo $this->form->renderField('tipo'); ?>
+				<?php echo $this->form->renderField('pieza'); ?>
+
+			<?php
+				foreach((array)$this->item->pieza as $value): 
+					if(!is_array($value)):
+						echo '<input type="hidden" class="pieza" name="jform[piezahidden]['.$value.']" value="'.$value.'" />';
+					endif;
+				endforeach;
+			?>				<?php echo $this->form->renderField('piezas'); ?>
+				<?php echo $this->form->renderField('gramos'); ?>
+				<?php echo $this->form->renderField('fecha'); ?>
+				<?php echo $this->form->renderField('total'); ?>
+				<?php echo $this->form->renderField('abonado'); ?>
+				<?php echo $this->form->renderField('pagada'); ?>
 
 
 					<?php if ($this->state->params->get('save_history', 1)) : ?>

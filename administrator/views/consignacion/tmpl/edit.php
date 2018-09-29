@@ -23,13 +23,13 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	js = jQuery.noConflict();
 	js(document).ready(function () {
 		
-	js('input:hidden.piezas').each(function(){
+	js('input:hidden.pieza').each(function(){
 		var name = js(this).attr('name');
-		if(name.indexOf('piezashidden')){
-			js('#jform_piezas option[value="'+js(this).val()+'"]').attr('selected',true);
+		if(name.indexOf('piezahidden')){
+			js('#jform_pieza option[value="'+js(this).val()+'"]').attr('selected',true);
 		}
 	});
-	js("#jform_piezas").trigger("liszt:updated");
+	js("#jform_pieza").trigger("liszt:updated");
 	js('input:hidden.cliente').each(function(){
 		var name = js(this).attr('name');
 		if(name.indexOf('clientehidden')){
@@ -103,15 +103,18 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						<?php endif; ?>
 					<?php endforeach; ?>
 					<input type="hidden" name="jform[foto_pagare_hidden]" id="jform_foto_pagare_hidden" value="<?php echo implode(',', $foto_pagareFiles); ?>" />
-				<?php endif; ?>				<?php echo $this->form->renderField('piezas'); ?>
+				<?php endif; ?>				<?php echo $this->form->renderField('tipo_transaccion'); ?>
+				<?php echo $this->form->renderField('tipo'); ?>
+				<?php echo $this->form->renderField('pieza'); ?>
 
 			<?php
-				foreach((array)$this->item->piezas as $value): 
+				foreach((array)$this->item->pieza as $value): 
 					if(!is_array($value)):
-						echo '<input type="hidden" class="piezas" name="jform[piezashidden]['.$value.']" value="'.$value.'" />';
+						echo '<input type="hidden" class="pieza" name="jform[piezahidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('para'); ?>
+			?>				<?php echo $this->form->renderField('piezas'); ?>
+				<?php echo $this->form->renderField('gramos'); ?>
 				<?php echo $this->form->renderField('cliente'); ?>
 
 			<?php

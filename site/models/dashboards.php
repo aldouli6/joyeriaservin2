@@ -122,6 +122,7 @@ class Servin2ModelDashboards extends JModelList
 		
 		foreach ($items as $item)
 		{
+				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($item->tipo));
 
 			if (isset($item->consignacion))
 			{
@@ -134,20 +135,76 @@ class Servin2ModelDashboards extends JModelList
 					$db    = Factory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-						->select('`#__servin_consignaciones2_3029711`.`foto_pagare`')
+						->select('`#__servin_consignaciones2_3029711`.`pieza`')
 						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3029711'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_consignaciones2_3029711.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
 
 					if ($results)
 					{
-						$textValue[] = $results->foto_pagare;
+						$textValue[] = $results->pieza;
 					}
 				}
 
 				$item->consignacion = !empty($textValue) ? implode(', ', $textValue) : $item->consignacion;
+			}
+
+
+			if (isset($item->compra))
+			{
+
+				$values    = explode(',', $item->compra);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = Factory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__servin_compras2_3076251`.`pieza`')
+						->from($db->quoteName('#__servin_compras2', '#__servin_compras2_3076251'))
+						->where($db->quoteName('#__servin_compras2_3076251.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->pieza;
+					}
+				}
+
+				$item->compra = !empty($textValue) ? implode(', ', $textValue) : $item->compra;
+			}
+
+
+			if (isset($item->venta))
+			{
+
+				$values    = explode(',', $item->venta);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = Factory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__servin_ventas2_3076252`.`pieza`')
+						->from($db->quoteName('#__servin_ventas2', '#__servin_ventas2_3076252'))
+						->where($db->quoteName('#__servin_ventas2_3076252.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->pieza;
+					}
+				}
+
+				$item->venta = !empty($textValue) ? implode(', ', $textValue) : $item->venta;
 			}
 
 

@@ -30,6 +30,20 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 		}
 	});
 	js("#jform_consignacion").trigger("liszt:updated");
+	js('input:hidden.compra').each(function(){
+		var name = js(this).attr('name');
+		if(name.indexOf('comprahidden')){
+			js('#jform_compra option[value="'+js(this).val()+'"]').attr('selected',true);
+		}
+	});
+	js("#jform_compra").trigger("liszt:updated");
+	js('input:hidden.venta').each(function(){
+		var name = js(this).attr('name');
+		if(name.indexOf('ventahidden')){
+			js('#jform_venta option[value="'+js(this).val()+'"]').attr('selected',true);
+		}
+	});
+	js("#jform_venta").trigger("liszt:updated");
 	});
 
 	Joomla.submitbutton = function (task) {
@@ -68,12 +82,29 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 				<input type="hidden" name="jform[checked_out_time]" value="<?php echo $this->item->checked_out_time; ?>" />
 
 				<?php echo $this->form->renderField('created_by'); ?>
-				<?php echo $this->form->renderField('modified_by'); ?>				<?php echo $this->form->renderField('consignacion'); ?>
+				<?php echo $this->form->renderField('modified_by'); ?>				<?php echo $this->form->renderField('tipo'); ?>
+				<?php echo $this->form->renderField('consignacion'); ?>
 
 			<?php
 				foreach((array)$this->item->consignacion as $value): 
 					if(!is_array($value)):
 						echo '<input type="hidden" class="consignacion" name="jform[consignacionhidden]['.$value.']" value="'.$value.'" />';
+					endif;
+				endforeach;
+			?>				<?php echo $this->form->renderField('compra'); ?>
+
+			<?php
+				foreach((array)$this->item->compra as $value): 
+					if(!is_array($value)):
+						echo '<input type="hidden" class="compra" name="jform[comprahidden]['.$value.']" value="'.$value.'" />';
+					endif;
+				endforeach;
+			?>				<?php echo $this->form->renderField('venta'); ?>
+
+			<?php
+				foreach((array)$this->item->venta as $value): 
+					if(!is_array($value)):
+						echo '<input type="hidden" class="venta" name="jform[ventahidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
 			?>				<?php echo $this->form->renderField('pago'); ?>

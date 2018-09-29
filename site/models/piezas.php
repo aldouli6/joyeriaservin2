@@ -48,8 +48,7 @@ class Servin2ModelPiezas extends JModelList
 				'hechura', 'a.hechura',
 				'tipo', 'a.tipo',
 				'gramos', 'a.gramos',
-				'cantidad', 'a.cantidad',
-				'estatus', 'a.estatus',
+				'piezas', 'a.piezas',
 			);
 		}
 
@@ -209,9 +208,17 @@ class Servin2ModelPiezas extends JModelList
 			$query->where("a.`hechura` = '".$db->escape($filter_hechura)."'");
 		}
 
+		// Filtering tipo
+		$filter_tipo = $this->state->get("filter.tipo");
+
+		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
+		{
+			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
+		}
+
             // Add the list ordering clause.
-            $orderCol  = $this->state->get('list.ordering');
-            $orderDirn = $this->state->get('list.direction');
+            $orderCol  = $this->state->get('list.ordering', "a.id");
+            $orderDirn = $this->state->get('list.direction', "ASC");
 
             if ($orderCol && $orderDirn)
             {
@@ -246,7 +253,7 @@ class Servin2ModelPiezas extends JModelList
 					$query
 						->select('`#__servin_materiales2_3025006`.`nombre`')
 						->from($db->quoteName('#__servin_materiales2', '#__servin_materiales2_3025006'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_materiales2_3025006.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -274,7 +281,7 @@ class Servin2ModelPiezas extends JModelList
 					$query
 						->select('`#__servin_kilatajes2_3025007`.`kilataje`')
 						->from($db->quoteName('#__servin_kilatajes2', '#__servin_kilatajes2_3025007'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_kilatajes2_3025007.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -302,7 +309,7 @@ class Servin2ModelPiezas extends JModelList
 					$query
 						->select('`#__servin_ubicaciones2_3025008`.`nombre`')
 						->from($db->quoteName('#__servin_ubicaciones2', '#__servin_ubicaciones2_3025008'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_ubicaciones2_3025008.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -330,7 +337,7 @@ class Servin2ModelPiezas extends JModelList
 					$query
 						->select('`#__servin_hechuras2_3025009`.`numero`')
 						->from($db->quoteName('#__servin_hechuras2', '#__servin_hechuras2_3025009'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_hechuras2_3025009.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -345,7 +352,6 @@ class Servin2ModelPiezas extends JModelList
 			}
 
 				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_PIEZAS_TIPO_OPTION_' . strtoupper($item->tipo));
-				$item->estatus = empty($item->estatus) ? '' : JText::_('COM_SERVIN2_PIEZAS_ESTATUS_OPTION_' . strtoupper($item->estatus));
 		}
 
 		return $items;

@@ -74,6 +74,20 @@ class Servin2Tableventa extends JTable
 			$array['modified_at'] = $date->toSql();
 		}
 
+		// Support for multiple or not foreign key field: cliente
+			if(!empty($array['cliente']))
+			{
+				if(is_array($array['cliente'])){
+					$array['cliente'] = implode(',',$array['cliente']);
+				}
+				else if(strrpos($array['cliente'], ',') != false){
+					$array['cliente'] = explode(',',$array['cliente']);
+				}
+			}
+			else {
+				$array['cliente'] = '';
+			}
+
 		// Support for multiple or not foreign key field: pieza
 			if(!empty($array['pieza']))
 			{
@@ -94,39 +108,10 @@ class Servin2Tableventa extends JTable
 			$array['fecha'] = '';
 		}
 
-		// Support for multiple or not foreign key field: cliente
-			if(!empty($array['cliente']))
-			{
-				if(is_array($array['cliente'])){
-					$array['cliente'] = implode(',',$array['cliente']);
-				}
-				else if(strrpos($array['cliente'], ',') != false){
-					$array['cliente'] = explode(',',$array['cliente']);
-				}
-			}
-			else {
-				$array['cliente'] = '';
-			}
-
-		// Support for multiple field: metodo_pago
-		if (isset($array['metodo_pago']))
+		// Support for checkbox field: pagada
+		if (!isset($array['pagada']))
 		{
-			if (is_array($array['metodo_pago']))
-			{
-				$array['metodo_pago'] = implode(',',$array['metodo_pago']);
-			}
-			elseif (strpos($array['metodo_pago'], ',') != false)
-			{
-				$array['metodo_pago'] = explode(',',$array['metodo_pago']);
-			}
-			elseif (strlen($array['metodo_pago']) == 0)
-			{
-				$array['metodo_pago'] = '';
-			}
-		}
-		else
-		{
-			$array['metodo_pago'] = '';
+			$array['pagada'] = 0;
 		}
 
 		if (isset($array['params']) && is_array($array['params']))

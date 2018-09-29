@@ -39,7 +39,10 @@ class Servin2ModelPagos extends JModelList
 				'state', 'a.state',
 				'created_by', 'a.created_by',
 				'modified_by', 'a.modified_by',
+				'tipo', 'a.tipo',
 				'consignacion', 'a.consignacion',
+				'compra', 'a.compra',
+				'venta', 'a.venta',
 				'pago', 'a.pago',
 				'metodo', 'a.metodo',
 				'fecha', 'a.fecha',
@@ -136,8 +139,14 @@ class Servin2ModelPagos extends JModelList
 		// Join over the created by field 'modified_by'
 		$query->join('LEFT', '#__users AS modified_by ON modified_by.id = a.modified_by');
 		// Join over the foreign key 'consignacion'
-		$query->select('`#__servin_consignaciones2_3029711`.`foto_pagare` AS consignaciones_fk_value_3029711');
+		$query->select('`#__servin_consignaciones2_3029711`.`pieza` AS consignaciones_fk_value_3029711');
 		$query->join('LEFT', '#__servin_consignaciones2 AS #__servin_consignaciones2_3029711 ON #__servin_consignaciones2_3029711.`id` = a.`consignacion`');
+		// Join over the foreign key 'compra'
+		$query->select('`#__servin_compras2_3076251`.`pieza` AS compras_fk_value_3076251');
+		$query->join('LEFT', '#__servin_compras2 AS #__servin_compras2_3076251 ON #__servin_compras2_3076251.`id` = a.`compra`');
+		// Join over the foreign key 'venta'
+		$query->select('`#__servin_ventas2_3076252`.`pieza` AS ventas_fk_value_3076252');
+		$query->join('LEFT', '#__servin_ventas2 AS #__servin_ventas2_3076252 ON #__servin_ventas2_3076252.`id` = a.`venta`');
             
 		if (!Factory::getUser()->authorise('core.edit', 'com_servin2'))
 		{
@@ -160,12 +169,36 @@ class Servin2ModelPagos extends JModelList
             }
             
 
+		// Filtering tipo
+		$filter_tipo = $this->state->get("filter.tipo");
+
+		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
+		{
+			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
+		}
+
 		// Filtering consignacion
 		$filter_consignacion = $this->state->get("filter.consignacion");
 
 		if ($filter_consignacion)
 		{
 			$query->where("a.`consignacion` = '".$db->escape($filter_consignacion)."'");
+		}
+
+		// Filtering compra
+		$filter_compra = $this->state->get("filter.compra");
+
+		if ($filter_compra)
+		{
+			$query->where("a.`compra` = '".$db->escape($filter_compra)."'");
+		}
+
+		// Filtering venta
+		$filter_venta = $this->state->get("filter.venta");
+
+		if ($filter_venta)
+		{
+			$query->where("a.`venta` = '".$db->escape($filter_venta)."'");
 		}
 
 		// Filtering metodo
@@ -175,26 +208,22 @@ class Servin2ModelPagos extends JModelList
 		}
 
 		// Filtering fecha
-		// Checking "_dateformat"
-		$filter_fecha_from = $this->state->get("filter.fecha_from_dateformat");
-		$filter_Qfecha_from = (!empty($filter_fecha_from)) ? $this->isValidDate($filter_fecha_from) : null;
+		$filter_fecha_from = $this->state->get("filter.fecha.from");
 
-		if ($filter_Qfecha_from != null)
+		if ($filter_fecha_from !== null && !empty($filter_fecha_from))
 		{
-			$query->where("a.fecha >= '" . $db->escape($filter_Qfecha_from) . "'");
+			$query->where("a.`fecha` >= '".$db->escape($filter_fecha_from)."'");
 		}
+		$filter_fecha_to = $this->state->get("filter.fecha.to");
 
-		$filter_fecha_to = $this->state->get("filter.fecha_to_dateformat");
-		$filter_Qfecha_to = (!empty($filter_fecha_to)) ? $this->isValidDate($filter_fecha_to) : null ;
-
-		if ($filter_Qfecha_to != null)
+		if ($filter_fecha_to !== null  && !empty($filter_fecha_to))
 		{
-			$query->where("a.fecha <= '" . $db->escape($filter_Qfecha_to) . "'");
+			$query->where("a.`fecha` <= '".$db->escape($filter_fecha_to)."'");
 		}
 
             // Add the list ordering clause.
-            $orderCol  = $this->state->get('list.ordering');
-            $orderDirn = $this->state->get('list.direction');
+            $orderCol  = $this->state->get('list.ordering', "a.id");
+            $orderDirn = $this->state->get('list.direction', "ASC");
 
             if ($orderCol && $orderDirn)
             {
@@ -215,6 +244,7 @@ class Servin2ModelPagos extends JModelList
 		
 		foreach ($items as $item)
 		{
+				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($item->tipo));
 
 			if (isset($item->consignacion))
 			{
@@ -227,20 +257,76 @@ class Servin2ModelPagos extends JModelList
 					$db    = Factory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-						->select('`#__servin_consignaciones2_3029711`.`foto_pagare`')
+						->select('`#__servin_consignaciones2_3029711`.`pieza`')
 						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3029711'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_consignaciones2_3029711.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
 
 					if ($results)
 					{
-						$textValue[] = $results->foto_pagare;
+						$textValue[] = $results->pieza;
 					}
 				}
 
 				$item->consignacion = !empty($textValue) ? implode(', ', $textValue) : $item->consignacion;
+			}
+
+
+			if (isset($item->compra))
+			{
+
+				$values    = explode(',', $item->compra);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = Factory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__servin_compras2_3076251`.`pieza`')
+						->from($db->quoteName('#__servin_compras2', '#__servin_compras2_3076251'))
+						->where($db->quoteName('#__servin_compras2_3076251.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->pieza;
+					}
+				}
+
+				$item->compra = !empty($textValue) ? implode(', ', $textValue) : $item->compra;
+			}
+
+
+			if (isset($item->venta))
+			{
+
+				$values    = explode(',', $item->venta);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = Factory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__servin_ventas2_3076252`.`pieza`')
+						->from($db->quoteName('#__servin_ventas2', '#__servin_ventas2_3076252'))
+						->where($db->quoteName('#__servin_ventas2_3076252.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->pieza;
+					}
+				}
+
+				$item->venta = !empty($textValue) ? implode(', ', $textValue) : $item->venta;
 			}
 
 

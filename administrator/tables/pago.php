@@ -78,6 +78,34 @@ class Servin2Tablepago extends JTable
 				$array['consignacion'] = '';
 			}
 
+		// Support for multiple or not foreign key field: compra
+			if(!empty($array['compra']))
+			{
+				if(is_array($array['compra'])){
+					$array['compra'] = implode(',',$array['compra']);
+				}
+				else if(strrpos($array['compra'], ',') != false){
+					$array['compra'] = explode(',',$array['compra']);
+				}
+			}
+			else {
+				$array['compra'] = '';
+			}
+
+		// Support for multiple or not foreign key field: venta
+			if(!empty($array['venta']))
+			{
+				if(is_array($array['venta'])){
+					$array['venta'] = implode(',',$array['venta']);
+				}
+				else if(strrpos($array['venta'], ',') != false){
+					$array['venta'] = explode(',',$array['venta']);
+				}
+			}
+			else {
+				$array['venta'] = '';
+			}
+
 		// Support for multiple field: metodo
 		if (isset($array['metodo']))
 		{

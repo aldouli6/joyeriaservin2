@@ -207,10 +207,7 @@ class ModServin2Helper
 		case 'gramos':
 		$result = $field_value;
 		break;
-		case 'cantidad':
-		$result = $field_value;
-		break;
-		case 'estatus':
+		case 'piezas':
 		$result = $field_value;
 		break;
 		}
@@ -305,16 +302,22 @@ class ModServin2Helper
 		case 'modified_at':
 		$result = $field_value;
 		break;
+		case 'proveedor':
+		$result = self::loadValueFromExternalTable('#__servin_proveedores2', 'id', '', $field_value);
+		break;
 		case 'fecha':
 		$result = $field_value;
 		break;
-		case 'proveedor':
-		$result = self::loadValueFromExternalTable('#__servin_proveedores2', 'id', '', $field_value);
+		case 'tipo':
+		$result = $field_value;
 		break;
 		case 'pieza':
 		$result = self::loadValueFromExternalTable('#__servin_piezas2', 'id', '', $field_value);
 		break;
-		case 'cantidad':
+		case 'piezas':
+		$result = $field_value;
+		break;
+		case 'gramos':
 		$result = $field_value;
 		break;
 		case 'total':
@@ -347,28 +350,31 @@ class ModServin2Helper
 		case 'modified_at':
 		$result = $field_value;
 		break;
+		case 'cliente':
+		$result = self::loadValueFromExternalTable('#__servin_clientes2', 'id', 'nombre', $field_value);
+		break;
+		case 'tipo':
+		$result = $field_value;
+		break;
 		case 'pieza':
 		$result = self::loadValueFromExternalTable('#__servin_piezas2', 'id', '', $field_value);
 		break;
-		case 'fecha':
-		$result = $field_value;
-		break;
-		case 'tipo':
+		case 'piezas':
 		$result = $field_value;
 		break;
 		case 'gramos':
 		$result = $field_value;
 		break;
-		case 'cantidad':
+		case 'fecha':
 		$result = $field_value;
-		break;
-		case 'cliente':
-		$result = self::loadValueFromExternalTable('#__servin_clientes2', 'id', 'nombre', $field_value);
 		break;
 		case 'total':
 		$result = $field_value;
 		break;
-		case 'metodo_pago':
+		case 'abonado':
+		$result = $field_value;
+		break;
+		case 'pagada':
 		$result = $field_value;
 		break;
 		}
@@ -402,10 +408,19 @@ class ModServin2Helper
 							$result = $field_value;
 						}
 		break;
-		case 'piezas':
+		case 'tipo_transaccion':
+		$result = $field_value;
+		break;
+		case 'tipo':
+		$result = $field_value;
+		break;
+		case 'pieza':
 		$result = self::loadValueFromExternalTable('#__servin_piezas2', 'id', '', $field_value);
 		break;
-		case 'para':
+		case 'piezas':
+		$result = $field_value;
+		break;
+		case 'gramos':
 		$result = $field_value;
 		break;
 		case 'cliente':
@@ -459,8 +474,17 @@ class ModServin2Helper
 		$user = JFactory::getUser($field_value);
 		$result = $user->name;
 		break;
+		case 'tipo':
+		$result = $field_value;
+		break;
 		case 'consignacion':
-		$result = self::loadValueFromExternalTable('#__servin_consignaciones2', 'id', 'foto_pagare', $field_value);
+		$result = self::loadValueFromExternalTable('#__servin_consignaciones2', 'id', 'pieza', $field_value);
+		break;
+		case 'compra':
+		$result = self::loadValueFromExternalTable('#__servin_compras2', 'id', 'pieza', $field_value);
+		break;
+		case 'venta':
+		$result = self::loadValueFromExternalTable('#__servin_ventas2', 'id', 'pieza', $field_value);
 		break;
 		case 'pago':
 		$result = $field_value;

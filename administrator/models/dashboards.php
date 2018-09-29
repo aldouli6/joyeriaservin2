@@ -53,7 +53,7 @@ class Servin2ModelDashboards extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::populateState('a.pago', 'asc');
+		parent::populateState('a.tipo', 'asc');
 	}
 
 	/**
@@ -106,6 +106,7 @@ class Servin2ModelDashboards extends JModelList
                 
 		foreach ($items as $oneItem)
 		{
+					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($oneItem->tipo));
 
 			if (isset($oneItem->consignacion))
 			{
@@ -117,20 +118,72 @@ class Servin2ModelDashboards extends JModelList
 					$db    = JFactory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-						->select('`#__servin_consignaciones2_3029711`.`foto_pagare`')
+						->select('`#__servin_consignaciones2_3029711`.`pieza`')
 						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3029711'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_consignaciones2_3029711.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
 
 					if ($results)
 					{
-						$textValue[] = $results->foto_pagare;
+						$textValue[] = $results->pieza;
 					}
 				}
 
 				$oneItem->consignacion = !empty($textValue) ? implode(', ', $textValue) : $oneItem->consignacion;
+			}
+
+			if (isset($oneItem->compra))
+			{
+				$values    = explode(',', $oneItem->compra);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__servin_compras2_3076251`.`pieza`')
+						->from($db->quoteName('#__servin_compras2', '#__servin_compras2_3076251'))
+						->where($db->quoteName('#__servin_compras2_3076251.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->pieza;
+					}
+				}
+
+				$oneItem->compra = !empty($textValue) ? implode(', ', $textValue) : $oneItem->compra;
+			}
+
+			if (isset($oneItem->venta))
+			{
+				$values    = explode(',', $oneItem->venta);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__servin_ventas2_3076252`.`pieza`')
+						->from($db->quoteName('#__servin_ventas2', '#__servin_ventas2_3076252'))
+						->where($db->quoteName('#__servin_ventas2_3076252.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->pieza;
+					}
+				}
+
+				$oneItem->venta = !empty($textValue) ? implode(', ', $textValue) : $oneItem->venta;
 			}
 					$oneItem->metodo = JText::_('COM_SERVIN2_PAGOS_METODO_OPTION_' . strtoupper($oneItem->metodo));
 		}

@@ -77,8 +77,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 				<?php echo $this->form->renderField('created_by'); ?>
 				<?php echo $this->form->renderField('modified_by'); ?>
 				<?php echo $this->form->renderField('created_at'); ?>
-				<?php echo $this->form->renderField('modified_at'); ?>				<?php echo $this->form->renderField('fecha'); ?>
-				<?php echo $this->form->renderField('proveedor'); ?>
+				<?php echo $this->form->renderField('modified_at'); ?>				<?php echo $this->form->renderField('proveedor'); ?>
 
 			<?php
 				foreach((array)$this->item->proveedor as $value): 
@@ -86,7 +85,9 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						echo '<input type="hidden" class="proveedor" name="jform[proveedorhidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('pieza'); ?>
+			?>				<?php echo $this->form->renderField('fecha'); ?>
+				<?php echo $this->form->renderField('tipo'); ?>
+				<?php echo $this->form->renderField('pieza'); ?>
 
 			<?php
 				foreach((array)$this->item->pieza as $value): 
@@ -94,7 +95,8 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						echo '<input type="hidden" class="pieza" name="jform[piezahidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('cantidad'); ?>
+			?>				<?php echo $this->form->renderField('piezas'); ?>
+				<?php echo $this->form->renderField('gramos'); ?>
 				<?php echo $this->form->renderField('total'); ?>
 				<?php echo $this->form->renderField('abonado'); ?>
 				<?php echo $this->form->renderField('pagada'); ?>

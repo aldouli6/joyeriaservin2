@@ -23,12 +23,7 @@
       <option value="1">COM_SERVIN2_PIEZAS_TIPO_OPTION_1</option>
     </field>
     <field name="gramos" filter="safehtml" min="0" step="0.01" type="number" required="true" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_GRAMOS" description="COM_SERVIN2_FORM_DESC_PIEZA_GRAMOS" hint="COM_SERVIN2_FORM_LBL_PIEZA_GRAMOS" showon="tipo:0"/>
-    <field name="cantidad" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_CANTIDAD" description="COM_SERVIN2_FORM_DESC_PIEZA_CANTIDAD" hint="COM_SERVIN2_FORM_LBL_PIEZA_CANTIDAD" showon="tipo:1"/>
-    <field name="estatus" default="1" type="radio" required="true" label="COM_SERVIN2_FORM_LBL_PIEZA_ESTATUS" description="COM_SERVIN2_FORM_DESC_PIEZA_ESTATUS" hint="COM_SERVIN2_FORM_LBL_PIEZA_ESTATUS">
-      <option value="1">COM_SERVIN2_PIEZAS_ESTATUS_OPTION_1</option>
-      <option value="2">COM_SERVIN2_PIEZAS_ESTATUS_OPTION_2</option>
-      <option value="3">COM_SERVIN2_PIEZAS_ESTATUS_OPTION_3</option>
-    </field>
+    <field name="piezas" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_PIEZAS" description="COM_SERVIN2_FORM_DESC_PIEZA_PIEZAS" hint="COM_SERVIN2_FORM_LBL_PIEZA_PIEZAS" showon="tipo:1"/>
     <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
   </fieldset>
 </form>

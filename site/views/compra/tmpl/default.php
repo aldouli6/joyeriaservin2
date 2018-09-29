@@ -23,13 +23,18 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		
 
 		<tr>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_COMPRA_PROVEEDOR'); ?></th>
+			<td><?php echo $this->item->proveedor; ?></td>
+		</tr>
+
+		<tr>
 			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_COMPRA_FECHA'); ?></th>
 			<td><?php echo $this->item->fecha; ?></td>
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_COMPRA_PROVEEDOR'); ?></th>
-			<td><?php echo $this->item->proveedor; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_COMPRA_TIPO'); ?></th>
+			<td><?php echo $this->item->tipo; ?></td>
 		</tr>
 
 		<tr>
@@ -38,8 +43,13 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_COMPRA_CANTIDAD'); ?></th>
-			<td><?php echo $this->item->cantidad; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_COMPRA_PIEZAS'); ?></th>
+			<td><?php if( $this->item->tipo == 1 ) echo $this->item->piezas; ?></td>
+		</tr>
+
+		<tr>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_COMPRA_GRAMOS'); ?></th>
+			<td><?php if( $this->item->tipo == 0 ) echo $this->item->gramos; ?></td>
 		</tr>
 
 		<tr>

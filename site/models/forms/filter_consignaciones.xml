@@ -5,9 +5,19 @@
                label="COM_USERS_FILTER_SEARCH_DESC"
                class="js-stools-search-string" />
 
-        <field name="piezas" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_PIEZAS" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_PIEZAS_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`descripcion`, ' ', `hechura`) AS val FROM `#__servin_piezas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+        <field name="tipo_transaccion" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_TIPO_TRANSACCION" type="list" onchange="this.form.submit();" default="COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_FILTER">
+  <option value="">COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_FILTER</option>
+  <option value="0">COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_0</option>
+  <option value="1">COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_1</option>
+</field>
+<field name="tipo" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_TIPO" type="list" onchange="this.form.submit();" default="COM_SERVIN2_CONSIGNACIONES_TIPO_FILTER">
+  <option value="">COM_SERVIN2_CONSIGNACIONES_TIPO_FILTER</option>
+  <option value="0">COM_SERVIN2_CONSIGNACIONES_TIPO_OPTION_0</option>
+  <option value="1">COM_SERVIN2_CONSIGNACIONES_TIPO_OPTION_1</option>
+</field>
+<field name="pieza" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_PIEZA" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_PIEZA_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`descripcion`, ' ', `hechura`) AS val FROM `#__servin_piezas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="cliente" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_CLIENTE" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_CLIENTE_FILTER' AS `val` UNION SELECT `id` AS `id`, `nombre` AS val FROM `#__servin_clientes2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
-<field name="proveedor" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_PROVEEDOR" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_PROVEEDOR_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`empresa`, ' ', `nombre`) AS val FROM `#__servin_proveedores2`" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="proveedor" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_PROVEEDOR" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_PROVEEDOR_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`empresa`, ' ', `nombre`) AS val FROM `#__servin_proveedores2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="fecha_emision.from" label="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_FROM"/>
 <field name="fecha_emision.to" label="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_TO"/>
 <field name="fecha_limite.from" label="COM_SERVIN2_CONSIGNACIONES_FECHA_LIMITE_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_LIMITE_FILTER_FROM"/>

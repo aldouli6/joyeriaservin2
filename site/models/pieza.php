@@ -268,7 +268,6 @@ class Servin2ModelPieza extends JModelItem
 
 		}
 					$this->_item->tipo = JText::_('COM_SERVIN2_PIEZAS_TIPO_OPTION_' . $this->_item->tipo);
-					$this->_item->estatus = JText::_('COM_SERVIN2_PIEZAS_ESTATUS_OPTION_' . $this->_item->estatus);
 
             return $this->_item;
         }

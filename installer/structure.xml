@@ -8,7 +8,10 @@
     <field field_name="checked_out_time" field_type="DATETIME" description=""/>
     <field field_name="created_by" field_type="INT" field_length="11" index="index" description=""/>
     <field field_name="modified_by" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="tipo" field_type="VARCHAR" field_length="255" description=""/>
     <field field_name="consignacion" field_type="INT" field_length="11" description=""/>
+    <field action="add" field_name="compra" field_type="INT" field_length="11" description=""/>
+    <field action="add" field_name="venta" field_type="INT" field_length="11" description=""/>
     <field field_name="pago" field_type="DOUBLE" description=""/>
     <field field_name="metodo" field_type="VARCHAR" field_length="255" description=""/>
     <field field_name="fecha" field_type="DATETIME" description=""/>
@@ -74,9 +77,8 @@
     <field action="add" field_name="hechura" field_type="INT" field_length="11" description=""/>
     <field action="change" field_name="tipo" field_type="VARCHAR" field_length="255" description=""/>
     <field action="change" old_name="peso" new_name="gramos" field_name="gramos" field_type="DOUBLE" description=""/>
-    <field field_name="cantidad" field_type="DOUBLE" description=""/>
-    <field action="add" field_name="estatus" field_type="VARCHAR" field_length="255" description=""/>
-    <field action="remove" field_name="precio"/>
+    <field action="change" old_name="cantidad" new_name="piezas" field_name="piezas" field_type="DOUBLE" description=""/>
+    <field action="remove" field_name="estatus"/>
   </table>
   <table action="change" old_name="#__servin_proveedores" new_name="#__servin_proveedores2" table_name="#__servin_proveedores2" storage_engine="" collation="utf8mb4_unicode_ci">
     <field action="add" field_name="id" field_type="INT" field_length="11" is_autoincrement="1" index="primary" description=""/>
@@ -102,10 +104,12 @@
     <field action="add" field_name="modified_by" field_type="INT" field_length="11" index="index" description=""/>
     <field action="add" field_name="created_at" field_type="DATETIME" description=""/>
     <field action="add" field_name="modified_at" field_type="DATETIME" description=""/>
-    <field action="add" field_name="fecha" field_type="DATETIME" description=""/>
     <field action="add" field_name="proveedor" field_type="INT" field_length="11" description=""/>
+    <field action="add" field_name="fecha" field_type="DATETIME" description=""/>
+    <field field_name="tipo" field_type="VARCHAR" field_length="255" description=""/>
     <field action="change" old_name="piezas" new_name="pieza" field_name="pieza" field_type="INT" field_length="11" description=""/>
-    <field field_name="cantidad" field_type="DOUBLE" description=""/>
+    <field action="change" old_name="cantidad" new_name="piezas" field_name="piezas" field_type="DOUBLE" description=""/>
+    <field action="add" field_name="gramos" field_type="DOUBLE" description=""/>
     <field action="add" field_name="total" field_type="DOUBLE" description=""/>
     <field action="change" old_name="abono" new_name="abonado" field_name="abonado" field_type="DOUBLE" description=""/>
     <field field_name="pagada" field_type="VARCHAR" field_length="255" description=""/>
@@ -135,14 +139,16 @@
     <field action="add" field_name="modified_by" field_type="INT" field_length="11" index="index" description=""/>
     <field action="add" field_name="created_at" field_type="DATETIME" description=""/>
     <field action="add" field_name="modified_at" field_type="DATETIME" description=""/>
-    <field action="change" old_name="piezas" new_name="pieza" field_name="pieza" field_type="INT" field_length="11" description=""/>
-    <field action="add" field_name="fecha" field_type="DATETIME" description=""/>
-    <field field_name="tipo" field_type="VARCHAR" field_length="255" description=""/>
-    <field field_name="gramos" field_type="DOUBLE" description=""/>
-    <field field_name="cantidad" field_type="DOUBLE" description=""/>
     <field action="add" field_name="cliente" field_type="INT" field_length="11" description=""/>
+    <field action="add" field_name="tipo" field_type="VARCHAR" field_length="255" description=""/>
+    <field action="change" old_name="piezas" new_name="pieza" field_name="pieza" field_type="INT" field_length="11" description=""/>
+    <field action="add" field_name="piezas" field_type="DOUBLE" description=""/>
+    <field action="add" field_name="gramos" field_type="DOUBLE" description=""/>
+    <field action="add" field_name="fecha" field_type="DATETIME" description=""/>
     <field action="add" field_name="total" field_type="DOUBLE" description=""/>
-    <field action="add" field_name="metodo_pago" field_type="VARCHAR" field_length="255" description=""/>
+    <field action="change" old_name="abono" new_name="abonado" field_name="abonado" field_type="DOUBLE" description=""/>
+    <field action="change" field_name="pagada" field_type="VARCHAR" field_length="255" description=""/>
+    <field action="remove" field_name="metodo_pago"/>
   </table>
   <table action="change" old_name="#__servin_consignaciones" new_name="#__servin_consignaciones2" table_name="#__servin_consignaciones2" storage_engine="" collation="utf8mb4_unicode_ci">
     <field action="add" field_name="id" field_type="INT" field_length="11" is_autoincrement="1" index="primary" description=""/>
@@ -156,8 +162,11 @@
     <field action="add" field_name="modified_at" field_type="DATETIME" description=""/>
     <field action="add" field_name="no_folio_pagare" field_type="VARCHAR" field_length="255" description=""/>
     <field action="add" field_name="foto_pagare" field_type="TEXT" description=""/>
-    <field action="add" field_name="piezas" field_type="INT" field_length="11" description=""/>
-    <field field_name="para" field_type="VARCHAR" field_length="255" description=""/>
+    <field action="change" old_name="tipo" new_name="tipo_transaccion" field_name="tipo_transaccion" field_type="VARCHAR" field_length="255" description=""/>
+    <field action="change" old_name="tipo_copy_1" new_name="tipo" field_name="tipo" field_type="VARCHAR" field_length="255" description=""/>
+    <field action="change" old_name="piezas" new_name="pieza" field_name="pieza" field_type="INT" field_length="11" description=""/>
+    <field action="add" field_name="piezas" field_type="DOUBLE" description=""/>
+    <field action="add" field_name="gramos" field_type="DOUBLE" description=""/>
     <field action="add" field_name="cliente" field_type="INT" field_length="11" description=""/>
     <field action="add" field_name="proveedor" field_type="INT" field_length="11" description=""/>
     <field action="add" field_name="total" field_type="DOUBLE" description=""/>

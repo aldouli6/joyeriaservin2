@@ -70,14 +70,20 @@ $canEdit = Servin2HelpersServin2::canUserEdit($this->item, $user);
 					<?php endforeach; ?>
 				<?php endif; ?>
 				<input type="hidden" name="jform[foto_pagare_hidden]" id="jform_foto_pagare_hidden" value="<?php echo implode(',', $foto_pagareFiles); ?>" />
-	<?php echo $this->form->renderField('piezas'); ?>
+	<?php echo $this->form->renderField('tipo_transaccion'); ?>
 
-	<?php foreach((array)$this->item->piezas as $value): ?>
+	<?php echo $this->form->renderField('tipo'); ?>
+
+	<?php echo $this->form->renderField('pieza'); ?>
+
+	<?php foreach((array)$this->item->pieza as $value): ?>
 		<?php if(!is_array($value)): ?>
-			<input type="hidden" class="piezas" name="jform[piezashidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
+			<input type="hidden" class="pieza" name="jform[piezahidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
 		<?php endif; ?>
 	<?php endforeach; ?>
-	<?php echo $this->form->renderField('para'); ?>
+	<?php echo $this->form->renderField('piezas'); ?>
+
+	<?php echo $this->form->renderField('gramos'); ?>
 
 	<?php echo $this->form->renderField('cliente'); ?>
 

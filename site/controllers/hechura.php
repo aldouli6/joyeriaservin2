@@ -105,7 +105,7 @@ class Servin2ControllerHechura extends JControllerLegacy
 			}
 			else
 			{
-				$this->setRedirect(JRoute::_($item->link . $menuitemid, false));
+                $this->setRedirect(JRoute::_('index.php?Itemid='. $item->id, false));
 			}
 		}
 		else

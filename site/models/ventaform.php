@@ -284,18 +284,6 @@ class Servin2ModelVentaForm extends JModelForm
             $data = $this->getItem();
         }
         
-		// Support for multiple or not foreign key field: metodo_pago
-		$array = array();
-
-		foreach ((array) $data->metodo_pago as $value)
-		{
-			if (!is_array($value))
-			{
-				$array[] = $value;
-			}
-		}
-
-		$data->metodo_pago = $array;
 
         return $data;
     }

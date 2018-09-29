@@ -41,10 +41,12 @@ class Servin2ModelCompras extends JModelList
 				'modified_by', 'a.modified_by',
 				'created_at', 'a.created_at',
 				'modified_at', 'a.modified_at',
-				'fecha', 'a.fecha',
 				'proveedor', 'a.proveedor',
+				'fecha', 'a.fecha',
+				'tipo', 'a.tipo',
 				'pieza', 'a.pieza',
-				'cantidad', 'a.cantidad',
+				'piezas', 'a.piezas',
+				'gramos', 'a.gramos',
 				'total', 'a.total',
 				'abonado', 'a.abonado',
 				'pagada', 'a.pagada',
@@ -169,30 +171,34 @@ class Servin2ModelCompras extends JModelList
             }
             
 
-		// Filtering fecha
-		// Checking "_dateformat"
-		$filter_fecha_from = $this->state->get("filter.fecha_from_dateformat");
-		$filter_Qfecha_from = (!empty($filter_fecha_from)) ? $this->isValidDate($filter_fecha_from) : null;
-
-		if ($filter_Qfecha_from != null)
-		{
-			$query->where("a.fecha >= '" . $db->escape($filter_Qfecha_from) . "'");
-		}
-
-		$filter_fecha_to = $this->state->get("filter.fecha_to_dateformat");
-		$filter_Qfecha_to = (!empty($filter_fecha_to)) ? $this->isValidDate($filter_fecha_to) : null ;
-
-		if ($filter_Qfecha_to != null)
-		{
-			$query->where("a.fecha <= '" . $db->escape($filter_Qfecha_to) . "'");
-		}
-
 		// Filtering proveedor
 		$filter_proveedor = $this->state->get("filter.proveedor");
 
 		if ($filter_proveedor)
 		{
 			$query->where("a.`proveedor` = '".$db->escape($filter_proveedor)."'");
+		}
+
+		// Filtering fecha
+		$filter_fecha_from = $this->state->get("filter.fecha.from");
+
+		if ($filter_fecha_from !== null && !empty($filter_fecha_from))
+		{
+			$query->where("a.`fecha` >= '".$db->escape($filter_fecha_from)."'");
+		}
+		$filter_fecha_to = $this->state->get("filter.fecha.to");
+
+		if ($filter_fecha_to !== null  && !empty($filter_fecha_to))
+		{
+			$query->where("a.`fecha` <= '".$db->escape($filter_fecha_to)."'");
+		}
+
+		// Filtering tipo
+		$filter_tipo = $this->state->get("filter.tipo");
+
+		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
+		{
+			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
 		}
 
 		// Filtering pieza
@@ -204,8 +210,8 @@ class Servin2ModelCompras extends JModelList
 		}
 
             // Add the list ordering clause.
-            $orderCol  = $this->state->get('list.ordering');
-            $orderDirn = $this->state->get('list.direction');
+            $orderCol  = $this->state->get('list.ordering', "a.id");
+            $orderDirn = $this->state->get('list.direction', "ASC");
 
             if ($orderCol && $orderDirn)
             {
@@ -240,7 +246,7 @@ class Servin2ModelCompras extends JModelList
 					$query
 						->select('CONCAT(`#__servin_proveedores2_3025053`.`empresa`, \' |\', `#__servin_proveedores2_3025053`.`nombre`) AS `fk_value`')
 						->from($db->quoteName('#__servin_proveedores2', '#__servin_proveedores2_3025053'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_proveedores2_3025053.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -254,6 +260,7 @@ class Servin2ModelCompras extends JModelList
 				$item->proveedor = !empty($textValue) ? implode(', ', $textValue) : $item->proveedor;
 			}
 
+				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_COMPRAS_TIPO_OPTION_' . strtoupper($item->tipo));
 
 			if (isset($item->pieza))
 			{
@@ -268,7 +275,7 @@ class Servin2ModelCompras extends JModelList
 					$query
 						->select('CONCAT(`#__servin_piezas2_3025051`.`descripcion`, \' \', `#__servin_piezas2_3025051`.`hechura`) AS `fk_value`')
 						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025051'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_piezas2_3025051.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();

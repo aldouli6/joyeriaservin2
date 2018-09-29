@@ -9,6 +9,11 @@
 <field name="kilataje" type="sql" label="COM_SERVIN2_FORM_LBL_PIEZA_KILATAJE" query="SELECT '' AS `id`, 'COM_SERVIN2_PIEZAS_KILATAJE_FILTER' AS `val` UNION SELECT `id` AS `id`, `kilataje` AS val FROM `#__servin_kilatajes2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="ubicacion" type="sql" label="COM_SERVIN2_FORM_LBL_PIEZA_UBICACION" query="SELECT '' AS `id`, 'COM_SERVIN2_PIEZAS_UBICACION_FILTER' AS `val` UNION SELECT `id` AS `id`, `nombre` AS val FROM `#__servin_ubicaciones2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="hechura" type="sql" label="COM_SERVIN2_FORM_LBL_PIEZA_HECHURA" query="SELECT '' AS `id`, 'COM_SERVIN2_PIEZAS_HECHURA_FILTER' AS `val` UNION SELECT `id` AS `id`, `numero` AS val FROM `#__servin_hechuras2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="tipo" label="COM_SERVIN2_FORM_LBL_PIEZA_TIPO" type="list" onchange="this.form.submit();" default="COM_SERVIN2_PIEZAS_TIPO_FILTER">
+  <option value="">COM_SERVIN2_PIEZAS_TIPO_FILTER</option>
+  <option value="0">COM_SERVIN2_PIEZAS_TIPO_OPTION_0</option>
+  <option value="1">COM_SERVIN2_PIEZAS_TIPO_OPTION_1</option>
+</field>
 
 
     </fields>

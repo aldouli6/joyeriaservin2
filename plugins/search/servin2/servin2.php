@@ -365,9 +365,7 @@ $wheres2[] = '`servin_materiales2`.`nombre` LIKE ' . $text;
 $wheres2[] = '`servin_kilatajes2`.`kilataje` LIKE ' . $text;
 $wheres2[] = '`servin_ubicaciones2`.`nombre` LIKE ' . $text;
 $wheres2[] = '`servin_hechuras2`.`numero` LIKE ' . $text;
-$wheres2[] = 'a.tipo LIKE ' . $text;
 $wheres2[] = 'a.gramos LIKE ' . $text;
-$wheres2[] = 'a.estatus LIKE ' . $text;
             $where = '(' . implode(') OR (', $wheres2) . ')';
             break;
 
@@ -385,9 +383,7 @@ $wheres2[] = '`servin_materiales2`.`nombre` LIKE ' . $word;
 $wheres2[] = '`servin_kilatajes2`.`kilataje` LIKE ' . $word;
 $wheres2[] = '`servin_ubicaciones2`.`nombre` LIKE ' . $word;
 $wheres2[] = '`servin_hechuras2`.`numero` LIKE ' . $word;
-$wheres2[] = 'a.tipo LIKE ' . $word;
 $wheres2[] = 'a.gramos LIKE ' . $word;
-$wheres2[] = 'a.estatus LIKE ' . $word;
                 $wheres[] = implode(' OR ', $wheres2);
             }
 
@@ -597,8 +593,8 @@ if ($limit > 0) {
         case 'exact':
             $text = $db->quote('%' . $db->escape($text, true) . '%', false);
             $wheres2 = array();
-            $wheres2[] = 'a.fecha LIKE ' . $text;
-$wheres2[] = 'CONCAT(`servin_proveedores2`.`empresa`, \' \', `servin_proveedores2`.`nombre`) LIKE ' . $text;
+            $wheres2[] = 'CONCAT(`servin_proveedores2`.`empresa`, \' \', `servin_proveedores2`.`nombre`) LIKE ' . $text;
+$wheres2[] = 'a.fecha LIKE ' . $text;
 $wheres2[] = 'CONCAT(`servin_piezas2`.`descripcion`, \' \', `servin_piezas2`.`hechura`) LIKE ' . $text;
 $wheres2[] = 'a.total LIKE ' . $text;
 $wheres2[] = 'a.abonado LIKE ' . $text;
@@ -614,8 +610,8 @@ $wheres2[] = 'a.abonado LIKE ' . $text;
             foreach ($words as $word) {
                 $word = $db->quote('%' . $db->escape($word, true) . '%', false);
                 $wheres2 = array();
-                $wheres2[] = 'a.fecha LIKE ' . $word;
-$wheres2[] = 'CONCAT(`servin_proveedores2`.`empresa`, \' \', `servin_proveedores2`.`nombre`) LIKE ' . $word;
+                $wheres2[] = 'CONCAT(`servin_proveedores2`.`empresa`, \' \', `servin_proveedores2`.`nombre`) LIKE ' . $word;
+$wheres2[] = 'a.fecha LIKE ' . $word;
 $wheres2[] = 'CONCAT(`servin_piezas2`.`descripcion`, \' \', `servin_piezas2`.`hechura`) LIKE ' . $word;
 $wheres2[] = 'a.total LIKE ' . $word;
 $wheres2[] = 'a.abonado LIKE ' . $word;
@@ -674,11 +670,10 @@ if ($limit > 0) {
         case 'exact':
             $text = $db->quote('%' . $db->escape($text, true) . '%', false);
             $wheres2 = array();
-            $wheres2[] = 'CONCAT(`servin_piezas2`.`descripcion`, \' \', `servin_piezas2`.`hechura`) LIKE ' . $text;
+            $wheres2[] = '`servin_clientes2`.`nombre` LIKE ' . $text;
+$wheres2[] = 'CONCAT(`servin_piezas2`.`descripcion`, \' \', `servin_piezas2`.`hechura`) LIKE ' . $text;
 $wheres2[] = 'a.fecha LIKE ' . $text;
-$wheres2[] = '`servin_clientes2`.`nombre` LIKE ' . $text;
 $wheres2[] = 'a.total LIKE ' . $text;
-$wheres2[] = 'a.metodo_pago LIKE ' . $text;
             $where = '(' . implode(') OR (', $wheres2) . ')';
             break;
 
@@ -691,11 +686,10 @@ $wheres2[] = 'a.metodo_pago LIKE ' . $text;
             foreach ($words as $word) {
                 $word = $db->quote('%' . $db->escape($word, true) . '%', false);
                 $wheres2 = array();
-                $wheres2[] = 'CONCAT(`servin_piezas2`.`descripcion`, \' \', `servin_piezas2`.`hechura`) LIKE ' . $word;
+                $wheres2[] = '`servin_clientes2`.`nombre` LIKE ' . $word;
+$wheres2[] = 'CONCAT(`servin_piezas2`.`descripcion`, \' \', `servin_piezas2`.`hechura`) LIKE ' . $word;
 $wheres2[] = 'a.fecha LIKE ' . $word;
-$wheres2[] = '`servin_clientes2`.`nombre` LIKE ' . $word;
 $wheres2[] = 'a.total LIKE ' . $word;
-$wheres2[] = 'a.metodo_pago LIKE ' . $word;
                 $wheres[] = implode(' OR ', $wheres2);
             }
 
@@ -724,8 +718,8 @@ $wheres2[] = 'a.metodo_pago LIKE ' . $word;
                     )
             )
             ->from('#__servin_ventas2 AS a')
-            ->innerJoin('`#__servin_piezas2` AS servin_piezas2 ON servin_piezas2.id = a.pieza')
-->innerJoin('`#__servin_clientes2` AS servin_clientes2 ON servin_clientes2.id = a.cliente')
+            ->innerJoin('`#__servin_clientes2` AS servin_clientes2 ON servin_clientes2.id = a.cliente')
+->innerJoin('`#__servin_piezas2` AS servin_piezas2 ON servin_piezas2.id = a.pieza')
             ->where('(' . $where . ')')
             ->group('a.id')
             ->order($order);
@@ -813,7 +807,7 @@ $wheres2[] = 'a.estatus LIKE ' . $word;
                     )
             )
             ->from('#__servin_consignaciones2 AS a')
-            ->innerJoin('`#__servin_piezas2` AS servin_piezas2 ON servin_piezas2.id = a.piezas')
+            ->innerJoin('`#__servin_piezas2` AS servin_piezas2 ON servin_piezas2.id = a.pieza')
 ->innerJoin('`#__servin_clientes2` AS servin_clientes2 ON servin_clientes2.id = a.cliente')
 ->innerJoin('`#__servin_proveedores2` AS servin_proveedores2 ON servin_proveedores2.id = a.proveedor')
             ->where('(' . $where . ')')

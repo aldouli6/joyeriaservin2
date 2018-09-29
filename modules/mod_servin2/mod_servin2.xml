@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.0" method="upgrade" client="site">
     <name>MOD_SERVIN2_NAME</name>
-    <creationDate>2018-06-21</creationDate>
+    <creationDate>2018-09-29</creationDate>
     <copyright>2018 Aldo Ulises</copyright>
     <license>Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt</license>
     <author>Aldo Ulises</author>
@@ -114,8 +114,7 @@
 		<option value="hechura">hechura</option>
 		<option value="tipo">tipo</option>
 		<option value="gramos">gramos</option>
-		<option value="cantidad">cantidad</option>
-		<option value="estatus">estatus</option>
+		<option value="piezas">piezas</option>
 	</group>
 	<group label="#__servin_proveedores2">
 		<option value="id">id</option>
@@ -144,10 +143,12 @@
 		<option value="modified_by">modified_by</option>
 		<option value="created_at">created_at</option>
 		<option value="modified_at">modified_at</option>
-		<option value="fecha">fecha</option>
 		<option value="proveedor">proveedor</option>
+		<option value="fecha">fecha</option>
+		<option value="tipo">tipo</option>
 		<option value="pieza">pieza</option>
-		<option value="cantidad">cantidad</option>
+		<option value="piezas">piezas</option>
+		<option value="gramos">gramos</option>
 		<option value="total">total</option>
 		<option value="abonado">abonado</option>
 		<option value="pagada">pagada</option>
@@ -158,14 +159,15 @@
 		<option value="modified_by">modified_by</option>
 		<option value="created_at">created_at</option>
 		<option value="modified_at">modified_at</option>
-		<option value="pieza">pieza</option>
-		<option value="fecha">fecha</option>
-		<option value="tipo">tipo</option>
-		<option value="gramos">gramos</option>
-		<option value="cantidad">cantidad</option>
 		<option value="cliente">cliente</option>
+		<option value="tipo">tipo</option>
+		<option value="pieza">pieza</option>
+		<option value="piezas">piezas</option>
+		<option value="gramos">gramos</option>
+		<option value="fecha">fecha</option>
 		<option value="total">total</option>
-		<option value="metodo_pago">metodo_pago</option>
+		<option value="abonado">abonado</option>
+		<option value="pagada">pagada</option>
 	</group>
 	<group label="#__servin_consignaciones2">
 		<option value="id">id</option>
@@ -175,8 +177,11 @@
 		<option value="modified_at">modified_at</option>
 		<option value="no_folio_pagare">no_folio_pagare</option>
 		<option value="foto_pagare">foto_pagare</option>
+		<option value="tipo_transaccion">tipo_transaccion</option>
+		<option value="tipo">tipo</option>
+		<option value="pieza">pieza</option>
 		<option value="piezas">piezas</option>
-		<option value="para">para</option>
+		<option value="gramos">gramos</option>
 		<option value="cliente">cliente</option>
 		<option value="proveedor">proveedor</option>
 		<option value="total">total</option>
@@ -194,7 +199,10 @@
 		<option value="id">id</option>
 		<option value="created_by">created_by</option>
 		<option value="modified_by">modified_by</option>
+		<option value="tipo">tipo</option>
 		<option value="consignacion">consignacion</option>
+		<option value="compra">compra</option>
+		<option value="venta">venta</option>
 		<option value="pago">pago</option>
 		<option value="metodo">metodo</option>
 		<option value="fecha">fecha</option>

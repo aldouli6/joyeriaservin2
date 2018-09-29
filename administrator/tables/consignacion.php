@@ -18,7 +18,30 @@ use Joomla\Utilities\ArrayHelper;
  */
 class Servin2Tableconsignacion extends JTable
 {
-	
+	/**
+	 * Check if a field is unique
+	 *
+	 * @param   string  $field  Name of the field
+	 *
+	 * @return bool True if unique
+	 */
+	private function isUnique ($field)
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query
+			->select($db->quoteName($field))
+			->from($db->quoteName($this->_tbl))
+			->where($db->quoteName($field) . ' = ' . $db->quote($this->$field))
+			->where($db->quoteName('id') . ' <> ' . (int) $this->{$this->_tbl_key});
+
+		$db->setQuery($query);
+		$db->execute();
+
+		return ($db->getNumRows() == 0) ? true : false;
+	}
+
 	/**
 	 * Constructor
 	 *
@@ -91,18 +114,18 @@ class Servin2Tableconsignacion extends JTable
 		}
 
 
-		// Support for multiple or not foreign key field: piezas
-			if(!empty($array['piezas']))
+		// Support for multiple or not foreign key field: pieza
+			if(!empty($array['pieza']))
 			{
-				if(is_array($array['piezas'])){
-					$array['piezas'] = implode(',',$array['piezas']);
+				if(is_array($array['pieza'])){
+					$array['pieza'] = implode(',',$array['pieza']);
 				}
-				else if(strrpos($array['piezas'], ',') != false){
-					$array['piezas'] = explode(',',$array['piezas']);
+				else if(strrpos($array['pieza'], ',') != false){
+					$array['pieza'] = explode(',',$array['pieza']);
 				}
 			}
 			else {
-				$array['piezas'] = '';
+				$array['pieza'] = '';
 			}
 
 		// Support for multiple or not foreign key field: cliente
@@ -256,6 +279,11 @@ class Servin2Tableconsignacion extends JTable
 			$this->ordering = self::getNextOrder();
 		}
 		
+		// Check if no_folio_pagare is unique
+		if (!$this->isUnique('no_folio_pagare'))
+		{
+			throw new Exception('Your <b>no_folio_pagare</b> item "<b>' . $this->no_folio_pagare . '</b>" already exists');
+		}
 		
 		// Support multi file field: foto_pagare
 		$app = JFactory::getApplication();
