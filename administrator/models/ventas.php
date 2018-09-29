@@ -267,7 +267,7 @@ class Servin2ModelVentas extends JModelList
 					$query
 						->select('`#__servin_clientes2_3025079`.`nombre`')
 						->from($db->quoteName('#__servin_clientes2', '#__servin_clientes2_3025079'))
-						->where($db->quoteName('#__servin_clientes2_3025079.id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -294,7 +294,7 @@ class Servin2ModelVentas extends JModelList
 					$query
 						->select('CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) AS `fk_value`')
 						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025077'))
-						->where($db->quoteName('#__servin_piezas2_3025077.id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();

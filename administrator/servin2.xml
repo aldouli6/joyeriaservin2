@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+    <name>com_servin2</name>
+    <creationDate>2018-09-03</creationDate>
+    <copyright>2018 Aldo Ulises</copyright>
+    <license>Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt</license>
+    <author>Aldo Ulises</author>
+    <authorEmail>aldouli6@gmail.com</authorEmail>
+    <authorUrl></authorUrl>
+    <version>CVS: 1.0.0</version>
+    <description></description>
+    
+    <scriptfile>script.php</scriptfile>
+    
+    <install> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <update> <!-- Runs on update -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/update.mysql.utf8.sql</file>
+        </sql>
+    </update>
+    <uninstall> <!-- Runs on uninstall -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>servin2.php</filename>
+        <filename>controller.php</filename>
+        <filename>router.php</filename>
+        <folder>views</folder>
+        <folder>models</folder>
+        <folder>controllers</folder>
+        <folder>helpers</folder>
+    </files>
+    <media destination="com_servin2" folder="media">
+        <folder>js</folder>
+        <folder>css</folder>
+    </media>
+    <languages folder="site/languages">
+        
+			<language tag="en-US">en-US/en-US.com_servin2.ini</language>
+			<language tag="es-ES">es-ES/es-ES.com_servin2.ini</language>
+    </languages>
+    <administration>
+        <menu>COM_SERVIN2</menu>
+        <submenu>
+            
+			<menu link="option=com_servin2&amp;view=materiales" view="materiales" alt="Servin2/Materiales">COM_SERVIN2_TITLE_MATERIALES</menu>
+
+			<menu link="option=com_servin2&amp;view=kilatajes" view="kilatajes" alt="Servin2/Kilatajes">COM_SERVIN2_TITLE_KILATAJES</menu>
+
+			<menu link="option=com_servin2&amp;view=ubicaciones" view="ubicaciones" alt="Servin2/Ubicaciones">COM_SERVIN2_TITLE_UBICACIONES</menu>
+
+			<menu link="option=com_servin2&amp;view=hechuras" view="hechuras" alt="Servin2/Hechuras">COM_SERVIN2_TITLE_HECHURAS</menu>
+
+			<menu link="option=com_servin2&amp;view=piezas" view="piezas" alt="Servin2/Piezas">COM_SERVIN2_TITLE_PIEZAS</menu>
+
+			<menu link="option=com_servin2&amp;view=proveedores" view="proveedores" alt="Servin2/Proveedores">COM_SERVIN2_TITLE_PROVEEDORES</menu>
+
+			<menu link="option=com_servin2&amp;view=clientes" view="clientes" alt="Servin2/Clientes">COM_SERVIN2_TITLE_CLIENTES</menu>
+
+			<menu link="option=com_servin2&amp;view=compras" view="compras" alt="Servin2/Compras">COM_SERVIN2_TITLE_COMPRAS</menu>
+
+			<menu link="option=com_servin2&amp;view=ventas" view="ventas" alt="Servin2/Ventas">COM_SERVIN2_TITLE_VENTAS</menu>
+
+			<menu link="option=com_servin2&amp;view=consignaciones" view="consignaciones" alt="Servin2/Consignaciones">COM_SERVIN2_TITLE_CONSIGNACIONES</menu>
+
+			<menu link="option=com_servin2&amp;view=pagos" view="pagos" alt="Servin2/Pagos">COM_SERVIN2_TITLE_PAGOS</menu>
+
+			<menu link="option=com_servin2&amp;view=dashboards" view="dashboards" alt="Servin2/Dashboards">COM_SERVIN2_TITLE_DASHBOARDS</menu>
+
+        </submenu>
+        <files folder="administrator">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <filename>controller.php</filename>
+            <filename>index.html</filename>
+            <filename>servin2.php</filename>
+            <folder>controllers</folder>
+            <folder>assets</folder>
+            <folder>helpers</folder>
+            <folder>models</folder>
+            <folder>sql</folder>
+            <folder>tables</folder>
+            <folder>views</folder>
+        </files>
+        <languages folder="administrator/languages">
+            
+			<language tag="en-US">en-US/en-US.com_servin2.ini</language>
+			<language tag="en-US">en-US/en-US.com_servin2.sys.ini</language>
+			<language tag="es-ES">es-ES/es-ES.com_servin2.ini</language>
+			<language tag="es-ES">es-ES/es-ES.com_servin2.sys.ini</language>
+        </languages>
+    </administration>
+    <config>
+        <fields name="params">
+            <fieldset name="component">
+                <field name="save_history" default="0" />
+            </fieldset>
+        </fields>
+    </config>
+    <plugins>
+        <plugin group="search" plugin="servin2"/>
+    </plugins>
+    <modules>
+		<module module="mod_servin2" />
+	</modules>
+</extension>
+<!-- Component built by the Joomla Component Creator -->
+<!-- http://www.component-creator.com/ -->

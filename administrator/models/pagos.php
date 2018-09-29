@@ -292,7 +292,7 @@ class Servin2ModelPagos extends JModelList
 					$query
 						->select('`#__servin_consignaciones2_3029711`.`pieza`')
 						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3029711'))
-						->where($db->quoteName('#__servin_consignaciones2_3029711.id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -318,7 +318,7 @@ class Servin2ModelPagos extends JModelList
 					$query
 						->select('`#__servin_compras2_3076251`.`pieza`')
 						->from($db->quoteName('#__servin_compras2', '#__servin_compras2_3076251'))
-						->where($db->quoteName('#__servin_compras2_3076251.id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -344,7 +344,7 @@ class Servin2ModelPagos extends JModelList
 					$query
 						->select('`#__servin_ventas2_3076252`.`pieza`')
 						->from($db->quoteName('#__servin_ventas2', '#__servin_ventas2_3076252'))
-						->where($db->quoteName('#__servin_ventas2_3076252.id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();

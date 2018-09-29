@@ -16,7 +16,7 @@ jimport('joomla.application.component.modellist');
  *
  * @since  1.6
  */
-class Servin2ModelCompras extends JModelList
+class Servin2ModelDeudas extends JModelList
 {
     
         
@@ -41,14 +41,13 @@ class Servin2ModelCompras extends JModelList
 				'created_at', 'a.`created_at`',
 				'modified_at', 'a.`modified_at`',
 				'proveedor', 'a.`proveedor`',
-				'fecha', 'a.`fecha`',
-				'tipo', 'a.`tipo`',
-				'pieza', 'a.`pieza`',
-				'piezas', 'a.`piezas`',
-				'gramos', 'a.`gramos`',
+				'fecha_compra', 'a.`fecha_compra`',
+				'fecha_limite', 'a.`fecha_limite`',
 				'total', 'a.`total`',
-				'abonado', 'a.`abonado`',
-				'pagada', 'a.`pagada`',
+				'abono', 'a.`abono`',
+				'saldo', 'a.`saldo`',
+				'resumen', 'a.`resumen`',
+				'estatus', 'a.`estatus`',
 			);
 		}
 
@@ -85,15 +84,13 @@ class Servin2ModelCompras extends JModelList
 		// Filtering proveedor
 		$this->setState('filter.proveedor', $app->getUserStateFromRequest($this->context.'.filter.proveedor', 'filter_proveedor', '', 'string'));
 
-		// Filtering fecha
-		$this->setState('filter.fecha.from', $app->getUserStateFromRequest($this->context.'.filter.fecha.from', 'filter_from_fecha', '', 'string'));
-		$this->setState('filter.fecha.to', $app->getUserStateFromRequest($this->context.'.filter.fecha.to', 'filter_to_fecha', '', 'string'));
+		// Filtering fecha_compra
+		$this->setState('filter.fecha_compra.from', $app->getUserStateFromRequest($this->context.'.filter.fecha_compra.from', 'filter_from_fecha_compra', '', 'string'));
+		$this->setState('filter.fecha_compra.to', $app->getUserStateFromRequest($this->context.'.filter.fecha_compra.to', 'filter_to_fecha_compra', '', 'string'));
 
-		// Filtering tipo
-		$this->setState('filter.tipo', $app->getUserStateFromRequest($this->context.'.filter.tipo', 'filter_tipo', '', 'string'));
-
-		// Filtering pieza
-		$this->setState('filter.pieza', $app->getUserStateFromRequest($this->context.'.filter.pieza', 'filter_pieza', '', 'string'));
+		// Filtering fecha_limite
+		$this->setState('filter.fecha_limite.from', $app->getUserStateFromRequest($this->context.'.filter.fecha_limite.from', 'filter_from_fecha_limite', '', 'string'));
+		$this->setState('filter.fecha_limite.to', $app->getUserStateFromRequest($this->context.'.filter.fecha_limite.to', 'filter_to_fecha_limite', '', 'string'));
 
 
 		// Load the parameters.
@@ -147,7 +144,7 @@ class Servin2ModelCompras extends JModelList
 				'list.select', 'DISTINCT a.*'
 			)
 		);
-		$query->from('`#__servin_compras2` AS a');
+		$query->from('`#__servin_deudas2` AS a');
                 
 
 		// Join over the user field 'created_by'
@@ -158,11 +155,8 @@ class Servin2ModelCompras extends JModelList
 		$query->select('`modified_by`.name AS `modified_by`');
 		$query->join('LEFT', '#__users AS `modified_by` ON `modified_by`.id = a.`modified_by`');
 		// Join over the foreign key 'proveedor'
-		$query->select('CONCAT(`#__servin_proveedores2_3025053`.`empresa`, \' \', `#__servin_proveedores2_3025053`.`nombre`) AS proveedores_fk_value_3025053');
-		$query->join('LEFT', '#__servin_proveedores2 AS #__servin_proveedores2_3025053 ON #__servin_proveedores2_3025053.`id` = a.`proveedor`');
-		// Join over the foreign key 'pieza'
-		$query->select('CONCAT(`#__servin_piezas2_3025051`.`descripcion`, \' \', `#__servin_piezas2_3025051`.`hechura`) AS piezas_fk_value_3025051');
-		$query->join('LEFT', '#__servin_piezas2 AS #__servin_piezas2_3025051 ON #__servin_piezas2_3025051.`id` = a.`pieza`');
+		$query->select('CONCAT(`#__servin_proveedores2_3025022`.`empresa`, \' \', `#__servin_proveedores2_3025022`.`nombre`) AS proveedores_fk_value_3025022');
+		$query->join('LEFT', '#__servin_proveedores2 AS #__servin_proveedores2_3025022 ON #__servin_proveedores2_3025022.`id` = a.`proveedor`');
                 
 
 		// Filter by published state
@@ -189,7 +183,7 @@ class Servin2ModelCompras extends JModelList
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('(CONCAT(`#__servin_proveedores2_3025053`.`empresa`, \' \', `#__servin_proveedores2_3025053`.`nombre`) LIKE ' . $search . '  OR  a.fecha LIKE ' . $search . '  OR CONCAT(`#__servin_piezas2_3025051`.`descripcion`, \' \', `#__servin_piezas2_3025051`.`hechura`) LIKE ' . $search . '  OR  a.total LIKE ' . $search . '  OR  a.abonado LIKE ' . $search . ' )');
+				$query->where('(CONCAT(`#__servin_proveedores2_3025022`.`empresa`, \' \', `#__servin_proveedores2_3025022`.`nombre`) LIKE ' . $search . '  OR  a.fecha_compra LIKE ' . $search . '  OR  a.fecha_limite LIKE ' . $search . '  OR  a.total LIKE ' . $search . '  OR  a.abono LIKE ' . $search . '  OR  a.saldo LIKE ' . $search . '  OR  a.resumen LIKE ' . $search . '  OR  a.estatus LIKE ' . $search . ' )');
 			}
 		}
                 
@@ -202,38 +196,36 @@ class Servin2ModelCompras extends JModelList
 			$query->where("a.`proveedor` = '".$db->escape($filter_proveedor)."'");
 		}
 
-		// Filtering fecha
-		$filter_fecha_from = $this->state->get("filter.fecha.from");
+		// Filtering fecha_compra
+		$filter_fecha_compra_from = $this->state->get("filter.fecha_compra.from");
 
-		if ($filter_fecha_from !== null && !empty($filter_fecha_from))
+		if ($filter_fecha_compra_from !== null && !empty($filter_fecha_compra_from))
 		{
-			$query->where("a.`fecha` >= '".$db->escape($filter_fecha_from)."'");
+			$query->where("a.`fecha_compra` >= '".$db->escape($filter_fecha_compra_from)."'");
 		}
-		$filter_fecha_to = $this->state->get("filter.fecha.to");
+		$filter_fecha_compra_to = $this->state->get("filter.fecha_compra.to");
 
-		if ($filter_fecha_to !== null  && !empty($filter_fecha_to))
+		if ($filter_fecha_compra_to !== null  && !empty($filter_fecha_compra_to))
 		{
-			$query->where("a.`fecha` <= '".$db->escape($filter_fecha_to)."'");
-		}
-
-		// Filtering tipo
-		$filter_tipo = $this->state->get("filter.tipo");
-
-		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
-		{
-			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
+			$query->where("a.`fecha_compra` <= '".$db->escape($filter_fecha_compra_to)."'");
 		}
 
-		// Filtering pieza
-		$filter_pieza = $this->state->get("filter.pieza");
+		// Filtering fecha_limite
+		$filter_fecha_limite_from = $this->state->get("filter.fecha_limite.from");
 
-		if ($filter_pieza !== null && !empty($filter_pieza))
+		if ($filter_fecha_limite_from !== null && !empty($filter_fecha_limite_from))
 		{
-			$query->where("a.`pieza` = '".$db->escape($filter_pieza)."'");
+			$query->where("a.`fecha_limite` >= '".$db->escape($filter_fecha_limite_from)."'");
+		}
+		$filter_fecha_limite_to = $this->state->get("filter.fecha_limite.to");
+
+		if ($filter_fecha_limite_to !== null  && !empty($filter_fecha_limite_to))
+		{
+			$query->where("a.`fecha_limite` <= '".$db->escape($filter_fecha_limite_to)."'");
 		}
 		// Add the list ordering clause.
-		$orderCol  = $this->state->get('list.ordering', "a.id");
-		$orderDirn = $this->state->get('list.direction', "ASC");
+		$orderCol  = $this->state->get('list.ordering');
+		$orderDirn = $this->state->get('list.direction');
 
 		if ($orderCol && $orderDirn)
 		{
@@ -265,8 +257,8 @@ class Servin2ModelCompras extends JModelList
 					$db    = JFactory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-						->select('CONCAT(`#__servin_proveedores2_3025053`.`empresa`, \' |\', `#__servin_proveedores2_3025053`.`nombre`) AS `fk_value`')
-						->from($db->quoteName('#__servin_proveedores2', '#__servin_proveedores2_3025053'))
+						->select('CONCAT(`#__servin_proveedores2_3025022`.`empresa`, \' |\', `#__servin_proveedores2_3025022`.`nombre`) AS `fk_value`')
+						->from($db->quoteName('#__servin_proveedores2', '#__servin_proveedores2_3025022'))
 						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
@@ -280,33 +272,7 @@ class Servin2ModelCompras extends JModelList
 
 				$oneItem->proveedor = !empty($textValue) ? implode(', ', $textValue) : $oneItem->proveedor;
 			}
-					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_COMPRAS_TIPO_OPTION_' . strtoupper($oneItem->tipo));
-
-			if (isset($oneItem->pieza))
-			{
-				$values    = explode(',', $oneItem->pieza);
-				$textValue = array();
-
-				foreach ($values as $value)
-				{
-					$db    = JFactory::getDbo();
-					$query = $db->getQuery(true);
-					$query
-						->select('CONCAT(`#__servin_piezas2_3025051`.`descripcion`, \' \', `#__servin_piezas2_3025051`.`hechura`) AS `fk_value`')
-						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025051'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
-
-					$db->setQuery($query);
-					$results = $db->loadObject();
-
-					if ($results)
-					{
-						$textValue[] = $results->fk_value;
-					}
-				}
-
-				$oneItem->pieza = !empty($textValue) ? implode(', ', $textValue) : $oneItem->pieza;
-			}
+					$oneItem->estatus = ($oneItem->estatus == '') ? '' : JText::_('COM_SERVIN2_DEUDAS_ESTATUS_OPTION_' . strtoupper($oneItem->estatus));
 		}
 
 		return $items;

@@ -343,7 +343,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('CONCAT(`#__servin_piezas2_3025094`.`descripcion`, \' \', `#__servin_piezas2_3025094`.`hechura`) AS `fk_value`')
 						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025094'))
-						->where($db->quoteName('#__servin_piezas2_3025094.id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -369,7 +369,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('`#__servin_clientes2_3025091`.`nombre`')
 						->from($db->quoteName('#__servin_clientes2', '#__servin_clientes2_3025091'))
-						->where($db->quoteName('#__servin_clientes2_3025091.id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -395,7 +395,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('CONCAT(`#__servin_proveedores2_3026599`.`empresa`, \' \', `#__servin_proveedores2_3026599`.`nombre`) AS `fk_value`')
 						->from($db->quoteName('#__servin_proveedores2', '#__servin_proveedores2_3026599'))
-						->where($db->quoteName('#__servin_proveedores2_3026599.id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();

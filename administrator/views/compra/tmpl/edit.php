@@ -21,8 +21,80 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 ?>
 <script type="text/javascript">
 	js = jQuery.noConflict();
+	
+	
 	js(document).ready(function () {
+	var costo_;
+	if (!'<?php print_r($this->item->pieza) ?>') {
+		js(".oculta").parent().parent().hide();
+	}
+	
+	js('#jform_total').on('change',function(e){
+		calcular();
+    });
+    function calcular(){
+		js('#jform_total').attr('min',js('#jform_abono').val());
+		js('#jform_abono').attr('max',js('#jform_total').val());
 		
+	}
+	function rellenar_piezas(tipo,selected){
+		console.log(tipo);
+		//var first =js('#jform_pieza option:first').val();
+		js('#jform_pieza').empty();
+		js.ajax({ 
+            url: "index.php?option=com_servin2&task=piezastipo&view=ajaxs&tmpl=ajax&id=" + tipo,  
+            async: true, 
+            success: function(result){
+            	var obj = result;
+				var objeto = JSON.parse(obj);
+            	console.log(objeto);
+				var sele = (selected==0)?' selected="selected" ':'';
+				js('#jform_pieza').append('<option value '+sele+'></option>');
+				js.each( objeto, function( key, value ) {
+					var selec = (selected==key)?' selected="selected" ':'';
+					js('#jform_pieza').append('<option value="'+key+'" '+selec+'>'+value+'</option>');					
+    				js("#jform_pieza").trigger("liszt:updated");
+				});
+				
+            },
+            error: function(result) {
+                console.log(result);
+            }
+    	});
+	}
+
+
+	rellenar_piezas(js( 'input[name="jform[tipo]"]:checked' ).val(), '<?php print_r($this->item->pieza) ?>');
+	js('#jform_tipo').on('change',function(e){		
+		rellenar_piezas(js( 'input[name="jform[tipo]"]:checked' ).val(), js( 'input[name="jform[pieza]"]:selected' ).val());
+    });
+    js("#jform_pieza").change(function(){
+	    if(js(this).val() !=""){
+	    	js(".oculta").parent().parent().show();
+	    	js.ajax({ 
+	            url: "index.php?option=com_servin2&task=costosugerido&view=ajaxs&tmpl=ajax&id=" + js(this).val(),  
+	            async: true, 
+	            success: function(result){
+	            	console.log(result);
+	            	costo_=result;
+	            	js("#jform_total").val(parseFloat( js("#jform_cantidad").val() * costo_ ).toFixed(2) );
+	
+	            },
+	            error: function(result) {
+	                console.log(result);
+	            }
+	    	});
+	    }else{
+	    	js(".oculta").parent().parent().hide();
+	    	costo_=0;
+	    }
+	});
+	js("#jform_piezas").change(function(){
+	    js("#jform_total").val(parseFloat( js(this).val() * costo_ ).toFixed(2) );
+	});
+	js("#jform_gramos").change(function(){
+	    js("#jform_total").val(parseFloat( js(this).val() * costo_ ).toFixed(2) );
+	});
 	js('input:hidden.proveedor').each(function(){
 		var name = js(this).attr('name');
 		if(name.indexOf('proveedorhidden')){
