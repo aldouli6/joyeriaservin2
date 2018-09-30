@@ -41,7 +41,7 @@ class Servin2ViewAjaxs extends JViewLegacy
         
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
+		if ($errors = $this->get('Errors'))
 		{
 			throw new Exception(implode("\n", $errors));
 		}

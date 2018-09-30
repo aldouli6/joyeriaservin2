@@ -22,6 +22,22 @@ switch ($task) {
     // echo $foo;
     $db->setQuery("select * from #__servin_hechuras2 where id=".$foo);
     $result=$db->loadAssoc();
+    $costo=$result['costo'];
+    $tipo_ganancia = $result['tipo_ganancia'];
+    $precio=0;
+    if($tipo_ganancia=="fijo"){
+      $precio = $costo + $result['ganancia'];
+    }else{
+      $precio = $costo + (($result['ganancia']*$costo)/100 );
+    }
+    $salida='';
+    $salida = $precio;
+    echo $salida;
+  break; 
+  case 'preciosugerido':
+    // echo $foo;
+    $db->setQuery("select * from #__servin_hechuras2 where id=".$foo);
+    $result=$db->loadAssoc();
     $salida='';
     if ($result['tipo_ganancia']  == "fijo") {
       $salida = ($result['costo'])+($result['ganancia']);
@@ -30,17 +46,17 @@ switch ($task) {
     }
     echo $salida;
   break;
-  case 'piezastipo':
+  case 'piezascompra':
     // echo $foo;
-    $db->setQuery("sELECT p.id, concat(h.numero,' | ' ,p.descripcion) as descripcion FROM #__servin_piezas2 as p inner join #__servin_hechuras2 as h on h.id = p.hechura   where p.tipo=".$foo." and (p.piezas > 0 or p.gramos > 0)");
+    $db->setQuery("sELECT p.id, concat(h.numero,' | ' ,p.descripcion) as descripcion FROM #__servin_piezas2 as p inner join #__servin_hechuras2 as h on h.id = p.hechura ");
     $result=$db->loadAssocList('id','descripcion');
     $salida=json_encode($result);
-    
+    echo "1";
     echo $salida;
   break;
   case 'consultotal':
     // echo $foo;
-    $db->setQuery("select precio from #__servin_piezas where id in (".$string.")");
+    $db->setQuery("select precio from #__servin_piezas2 where id in (".$string.")");
     $result=$db->loadColumn();
     echo round(array_sum($result),2);
   break;

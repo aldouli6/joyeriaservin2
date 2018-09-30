@@ -22,7 +22,45 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 <script type="text/javascript">
 	js = jQuery.noConflict();
 	js(document).ready(function () {
-		
+	var precio_;
+	if (!'<?php print_r($this->item->pieza) ?>') {
+		js(".oculta").parent().parent().hide();
+	}	
+	js('#jform_total').on('change',function(e){
+		calcular();
+    });
+    consultaprecio();
+    function calcular(){
+		js('#jform_total').attr('min',js('#jform_abono').val());
+		js('#jform_abono').attr('max',js('#jform_total').val());		
+	}
+	function consultaprecio(){
+ 		js.ajax({ 
+	            url: "index.php?option=com_servin2&task=preciosugerido&view=ajaxs&tmpl=ajax&id=" + js("#jform_pieza").val(),  
+	            async: true, 
+	            success: function(result){
+	            	console.log(result);
+	            	precio_=result;
+	            	js("#jform_total").val(parseFloat( js("#jform_cantidad").val() * precio_ ).toFixed(2) );
+	
+	            },
+	            error: function(result) {
+	                console.log(result);
+	            }
+	    	});
+ 	}
+ 	js("#jform_pieza").change(function(){
+	    if(js(this).val() !=""){
+	    	js(".oculta").parent().parent().show();	 
+	    	consultaprecio();   	
+	    }else{
+	    	js(".oculta").parent().parent().hide();
+	    	precio_=0;
+	    }
+	});
+	js("#jform_cantidad").change(function(){
+	    js("#jform_total").val(parseFloat( js(this).val() * precio_ ).toFixed(2) );
+	});
 	js('input:hidden.cliente').each(function(){
 		var name = js(this).attr('name');
 		if(name.indexOf('clientehidden')){
@@ -85,8 +123,9 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						echo '<input type="hidden" class="cliente" name="jform[clientehidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('tipo'); ?>
-				<?php echo $this->form->renderField('pieza'); ?>
+			?>
+			<?php echo $this->form->renderField('fecha'); ?>				
+			<?php echo $this->form->renderField('pieza'); ?>
 
 			<?php
 				foreach((array)$this->item->pieza as $value): 
@@ -94,9 +133,8 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						echo '<input type="hidden" class="pieza" name="jform[piezahidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('piezas'); ?>
-				<?php echo $this->form->renderField('gramos'); ?>
-				<?php echo $this->form->renderField('fecha'); ?>
+			?>				<?php echo $this->form->renderField('cantidad'); ?>
+				
 				<?php echo $this->form->renderField('total'); ?>
 				<?php echo $this->form->renderField('abonado'); ?>
 				<?php echo $this->form->renderField('pagada'); ?>

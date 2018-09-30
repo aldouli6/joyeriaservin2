@@ -32,17 +32,18 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	js('#jform_total').on('change',function(e){
 		calcular();
     });
+    consultacosto();
     function calcular(){
 		js('#jform_total').attr('min',js('#jform_abono').val());
 		js('#jform_abono').attr('max',js('#jform_total').val());
 		
 	}
-	function rellenar_piezas(tipo,selected){
+	function rellenar_piezas(selected){
 		console.log(tipo);
 		//var first =js('#jform_pieza option:first').val();
 		js('#jform_pieza').empty();
 		js.ajax({ 
-            url: "index.php?option=com_servin2&task=piezastipo&view=ajaxs&tmpl=ajax&id=" + tipo,  
+            url: "index.php?option=com_servin2&task=piezascompra&view=ajaxs&tmpl=ajax",  
             async: true, 
             success: function(result){
             	var obj = result;
@@ -62,17 +63,9 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
             }
     	});
 	}
-
-
-	rellenar_piezas(js( 'input[name="jform[tipo]"]:checked' ).val(), '<?php print_r($this->item->pieza) ?>');
-	js('#jform_tipo').on('change',function(e){		
-		rellenar_piezas(js( 'input[name="jform[tipo]"]:checked' ).val(), js( 'input[name="jform[pieza]"]:selected' ).val());
-    });
-    js("#jform_pieza").change(function(){
-	    if(js(this).val() !=""){
-	    	js(".oculta").parent().parent().show();
-	    	js.ajax({ 
-	            url: "index.php?option=com_servin2&task=costosugerido&view=ajaxs&tmpl=ajax&id=" + js(this).val(),  
+ 	function consultacosto(){
+ 		js.ajax({ 
+	            url: "index.php?option=com_servin2&task=costosugerido&view=ajaxs&tmpl=ajax&id=" + js("#jform_pieza").val(),  
 	            async: true, 
 	            success: function(result){
 	            	console.log(result);
@@ -84,15 +77,17 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	                console.log(result);
 	            }
 	    	});
+ 	}
+    js("#jform_pieza").change(function(){
+	    if(js(this).val() !=""){
+	    	js(".oculta").parent().parent().show();	 
+	    	consultacosto();   	
 	    }else{
 	    	js(".oculta").parent().parent().hide();
 	    	costo_=0;
 	    }
 	});
-	js("#jform_piezas").change(function(){
-	    js("#jform_total").val(parseFloat( js(this).val() * costo_ ).toFixed(2) );
-	});
-	js("#jform_gramos").change(function(){
+	js("#jform_cantidad").change(function(){
 	    js("#jform_total").val(parseFloat( js(this).val() * costo_ ).toFixed(2) );
 	});
 	js('input:hidden.proveedor').each(function(){
@@ -158,7 +153,6 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 					endif;
 				endforeach;
 			?>				<?php echo $this->form->renderField('fecha'); ?>
-				<?php echo $this->form->renderField('tipo'); ?>
 				<?php echo $this->form->renderField('pieza'); ?>
 
 			<?php
@@ -167,8 +161,8 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						echo '<input type="hidden" class="pieza" name="jform[piezahidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('piezas'); ?>
-				<?php echo $this->form->renderField('gramos'); ?>
+			?>				<?php echo $this->form->renderField('cantidad'); ?>
+				<!-- <?php echo $this->form->renderField('gramos'); ?> -->
 				<?php echo $this->form->renderField('total'); ?>
 				<?php echo $this->form->renderField('abonado'); ?>
 				<?php echo $this->form->renderField('pagada'); ?>
