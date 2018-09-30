@@ -41,10 +41,8 @@ class Servin2ModelVentas extends JModelList
 				'created_at', 'a.`created_at`',
 				'modified_at', 'a.`modified_at`',
 				'cliente', 'a.`cliente`',
-				'tipo', 'a.`tipo`',
 				'pieza', 'a.`pieza`',
-				'piezas', 'a.`piezas`',
-				'gramos', 'a.`gramos`',
+				'cantidad', 'a.`cantidad`',
 				'fecha', 'a.`fecha`',
 				'total', 'a.`total`',
 				'abonado', 'a.`abonado`',
@@ -84,9 +82,6 @@ class Servin2ModelVentas extends JModelList
 		$this->setState('filter.state', $published);
 		// Filtering cliente
 		$this->setState('filter.cliente', $app->getUserStateFromRequest($this->context.'.filter.cliente', 'filter_cliente', '', 'string'));
-
-		// Filtering tipo
-		$this->setState('filter.tipo', $app->getUserStateFromRequest($this->context.'.filter.tipo', 'filter_tipo', '', 'string'));
 
 		// Filtering pieza
 		$this->setState('filter.pieza', $app->getUserStateFromRequest($this->context.'.filter.pieza', 'filter_pieza', '', 'string'));
@@ -202,14 +197,6 @@ class Servin2ModelVentas extends JModelList
 			$query->where("a.`cliente` = '".$db->escape($filter_cliente)."'");
 		}
 
-		// Filtering tipo
-		$filter_tipo = $this->state->get("filter.tipo");
-
-		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
-		{
-			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
-		}
-
 		// Filtering pieza
 		$filter_pieza = $this->state->get("filter.pieza");
 
@@ -267,7 +254,7 @@ class Servin2ModelVentas extends JModelList
 					$query
 						->select('`#__servin_clientes2_3025079`.`nombre`')
 						->from($db->quoteName('#__servin_clientes2', '#__servin_clientes2_3025079'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_clientes2_3025079.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -280,7 +267,6 @@ class Servin2ModelVentas extends JModelList
 
 				$oneItem->cliente = !empty($textValue) ? implode(', ', $textValue) : $oneItem->cliente;
 			}
-					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_VENTAS_TIPO_OPTION_' . strtoupper($oneItem->tipo));
 
 			if (isset($oneItem->pieza))
 			{
@@ -294,7 +280,7 @@ class Servin2ModelVentas extends JModelList
 					$query
 						->select('CONCAT(`#__servin_piezas2_3025077`.`descripcion`, \' \', `#__servin_piezas2_3025077`.`hechura`) AS `fk_value`')
 						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025077'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_piezas2_3025077.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();

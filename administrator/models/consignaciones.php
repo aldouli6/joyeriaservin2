@@ -43,10 +43,8 @@ class Servin2ModelConsignaciones extends JModelList
 				'no_folio_pagare', 'a.`no_folio_pagare`',
 				'foto_pagare', 'a.`foto_pagare`',
 				'tipo_transaccion', 'a.`tipo_transaccion`',
-				'tipo', 'a.`tipo`',
 				'pieza', 'a.`pieza`',
-				'piezas', 'a.`piezas`',
-				'gramos', 'a.`gramos`',
+				'cantidad', 'a.`cantidad`',
 				'cliente', 'a.`cliente`',
 				'proveedor', 'a.`proveedor`',
 				'total', 'a.`total`',
@@ -94,9 +92,6 @@ class Servin2ModelConsignaciones extends JModelList
 		$this->setState('filter.state', $published);
 		// Filtering tipo_transaccion
 		$this->setState('filter.tipo_transaccion', $app->getUserStateFromRequest($this->context.'.filter.tipo_transaccion', 'filter_tipo_transaccion', '', 'string'));
-
-		// Filtering tipo
-		$this->setState('filter.tipo', $app->getUserStateFromRequest($this->context.'.filter.tipo', 'filter_tipo', '', 'string'));
 
 		// Filtering pieza
 		$this->setState('filter.pieza', $app->getUserStateFromRequest($this->context.'.filter.pieza', 'filter_pieza', '', 'string'));
@@ -232,14 +227,6 @@ class Servin2ModelConsignaciones extends JModelList
 			$query->where("a.`tipo_transaccion` = '".$db->escape($filter_tipo_transaccion)."'");
 		}
 
-		// Filtering tipo
-		$filter_tipo = $this->state->get("filter.tipo");
-
-		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
-		{
-			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
-		}
-
 		// Filtering pieza
 		$filter_pieza = $this->state->get("filter.pieza");
 
@@ -329,7 +316,6 @@ class Servin2ModelConsignaciones extends JModelList
 		foreach ($items as $oneItem)
 		{
 					$oneItem->tipo_transaccion = ($oneItem->tipo_transaccion == '') ? '' : JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_' . strtoupper($oneItem->tipo_transaccion));
-					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_OPTION_' . strtoupper($oneItem->tipo));
 
 			if (isset($oneItem->pieza))
 			{
@@ -343,7 +329,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('CONCAT(`#__servin_piezas2_3025094`.`descripcion`, \' \', `#__servin_piezas2_3025094`.`hechura`) AS `fk_value`')
 						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025094'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_piezas2_3025094.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -369,7 +355,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('`#__servin_clientes2_3025091`.`nombre`')
 						->from($db->quoteName('#__servin_clientes2', '#__servin_clientes2_3025091'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_clientes2_3025091.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -395,7 +381,7 @@ class Servin2ModelConsignaciones extends JModelList
 					$query
 						->select('CONCAT(`#__servin_proveedores2_3026599`.`empresa`, \' \', `#__servin_proveedores2_3026599`.`nombre`) AS `fk_value`')
 						->from($db->quoteName('#__servin_proveedores2', '#__servin_proveedores2_3026599'))
-						->where($db->quoteName('id') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__servin_proveedores2_3026599.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();

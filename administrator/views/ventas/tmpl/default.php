@@ -75,16 +75,10 @@ $sortFields = $this->getSortFields();
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_VENTAS_CLIENTE', 'a.`cliente`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_VENTAS_TIPO', 'a.`tipo`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_VENTAS_PIEZA', 'a.`pieza`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_VENTAS_PIEZAS', 'a.`piezas`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_VENTAS_GRAMOS', 'a.`gramos`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_VENTAS_CANTIDAD', 'a.`cantidad`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_VENTAS_FECHA', 'a.`fecha`', $listDirn, $listOrder); ?>
@@ -159,16 +153,10 @@ $sortFields = $this->getSortFields();
 					<?php echo $item->cliente; ?>
 				</td>				<td>
 
-					<?php echo $item->tipo; ?>
-				</td>				<td>
-
 					<?php echo $item->pieza; ?>
 				</td>				<td>
 
-					<?php echo $item->piezas; ?>
-				</td>				<td>
-
-					<?php echo $item->gramos; ?>
+					<?php echo $item->cantidad; ?>
 				</td>				<td>
 
 					<?php echo $item->fecha; ?>

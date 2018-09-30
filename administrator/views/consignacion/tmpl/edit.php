@@ -104,7 +104,6 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 					<?php endforeach; ?>
 					<input type="hidden" name="jform[foto_pagare_hidden]" id="jform_foto_pagare_hidden" value="<?php echo implode(',', $foto_pagareFiles); ?>" />
 				<?php endif; ?>				<?php echo $this->form->renderField('tipo_transaccion'); ?>
-				<?php echo $this->form->renderField('tipo'); ?>
 				<?php echo $this->form->renderField('pieza'); ?>
 
 			<?php
@@ -113,8 +112,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						echo '<input type="hidden" class="pieza" name="jform[piezahidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('piezas'); ?>
-				<?php echo $this->form->renderField('gramos'); ?>
+			?>				<?php echo $this->form->renderField('cantidad'); ?>
 				<?php echo $this->form->renderField('cliente'); ?>
 
 			<?php

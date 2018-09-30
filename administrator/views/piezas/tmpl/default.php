@@ -90,10 +90,7 @@ $sortFields = $this->getSortFields();
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_PIEZAS_TIPO', 'a.`tipo`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_PIEZAS_GRAMOS', 'a.`gramos`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_PIEZAS_PIEZAS', 'a.`piezas`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_PIEZAS_EXISTENCIA', 'a.`existencia`', $listDirn, $listOrder); ?>
 				</th>
 
 					
@@ -179,10 +176,7 @@ $sortFields = $this->getSortFields();
 					<?php echo $item->tipo; ?>
 				</td>				<td>
 
-					<?php echo $item->gramos; ?>
-				</td>				<td>
-
-					<?php echo $item->piezas; ?>
+					<?php echo $item->existencia; ?>
 				</td>
 
 					</tr>
