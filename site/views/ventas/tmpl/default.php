@@ -45,16 +45,10 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_CLIENTE', 'a.cliente', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_TIPO', 'a.tipo', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_PIEZA', 'a.pieza', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_PIEZAS', 'a.piezas', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_GRAMOS', 'a.gramos', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_CANTIDAD', 'a.cantidad', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_VENTAS_FECHA', 'a.fecha', $listDirn, $listOrder); ?>
@@ -117,23 +111,12 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 					<?php echo $item->cliente; ?>
 				</td>
 				<td>
-				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
-					<?php echo JHtml::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'ventas.', $canCheckin); ?>
-				<?php endif; ?>
-				<a href="<?php echo JRoute::_('index.php?option=com_servin2&view=venta&id='.(int) $item->id); ?>">
-				<?php echo $this->escape($item->tipo); ?></a>
-				</td>
-				<td>
 
 					<?php echo $item->pieza; ?>
 				</td>
 				<td>
 
-					<?php echo $item->piezas; ?>
-				</td>
-				<td>
-
-					<?php echo $item->gramos; ?>
+					<?php echo $item->cantidad; ?>
 				</td>
 				<td>
 

@@ -124,34 +124,6 @@ class Servin2ModelDashboards extends JModelList
 		{
 				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($item->tipo));
 
-			if (isset($item->consignacion))
-			{
-
-				$values    = explode(',', $item->consignacion);
-				$textValue = array();
-
-				foreach ($values as $value)
-				{
-					$db    = Factory::getDbo();
-					$query = $db->getQuery(true);
-					$query
-						->select('`#__servin_consignaciones2_3029711`.`pieza`')
-						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3029711'))
-						->where($db->quoteName('#__servin_consignaciones2_3029711.id') . ' = '. $db->quote($db->escape($value)));
-
-					$db->setQuery($query);
-					$results = $db->loadObject();
-
-					if ($results)
-					{
-						$textValue[] = $results->pieza;
-					}
-				}
-
-				$item->consignacion = !empty($textValue) ? implode(', ', $textValue) : $item->consignacion;
-			}
-
-
 			if (isset($item->compra))
 			{
 
@@ -177,6 +149,34 @@ class Servin2ModelDashboards extends JModelList
 				}
 
 				$item->compra = !empty($textValue) ? implode(', ', $textValue) : $item->compra;
+			}
+
+
+			if (isset($item->consignacion))
+			{
+
+				$values    = explode(',', $item->consignacion);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = Factory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__servin_consignaciones2_3109333`.`no_folio_pagare`')
+						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3109333'))
+						->where($db->quoteName('#__servin_consignaciones2_3109333.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->no_folio_pagare;
+					}
+				}
+
+				$item->consignacion = !empty($textValue) ? implode(', ', $textValue) : $item->consignacion;
 			}
 
 

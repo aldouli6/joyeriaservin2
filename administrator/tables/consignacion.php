@@ -114,46 +114,32 @@ class Servin2Tableconsignacion extends JTable
 		}
 
 
-		// Support for multiple or not foreign key field: pieza
-			if(!empty($array['pieza']))
+		// Support for multiple or not foreign key field: compras
+			if(!empty($array['compras']))
 			{
-				if(is_array($array['pieza'])){
-					$array['pieza'] = implode(',',$array['pieza']);
+				if(is_array($array['compras'])){
+					$array['compras'] = implode(',',$array['compras']);
 				}
-				else if(strrpos($array['pieza'], ',') != false){
-					$array['pieza'] = explode(',',$array['pieza']);
+				else if(strrpos($array['compras'], ',') != false){
+					$array['compras'] = explode(',',$array['compras']);
 				}
 			}
 			else {
-				$array['pieza'] = '';
+				$array['compras'] = '';
 			}
 
-		// Support for multiple or not foreign key field: cliente
-			if(!empty($array['cliente']))
+		// Support for multiple or not foreign key field: ventas
+			if(!empty($array['ventas']))
 			{
-				if(is_array($array['cliente'])){
-					$array['cliente'] = implode(',',$array['cliente']);
+				if(is_array($array['ventas'])){
+					$array['ventas'] = implode(',',$array['ventas']);
 				}
-				else if(strrpos($array['cliente'], ',') != false){
-					$array['cliente'] = explode(',',$array['cliente']);
+				else if(strrpos($array['ventas'], ',') != false){
+					$array['ventas'] = explode(',',$array['ventas']);
 				}
 			}
 			else {
-				$array['cliente'] = '';
-			}
-
-		// Support for multiple or not foreign key field: proveedor
-			if(!empty($array['proveedor']))
-			{
-				if(is_array($array['proveedor'])){
-					$array['proveedor'] = implode(',',$array['proveedor']);
-				}
-				else if(strrpos($array['proveedor'], ',') != false){
-					$array['proveedor'] = explode(',',$array['proveedor']);
-				}
-			}
-			else {
-				$array['proveedor'] = '';
+				$array['ventas'] = '';
 			}
 
 		// Support for multiple or not foreign key field: devoluciones

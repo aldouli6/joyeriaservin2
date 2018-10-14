@@ -294,8 +294,10 @@ class Servin2ModelDashboardForm extends JModelForm
 				$array[] = $value;
 			}
 		}
+		if(!empty($array)){
 
 		$data->metodo = $array;
+		}
 
         return $data;
     }

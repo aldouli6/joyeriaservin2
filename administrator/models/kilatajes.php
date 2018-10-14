@@ -79,6 +79,25 @@ class Servin2ModelKilatajes extends JModelList
 
 		// List state information.
 		parent::populateState('a.kilataje', 'asc');
+
+        parent::populateState($ordering, $direction);
+
+        $ordering  = $app->getUserStateFromRequest($this->context . '.ordercol', 'filter_order', $ordering);
+        $direction = $app->getUserStateFromRequest($this->context . '.orderdirn', 'filter_order_Dir', $ordering);
+
+        $this->setState('list.ordering', $ordering);
+        $this->setState('list.direction', $direction);
+
+        $start = $app->getUserStateFromRequest($this->context . '.limitstart', 'limitstart', 0, 'int');
+        $limit = $app->getUserStateFromRequest($this->context . '.limit', 'limit', 0, 'int');
+
+        if ($limit == 0)
+        {
+            $limit = $app->get('list_limit', 0);
+        }
+
+        $this->setState('list.limit', $limit);
+        $this->setState('list.start', $start);
 	}
 
 	/**

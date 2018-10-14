@@ -190,40 +190,28 @@ class Servin2ModelConsignacion extends JModelAdmin
 					$table->foto_pagare = '';
 				}
 
-				if (!empty($table->pieza))
+				if (!empty($table->compras))
 				{
-					if (is_array($table->pieza))
+					if (is_array($table->compras))
 					{
-						$table->pieza = implode(',', $table->pieza);
+						$table->compras = implode(',', $table->compras);
 					}
 				}
 				else
 				{
-					$table->pieza = '';
+					$table->compras = '';
 				}
 
-				if (!empty($table->cliente))
+				if (!empty($table->ventas))
 				{
-					if (is_array($table->cliente))
+					if (is_array($table->ventas))
 					{
-						$table->cliente = implode(',', $table->cliente);
+						$table->ventas = implode(',', $table->ventas);
 					}
 				}
 				else
 				{
-					$table->cliente = '';
-				}
-
-				if (!empty($table->proveedor))
-				{
-					if (is_array($table->proveedor))
-					{
-						$table->proveedor = implode(',', $table->proveedor);
-					}
-				}
-				else
-				{
-					$table->proveedor = '';
+					$table->ventas = '';
 				}
 
 				if (!empty($table->devoluciones))

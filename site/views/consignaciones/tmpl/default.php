@@ -48,22 +48,10 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION', 'a.tipo_transaccion', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_TIPO', 'a.tipo', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_COMPRAS', 'a.compras', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_PIEZA', 'a.pieza', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_PIEZAS', 'a.piezas', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_GRAMOS', 'a.gramos', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_CLIENTE', 'a.cliente', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_PROVEEDOR', 'a.proveedor', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_VENTAS', 'a.ventas', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_CONSIGNACIONES_TOTAL', 'a.total', $listDirn, $listOrder); ?>
@@ -143,27 +131,11 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				</td>
 				<td>
 
-					<?php echo $item->tipo; ?>
+					<?php echo $item->compras; ?>
 				</td>
 				<td>
 
-					<?php echo $item->pieza; ?>
-				</td>
-				<td>
-
-					<?php echo $item->piezas; ?>
-				</td>
-				<td>
-
-					<?php echo $item->gramos; ?>
-				</td>
-				<td>
-
-					<?php echo $item->cliente; ?>
-				</td>
-				<td>
-
-					<?php echo $item->proveedor; ?>
+					<?php echo $item->ventas; ?>
 				</td>
 				<td>
 

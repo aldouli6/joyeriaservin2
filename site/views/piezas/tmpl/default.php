@@ -60,10 +60,7 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_PIEZAS_TIPO', 'a.tipo', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_PIEZAS_GRAMOS', 'a.gramos', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_PIEZAS_PIEZAS', 'a.piezas', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_PIEZAS_EXISTENCIA', 'a.existencia', $listDirn, $listOrder); ?>
 				</th>
 
 
@@ -138,11 +135,7 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				</td>
 				<td>
 
-					<?php echo $item->gramos; ?>
-				</td>
-				<td>
-
-					<?php echo $item->piezas; ?>
+					<?php echo $item->existencia; ?>
 				</td>
 
 

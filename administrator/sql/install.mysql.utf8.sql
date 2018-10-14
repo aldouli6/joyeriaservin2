@@ -166,10 +166,8 @@ CREATE TABLE IF NOT EXISTS `#__servin_consignaciones2` (
 `no_folio_pagare` VARCHAR(255)  NOT NULL ,
 `foto_pagare` TEXT NOT NULL ,
 `tipo_transaccion` VARCHAR(255)  NOT NULL ,
-`pieza` INT NOT NULL ,
-`cantidad` DOUBLE,
-`cliente` INT NOT NULL ,
-`proveedor` INT NOT NULL ,
+`compras` INT NOT NULL ,
+`ventas` INT NOT NULL ,
 `total` DOUBLE,
 `abono` DOUBLE,
 `abo_dev` VARCHAR(255)  NOT NULL ,
@@ -183,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `#__servin_consignaciones2` (
 PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `#__servin2_pagos` (
+CREATE TABLE IF NOT EXISTS `#__servin_pagos2` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 
 `ordering` INT(11)  NOT NULL ,
@@ -193,8 +191,8 @@ CREATE TABLE IF NOT EXISTS `#__servin2_pagos` (
 `created_by` INT(11)  NOT NULL ,
 `modified_by` INT(11)  NOT NULL ,
 `tipo` VARCHAR(255)  NOT NULL ,
-`consignacion` INT NOT NULL ,
 `compra` INT NOT NULL ,
+`consignacion` INT NOT NULL ,
 `venta` INT NOT NULL ,
 `pago` DOUBLE,
 `metodo` VARCHAR(255)  NOT NULL ,

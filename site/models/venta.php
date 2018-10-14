@@ -165,7 +165,6 @@ class Servin2ModelVenta extends JModelItem
 			$this->_item->cliente = !empty($textValue) ? implode(', ', $textValue) : $this->_item->cliente;
 
 		}
-					$this->_item->tipo = JText::_('COM_SERVIN2_VENTAS_TIPO_OPTION_' . $this->_item->tipo);
 
 		if (isset($this->_item->pieza) && $this->_item->pieza != '')
 		{

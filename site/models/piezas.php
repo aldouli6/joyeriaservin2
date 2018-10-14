@@ -47,8 +47,7 @@ class Servin2ModelPiezas extends JModelList
 				'ubicacion', 'a.ubicacion',
 				'hechura', 'a.hechura',
 				'tipo', 'a.tipo',
-				'gramos', 'a.gramos',
-				'piezas', 'a.piezas',
+				'existencia', 'a.existencia',
 			);
 		}
 

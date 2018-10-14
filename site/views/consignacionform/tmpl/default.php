@@ -72,31 +72,18 @@ $canEdit = Servin2HelpersServin2::canUserEdit($this->item, $user);
 				<input type="hidden" name="jform[foto_pagare_hidden]" id="jform_foto_pagare_hidden" value="<?php echo implode(',', $foto_pagareFiles); ?>" />
 	<?php echo $this->form->renderField('tipo_transaccion'); ?>
 
-	<?php echo $this->form->renderField('tipo'); ?>
+	<?php echo $this->form->renderField('compras'); ?>
 
-	<?php echo $this->form->renderField('pieza'); ?>
-
-	<?php foreach((array)$this->item->pieza as $value): ?>
+	<?php foreach((array)$this->item->compras as $value): ?>
 		<?php if(!is_array($value)): ?>
-			<input type="hidden" class="pieza" name="jform[piezahidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
+			<input type="hidden" class="compras" name="jform[comprashidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
 		<?php endif; ?>
 	<?php endforeach; ?>
-	<?php echo $this->form->renderField('piezas'); ?>
+	<?php echo $this->form->renderField('ventas'); ?>
 
-	<?php echo $this->form->renderField('gramos'); ?>
-
-	<?php echo $this->form->renderField('cliente'); ?>
-
-	<?php foreach((array)$this->item->cliente as $value): ?>
+	<?php foreach((array)$this->item->ventas as $value): ?>
 		<?php if(!is_array($value)): ?>
-			<input type="hidden" class="cliente" name="jform[clientehidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
-		<?php endif; ?>
-	<?php endforeach; ?>
-	<?php echo $this->form->renderField('proveedor'); ?>
-
-	<?php foreach((array)$this->item->proveedor as $value): ?>
-		<?php if(!is_array($value)): ?>
-			<input type="hidden" class="proveedor" name="jform[proveedorhidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
+			<input type="hidden" class="ventas" name="jform[ventashidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
 		<?php endif; ?>
 	<?php endforeach; ?>
 	<?php echo $this->form->renderField('total'); ?>

@@ -27,7 +27,7 @@ class Servin2Tablepago extends JTable
 	public function __construct(&$db)
 	{
 		JObserverMapper::addObserverClassToClass('JTableObserverContenthistory', 'Servin2Tablepago', array('typeAlias' => 'com_servin2.pago'));
-		parent::__construct('#__servin2_pagos', 'id', $db);
+		parent::__construct('#__servin_pagos2', 'id', $db);
 	}
 
 	/**
@@ -64,20 +64,6 @@ class Servin2Tablepago extends JTable
 			$array['modified_by'] = JFactory::getUser()->id;
 		}
 
-		// Support for multiple or not foreign key field: consignacion
-			if(!empty($array['consignacion']))
-			{
-				if(is_array($array['consignacion'])){
-					$array['consignacion'] = implode(',',$array['consignacion']);
-				}
-				else if(strrpos($array['consignacion'], ',') != false){
-					$array['consignacion'] = explode(',',$array['consignacion']);
-				}
-			}
-			else {
-				$array['consignacion'] = '';
-			}
-
 		// Support for multiple or not foreign key field: compra
 			if(!empty($array['compra']))
 			{
@@ -90,6 +76,20 @@ class Servin2Tablepago extends JTable
 			}
 			else {
 				$array['compra'] = '';
+			}
+
+		// Support for multiple or not foreign key field: consignacion
+			if(!empty($array['consignacion']))
+			{
+				if(is_array($array['consignacion'])){
+					$array['consignacion'] = implode(',',$array['consignacion']);
+				}
+				else if(strrpos($array['consignacion'], ',') != false){
+					$array['consignacion'] = explode(',',$array['consignacion']);
+				}
+			}
+			else {
+				$array['consignacion'] = '';
 			}
 
 		// Support for multiple or not foreign key field: venta

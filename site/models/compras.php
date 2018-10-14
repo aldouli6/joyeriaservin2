@@ -43,10 +43,8 @@ class Servin2ModelCompras extends JModelList
 				'modified_at', 'a.modified_at',
 				'proveedor', 'a.proveedor',
 				'fecha', 'a.fecha',
-				'tipo', 'a.tipo',
 				'pieza', 'a.pieza',
-				'piezas', 'a.piezas',
-				'gramos', 'a.gramos',
+				'cantidad', 'a.cantidad',
 				'total', 'a.total',
 				'abonado', 'a.abonado',
 				'pagada', 'a.pagada',
@@ -193,14 +191,6 @@ class Servin2ModelCompras extends JModelList
 			$query->where("a.`fecha` <= '".$db->escape($filter_fecha_to)."'");
 		}
 
-		// Filtering tipo
-		$filter_tipo = $this->state->get("filter.tipo");
-
-		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
-		{
-			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
-		}
-
 		// Filtering pieza
 		$filter_pieza = $this->state->get("filter.pieza");
 
@@ -260,7 +250,6 @@ class Servin2ModelCompras extends JModelList
 				$item->proveedor = !empty($textValue) ? implode(', ', $textValue) : $item->proveedor;
 			}
 
-				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_COMPRAS_TIPO_OPTION_' . strtoupper($item->tipo));
 
 			if (isset($item->pieza))
 			{

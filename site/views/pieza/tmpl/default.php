@@ -53,13 +53,8 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_PIEZA_GRAMOS'); ?></th>
-			<td><?php if( $this->item->tipo == 0 ) echo $this->item->gramos; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_PIEZA_PIEZAS'); ?></th>
-			<td><?php if( $this->item->tipo == 1 ) echo $this->item->piezas; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_PIEZA_EXISTENCIA'); ?></th>
+			<td><?php echo $this->item->existencia; ?></td>
 		</tr>
 
 	</table>

@@ -23,13 +23,6 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	js = jQuery.noConflict();
 	js(document).ready(function () {
 		
-	js('input:hidden.consignacion').each(function(){
-		var name = js(this).attr('name');
-		if(name.indexOf('consignacionhidden')){
-			js('#jform_consignacion option[value="'+js(this).val()+'"]').attr('selected',true);
-		}
-	});
-	js("#jform_consignacion").trigger("liszt:updated");
 	js('input:hidden.compra').each(function(){
 		var name = js(this).attr('name');
 		if(name.indexOf('comprahidden')){
@@ -37,6 +30,13 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 		}
 	});
 	js("#jform_compra").trigger("liszt:updated");
+	js('input:hidden.consignacion').each(function(){
+		var name = js(this).attr('name');
+		if(name.indexOf('consignacionhidden')){
+			js('#jform_consignacion option[value="'+js(this).val()+'"]').attr('selected',true);
+		}
+	});
+	js("#jform_consignacion").trigger("liszt:updated");
 	js('input:hidden.venta').each(function(){
 		var name = js(this).attr('name');
 		if(name.indexOf('ventahidden')){
@@ -83,20 +83,20 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 
 				<?php echo $this->form->renderField('created_by'); ?>
 				<?php echo $this->form->renderField('modified_by'); ?>				<?php echo $this->form->renderField('tipo'); ?>
-				<?php echo $this->form->renderField('consignacion'); ?>
-
-			<?php
-				foreach((array)$this->item->consignacion as $value): 
-					if(!is_array($value)):
-						echo '<input type="hidden" class="consignacion" name="jform[consignacionhidden]['.$value.']" value="'.$value.'" />';
-					endif;
-				endforeach;
-			?>				<?php echo $this->form->renderField('compra'); ?>
+				<?php echo $this->form->renderField('compra'); ?>
 
 			<?php
 				foreach((array)$this->item->compra as $value): 
 					if(!is_array($value)):
 						echo '<input type="hidden" class="compra" name="jform[comprahidden]['.$value.']" value="'.$value.'" />';
+					endif;
+				endforeach;
+			?>				<?php echo $this->form->renderField('consignacion'); ?>
+
+			<?php
+				foreach((array)$this->item->consignacion as $value): 
+					if(!is_array($value)):
+						echo '<input type="hidden" class="consignacion" name="jform[consignacionhidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
 			?>				<?php echo $this->form->renderField('venta'); ?>

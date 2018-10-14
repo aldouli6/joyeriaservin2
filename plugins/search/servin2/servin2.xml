@@ -2,7 +2,7 @@
 <extension version="3.1" type="plugin" group="search">
     <name>plg_search_servin2</name>
     <author>Aldo Ulises</author>
-    <creationDate>2018-09-29</creationDate>
+    <creationDate>2018-10-14</creationDate>
     <copyright>2018 Aldo Ulises</copyright>
     <license>Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt</license>
     <authorEmail>aldouli6@gmail.com</authorEmail>

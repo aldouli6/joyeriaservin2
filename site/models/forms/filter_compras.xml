@@ -8,11 +8,6 @@
         <field name="proveedor" type="sql" label="COM_SERVIN2_FORM_LBL_COMPRA_PROVEEDOR" query="SELECT '' AS `id`, 'COM_SERVIN2_COMPRAS_PROVEEDOR_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`empresa`, ' ', `nombre`) AS val FROM `#__servin_proveedores2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="fecha.from" label="COM_SERVIN2_COMPRAS_FECHA_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_COMPRAS_FECHA_FILTER_FROM"/>
 <field name="fecha.to" label="COM_SERVIN2_COMPRAS_FECHA_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_COMPRAS_FECHA_FILTER_TO"/>
-<field name="tipo" label="COM_SERVIN2_FORM_LBL_COMPRA_TIPO" type="list" onchange="this.form.submit();" default="COM_SERVIN2_COMPRAS_TIPO_FILTER">
-  <option value="">COM_SERVIN2_COMPRAS_TIPO_FILTER</option>
-  <option value="0">COM_SERVIN2_COMPRAS_TIPO_OPTION_0</option>
-  <option value="1">COM_SERVIN2_COMPRAS_TIPO_OPTION_1</option>
-</field>
 <field name="pieza" type="sql" label="COM_SERVIN2_FORM_LBL_COMPRA_PIEZA" query="SELECT '' AS `id`, 'COM_SERVIN2_COMPRAS_PIEZA_FILTER' AS `val` UNION SELECT `id` AS `id`,  CONCAT(`descripcion`, ' ', `hechura`) AS val FROM `#__servin_piezas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 
 

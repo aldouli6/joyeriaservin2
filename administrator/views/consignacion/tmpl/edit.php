@@ -23,27 +23,20 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	js = jQuery.noConflict();
 	js(document).ready(function () {
 		
-	js('input:hidden.pieza').each(function(){
+	js('input:hidden.compras').each(function(){
 		var name = js(this).attr('name');
-		if(name.indexOf('piezahidden')){
-			js('#jform_pieza option[value="'+js(this).val()+'"]').attr('selected',true);
+		if(name.indexOf('comprashidden')){
+			js('#jform_compras option[value="'+js(this).val()+'"]').attr('selected',true);
 		}
 	});
-	js("#jform_pieza").trigger("liszt:updated");
-	js('input:hidden.cliente').each(function(){
+	js("#jform_compras").trigger("liszt:updated");
+	js('input:hidden.ventas').each(function(){
 		var name = js(this).attr('name');
-		if(name.indexOf('clientehidden')){
-			js('#jform_cliente option[value="'+js(this).val()+'"]').attr('selected',true);
+		if(name.indexOf('ventashidden')){
+			js('#jform_ventas option[value="'+js(this).val()+'"]').attr('selected',true);
 		}
 	});
-	js("#jform_cliente").trigger("liszt:updated");
-	js('input:hidden.proveedor').each(function(){
-		var name = js(this).attr('name');
-		if(name.indexOf('proveedorhidden')){
-			js('#jform_proveedor option[value="'+js(this).val()+'"]').attr('selected',true);
-		}
-	});
-	js("#jform_proveedor").trigger("liszt:updated");
+	js("#jform_ventas").trigger("liszt:updated");
 	js('input:hidden.devoluciones').each(function(){
 		var name = js(this).attr('name');
 		if(name.indexOf('devolucioneshidden')){
@@ -104,29 +97,20 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 					<?php endforeach; ?>
 					<input type="hidden" name="jform[foto_pagare_hidden]" id="jform_foto_pagare_hidden" value="<?php echo implode(',', $foto_pagareFiles); ?>" />
 				<?php endif; ?>				<?php echo $this->form->renderField('tipo_transaccion'); ?>
-				<?php echo $this->form->renderField('pieza'); ?>
+				<?php echo $this->form->renderField('compras'); ?>
 
 			<?php
-				foreach((array)$this->item->pieza as $value): 
+				foreach((array)$this->item->compras as $value): 
 					if(!is_array($value)):
-						echo '<input type="hidden" class="pieza" name="jform[piezahidden]['.$value.']" value="'.$value.'" />';
+						echo '<input type="hidden" class="compras" name="jform[comprashidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('cantidad'); ?>
-				<?php echo $this->form->renderField('cliente'); ?>
+			?>				<?php echo $this->form->renderField('ventas'); ?>
 
 			<?php
-				foreach((array)$this->item->cliente as $value): 
+				foreach((array)$this->item->ventas as $value): 
 					if(!is_array($value)):
-						echo '<input type="hidden" class="cliente" name="jform[clientehidden]['.$value.']" value="'.$value.'" />';
-					endif;
-				endforeach;
-			?>				<?php echo $this->form->renderField('proveedor'); ?>
-
-			<?php
-				foreach((array)$this->item->proveedor as $value): 
-					if(!is_array($value)):
-						echo '<input type="hidden" class="proveedor" name="jform[proveedorhidden]['.$value.']" value="'.$value.'" />';
+						echo '<input type="hidden" class="ventas" name="jform[ventashidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
 			?>				<?php echo $this->form->renderField('total'); ?>

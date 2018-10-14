@@ -123,8 +123,10 @@ class Servin2ModelPago extends JModelAdmin
 					$array[] = $value;
 				}
 			}
+			if(!empty($array)){
 
 			$data->metodo = $array;
+			}
 		}
 
 		return $data;
@@ -191,18 +193,6 @@ class Servin2ModelPago extends JModelAdmin
 					throw new Exception($table->getError());
 				}
 				
-				if (!empty($table->consignacion))
-				{
-					if (is_array($table->consignacion))
-					{
-						$table->consignacion = implode(',', $table->consignacion);
-					}
-				}
-				else
-				{
-					$table->consignacion = '';
-				}
-
 				if (!empty($table->compra))
 				{
 					if (is_array($table->compra))
@@ -213,6 +203,18 @@ class Servin2ModelPago extends JModelAdmin
 				else
 				{
 					$table->compra = '';
+				}
+
+				if (!empty($table->consignacion))
+				{
+					if (is_array($table->consignacion))
+					{
+						$table->consignacion = implode(',', $table->consignacion);
+					}
+				}
+				else
+				{
+					$table->consignacion = '';
 				}
 
 				if (!empty($table->venta))
@@ -271,7 +273,7 @@ class Servin2ModelPago extends JModelAdmin
 			if (@$table->ordering === '')
 			{
 				$db = JFactory::getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__servin2_pagos');
+				$db->setQuery('SELECT MAX(ordering) FROM #__servin_pagos2');
 				$max             = $db->loadResult();
 				$table->ordering = $max + 1;
 			}

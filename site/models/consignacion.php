@@ -132,16 +132,15 @@ class Servin2ModelConsignacion extends JModelItem
 			$this->_item->modified_by_name = Factory::getUser($this->_item->modified_by)->name;
 		}
 					$this->_item->tipo_transaccion = JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_' . $this->_item->tipo_transaccion);
-					$this->_item->tipo = JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_OPTION_' . $this->_item->tipo);
 
-		if (isset($this->_item->pieza) && $this->_item->pieza != '')
+		if (isset($this->_item->compras) && $this->_item->compras != '')
 		{
-			if (is_object($this->_item->pieza))
+			if (is_object($this->_item->compras))
 			{
-				$this->_item->pieza = ArrayHelper::fromObject($this->_item->pieza);
+				$this->_item->compras = ArrayHelper::fromObject($this->_item->compras);
 			}
 
-			$values = (is_array($this->_item->pieza)) ? $this->_item->pieza : explode(',',$this->_item->pieza);
+			$values = (is_array($this->_item->compras)) ? $this->_item->compras : explode(',',$this->_item->compras);
 
 			$textValue = array();
 
@@ -151,8 +150,8 @@ class Servin2ModelConsignacion extends JModelItem
 				$query = $db->getQuery(true);
 
 				$query
-					->select('CONCAT(`#__servin_piezas2_3025094`.`descripcion`, \' \', `#__servin_piezas2_3025094`.`hechura`) AS `fk_value`')
-					->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025094'))
+					->select('`#__servin_compras2_3109334`.`pieza`')
+					->from($db->quoteName('#__servin_compras2', '#__servin_compras2_3109334'))
 					->where($db->quoteName('id') . ' = ' . $db->quote($value));
 
 				$db->setQuery($query);
@@ -160,22 +159,22 @@ class Servin2ModelConsignacion extends JModelItem
 
 				if ($results)
 				{
-					$textValue[] = $results->fk_value;
+					$textValue[] = $results->pieza;
 				}
 			}
 
-			$this->_item->pieza = !empty($textValue) ? implode(', ', $textValue) : $this->_item->pieza;
+			$this->_item->compras = !empty($textValue) ? implode(', ', $textValue) : $this->_item->compras;
 
 		}
 
-		if (isset($this->_item->cliente) && $this->_item->cliente != '')
+		if (isset($this->_item->ventas) && $this->_item->ventas != '')
 		{
-			if (is_object($this->_item->cliente))
+			if (is_object($this->_item->ventas))
 			{
-				$this->_item->cliente = ArrayHelper::fromObject($this->_item->cliente);
+				$this->_item->ventas = ArrayHelper::fromObject($this->_item->ventas);
 			}
 
-			$values = (is_array($this->_item->cliente)) ? $this->_item->cliente : explode(',',$this->_item->cliente);
+			$values = (is_array($this->_item->ventas)) ? $this->_item->ventas : explode(',',$this->_item->ventas);
 
 			$textValue = array();
 
@@ -185,8 +184,8 @@ class Servin2ModelConsignacion extends JModelItem
 				$query = $db->getQuery(true);
 
 				$query
-					->select('`#__servin_clientes2_3025091`.`nombre`')
-					->from($db->quoteName('#__servin_clientes2', '#__servin_clientes2_3025091'))
+					->select('`#__servin_ventas2_3109336`.`pieza`')
+					->from($db->quoteName('#__servin_ventas2', '#__servin_ventas2_3109336'))
 					->where($db->quoteName('id') . ' = ' . $db->quote($value));
 
 				$db->setQuery($query);
@@ -194,45 +193,11 @@ class Servin2ModelConsignacion extends JModelItem
 
 				if ($results)
 				{
-					$textValue[] = $results->nombre;
+					$textValue[] = $results->pieza;
 				}
 			}
 
-			$this->_item->cliente = !empty($textValue) ? implode(', ', $textValue) : $this->_item->cliente;
-
-		}
-
-		if (isset($this->_item->proveedor) && $this->_item->proveedor != '')
-		{
-			if (is_object($this->_item->proveedor))
-			{
-				$this->_item->proveedor = ArrayHelper::fromObject($this->_item->proveedor);
-			}
-
-			$values = (is_array($this->_item->proveedor)) ? $this->_item->proveedor : explode(',',$this->_item->proveedor);
-
-			$textValue = array();
-
-			foreach ($values as $value)
-			{
-				$db    = Factory::getDbo();
-				$query = $db->getQuery(true);
-
-				$query
-					->select('CONCAT(`#__servin_proveedores2_3026599`.`empresa`, \' \', `#__servin_proveedores2_3026599`.`nombre`) AS `fk_value`')
-					->from($db->quoteName('#__servin_proveedores2', '#__servin_proveedores2_3026599'))
-					->where($db->quoteName('id') . ' = ' . $db->quote($value));
-
-				$db->setQuery($query);
-				$results = $db->loadObject();
-
-				if ($results)
-				{
-					$textValue[] = $results->fk_value;
-				}
-			}
-
-			$this->_item->proveedor = !empty($textValue) ? implode(', ', $textValue) : $this->_item->proveedor;
+			$this->_item->ventas = !empty($textValue) ? implode(', ', $textValue) : $this->_item->ventas;
 
 		}
 					$this->_item->abo_dev = JText::_('COM_SERVIN2_CONSIGNACIONES_ABO_DEV_OPTION_' . $this->_item->abo_dev);

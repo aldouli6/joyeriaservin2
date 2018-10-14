@@ -11,8 +11,8 @@
   <option value="2">COM_SERVIN2_PAGOS_TIPO_OPTION_2</option>
   <option value="3">COM_SERVIN2_PAGOS_TIPO_OPTION_3</option>
 </field>
-<field name="consignacion" type="sql" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" query="SELECT '' AS `id`, 'COM_SERVIN2_PAGOS_CONSIGNACION_FILTER' AS `val` UNION SELECT `id` AS `id`, `pieza` AS val FROM `#__servin_consignaciones2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="compra" type="sql" label="COM_SERVIN2_FORM_LBL_PAGO_COMPRA" query="SELECT '' AS `id`, 'COM_SERVIN2_PAGOS_COMPRA_FILTER' AS `val` UNION SELECT `id` AS `id`, `pieza` AS val FROM `#__servin_compras2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="consignacion" type="sql" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" query="SELECT '' AS `id`, 'COM_SERVIN2_PAGOS_CONSIGNACION_FILTER' AS `val` UNION SELECT `id` AS `id`, `no_folio_pagare` AS val FROM `#__servin_consignaciones2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="venta" type="sql" label="COM_SERVIN2_FORM_LBL_PAGO_VENTA" query="SELECT '' AS `id`, 'COM_SERVIN2_PAGOS_VENTA_FILTER' AS `val` UNION SELECT `id` AS `id`, `pieza` AS val FROM `#__servin_ventas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="metodo" label="COM_SERVIN2_FORM_LBL_PAGO_METODO" type="list" onchange="this.form.submit();" default="COM_SERVIN2_PAGOS_METODO_FILTER">
   <option value="">COM_SERVIN2_PAGOS_METODO_FILTER</option>

@@ -78,16 +78,10 @@ $sortFields = $this->getSortFields();
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION', 'a.`tipo_transaccion`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_PIEZA', 'a.`pieza`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_COMPRAS', 'a.`compras`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_CANTIDAD', 'a.`cantidad`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_CLIENTE', 'a.`cliente`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_PROVEEDOR', 'a.`proveedor`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_VENTAS', 'a.`ventas`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_TOTAL', 'a.`total`', $listDirn, $listOrder); ?>
@@ -182,16 +176,10 @@ $sortFields = $this->getSortFields();
 					<?php echo $item->tipo_transaccion; ?>
 				</td>				<td>
 
-					<?php echo $item->pieza; ?>
+					<?php echo $item->compras; ?>
 				</td>				<td>
 
-					<?php echo $item->cantidad; ?>
-				</td>				<td>
-
-					<?php echo $item->cliente; ?>
-				</td>				<td>
-
-					<?php echo $item->proveedor; ?>
+					<?php echo $item->ventas; ?>
 				</td>				<td>
 
 					<?php echo $item->total; ?>

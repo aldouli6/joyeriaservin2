@@ -28,23 +28,13 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_servin2'))
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_TIPO'); ?></th>
-			<td><?php echo $this->item->tipo; ?></td>
-		</tr>
-
-		<tr>
 			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_PIEZA'); ?></th>
 			<td><?php echo $this->item->pieza; ?></td>
 		</tr>
 
 		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_PIEZAS'); ?></th>
-			<td><?php if( $this->item->tipo == 1 ) echo $this->item->piezas; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_GRAMOS'); ?></th>
-			<td><?php if( $this->item->tipo == 0 ) echo $this->item->gramos; ?></td>
+			<th><?php echo JText::_('COM_SERVIN2_FORM_LBL_VENTA_CANTIDAD'); ?></th>
+			<td><?php echo $this->item->cantidad; ?></td>
 		</tr>
 
 		<tr>

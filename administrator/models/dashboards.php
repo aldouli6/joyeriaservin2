@@ -54,6 +54,25 @@ class Servin2ModelDashboards extends JModelList
 
 		// List state information.
 		parent::populateState('a.tipo', 'asc');
+
+        parent::populateState($ordering, $direction);
+
+        $ordering  = $app->getUserStateFromRequest($this->context . '.ordercol', 'filter_order', $ordering);
+        $direction = $app->getUserStateFromRequest($this->context . '.orderdirn', 'filter_order_Dir', $ordering);
+
+        $this->setState('list.ordering', $ordering);
+        $this->setState('list.direction', $direction);
+
+        $start = $app->getUserStateFromRequest($this->context . '.limitstart', 'limitstart', 0, 'int');
+        $limit = $app->getUserStateFromRequest($this->context . '.limit', 'limit', 0, 'int');
+
+        if ($limit == 0)
+        {
+            $limit = $app->get('list_limit', 0);
+        }
+
+        $this->setState('list.limit', $limit);
+        $this->setState('list.start', $start);
 	}
 
 	/**
@@ -108,32 +127,6 @@ class Servin2ModelDashboards extends JModelList
 		{
 					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($oneItem->tipo));
 
-			if (isset($oneItem->consignacion))
-			{
-				$values    = explode(',', $oneItem->consignacion);
-				$textValue = array();
-
-				foreach ($values as $value)
-				{
-					$db    = JFactory::getDbo();
-					$query = $db->getQuery(true);
-					$query
-						->select('`#__servin_consignaciones2_3029711`.`pieza`')
-						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3029711'))
-						->where($db->quoteName('#__servin_consignaciones2_3029711.id') . ' = '. $db->quote($db->escape($value)));
-
-					$db->setQuery($query);
-					$results = $db->loadObject();
-
-					if ($results)
-					{
-						$textValue[] = $results->pieza;
-					}
-				}
-
-				$oneItem->consignacion = !empty($textValue) ? implode(', ', $textValue) : $oneItem->consignacion;
-			}
-
 			if (isset($oneItem->compra))
 			{
 				$values    = explode(',', $oneItem->compra);
@@ -158,6 +151,32 @@ class Servin2ModelDashboards extends JModelList
 				}
 
 				$oneItem->compra = !empty($textValue) ? implode(', ', $textValue) : $oneItem->compra;
+			}
+
+			if (isset($oneItem->consignacion))
+			{
+				$values    = explode(',', $oneItem->consignacion);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__servin_consignaciones2_3109333`.`no_folio_pagare`')
+						->from($db->quoteName('#__servin_consignaciones2', '#__servin_consignaciones2_3109333'))
+						->where($db->quoteName('#__servin_consignaciones2_3109333.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->no_folio_pagare;
+					}
+				}
+
+				$oneItem->consignacion = !empty($textValue) ? implode(', ', $textValue) : $oneItem->consignacion;
 			}
 
 			if (isset($oneItem->venta))

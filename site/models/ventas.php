@@ -42,10 +42,8 @@ class Servin2ModelVentas extends JModelList
 				'created_at', 'a.created_at',
 				'modified_at', 'a.modified_at',
 				'cliente', 'a.cliente',
-				'tipo', 'a.tipo',
 				'pieza', 'a.pieza',
-				'piezas', 'a.piezas',
-				'gramos', 'a.gramos',
+				'cantidad', 'a.cantidad',
 				'fecha', 'a.fecha',
 				'total', 'a.total',
 				'abonado', 'a.abonado',
@@ -179,14 +177,6 @@ class Servin2ModelVentas extends JModelList
 			$query->where("a.`cliente` = '".$db->escape($filter_cliente)."'");
 		}
 
-		// Filtering tipo
-		$filter_tipo = $this->state->get("filter.tipo");
-
-		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
-		{
-			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
-		}
-
 		// Filtering pieza
 		$filter_pieza = $this->state->get("filter.pieza");
 
@@ -260,7 +250,6 @@ class Servin2ModelVentas extends JModelList
 				$item->cliente = !empty($textValue) ? implode(', ', $textValue) : $item->cliente;
 			}
 
-				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_VENTAS_TIPO_OPTION_' . strtoupper($item->tipo));
 
 			if (isset($item->pieza))
 			{

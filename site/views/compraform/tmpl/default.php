@@ -65,8 +65,6 @@ $canEdit = Servin2HelpersServin2::canUserEdit($this->item, $user);
 	<?php endforeach; ?>
 	<?php echo $this->form->renderField('fecha'); ?>
 
-	<?php echo $this->form->renderField('tipo'); ?>
-
 	<?php echo $this->form->renderField('pieza'); ?>
 
 	<?php foreach((array)$this->item->pieza as $value): ?>
@@ -74,9 +72,7 @@ $canEdit = Servin2HelpersServin2::canUserEdit($this->item, $user);
 			<input type="hidden" class="pieza" name="jform[piezahidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
 		<?php endif; ?>
 	<?php endforeach; ?>
-	<?php echo $this->form->renderField('piezas'); ?>
-
-	<?php echo $this->form->renderField('gramos'); ?>
+	<?php echo $this->form->renderField('cantidad'); ?>
 
 	<?php echo $this->form->renderField('total'); ?>
 

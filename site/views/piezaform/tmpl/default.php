@@ -88,9 +88,7 @@ $canEdit = Servin2HelpersServin2::canUserEdit($this->item, $user);
 	<?php endforeach; ?>
 	<?php echo $this->form->renderField('tipo'); ?>
 
-	<?php echo $this->form->renderField('gramos'); ?>
-
-	<?php echo $this->form->renderField('piezas'); ?>
+	<?php echo $this->form->renderField('existencia'); ?>
 
 			<div class="control-group">
 				<div class="controls">

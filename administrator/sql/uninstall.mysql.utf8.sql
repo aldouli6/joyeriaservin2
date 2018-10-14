@@ -8,4 +8,4 @@ DROP TABLE IF EXISTS `#__servin_clientes2`;
 DROP TABLE IF EXISTS `#__servin_compras2`;
 DROP TABLE IF EXISTS `#__servin_ventas2`;
 DROP TABLE IF EXISTS `#__servin_consignaciones2`;
-DROP TABLE IF EXISTS `#__servin2_pagos`;
+DROP TABLE IF EXISTS `#__servin_pagos2`;

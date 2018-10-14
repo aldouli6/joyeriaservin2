@@ -14,13 +14,8 @@
     <field name="created_at" type="timecreated" label="COM_SERVIN2_FORM_LBL_VENTA_CREATED_AT" description="COM_SERVIN2_FORM_DESC_VENTA_CREATED_AT" hidden="true" hint="COM_SERVIN2_FORM_LBL_VENTA_CREATED_AT"/>
     <field name="modified_at" type="timecreated" label="COM_SERVIN2_FORM_LBL_VENTA_MODIFIED_AT" description="COM_SERVIN2_FORM_DESC_VENTA_MODIFIED_AT" hidden="true" hint="COM_SERVIN2_FORM_LBL_VENTA_MODIFIED_AT"/>
     <field name="cliente" type="foreignkey" label="COM_SERVIN2_FORM_LBL_VENTA_CLIENTE" description="COM_SERVIN2_FORM_DESC_VENTA_CLIENTE" class="inputbox" input_type="list" table="#__servin_clientes2" key_field="id" value_field="nombre" hide_trashed="1" default="0"/>
-    <field name="tipo" default="0" type="radio" required="true" label="COM_SERVIN2_FORM_LBL_VENTA_TIPO" description="COM_SERVIN2_FORM_DESC_VENTA_TIPO" hint="COM_SERVIN2_FORM_LBL_VENTA_TIPO">
-      <option value="0">COM_SERVIN2_VENTAS_TIPO_OPTION_0</option>
-      <option value="1">COM_SERVIN2_VENTAS_TIPO_OPTION_1</option>
-    </field>
     <field name="pieza" type="foreignkey" label="COM_SERVIN2_FORM_LBL_VENTA_PIEZA" description="COM_SERVIN2_FORM_DESC_VENTA_PIEZA" class="inputbox" input_type="list" table="#__servin_piezas2" key_field="id" value_multiple="1" value_field_multiple="descripcion,hechura" value_field="fk_value" separator=" " hide_trashed="1" required="true" default=""/>
-    <field name="piezas" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_VENTA_PIEZAS" description="COM_SERVIN2_FORM_DESC_VENTA_PIEZAS" hint="COM_SERVIN2_FORM_LBL_VENTA_PIEZAS" showon="tipo:1"/>
-    <field name="gramos" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_VENTA_GRAMOS" description="COM_SERVIN2_FORM_DESC_VENTA_GRAMOS" hint="COM_SERVIN2_FORM_LBL_VENTA_GRAMOS" showon="tipo:0"/>
+    <field name="cantidad" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_VENTA_CANTIDAD" description="COM_SERVIN2_FORM_DESC_VENTA_CANTIDAD" hint="COM_SERVIN2_FORM_LBL_VENTA_CANTIDAD"/>
     <field name="fecha" class="inputbox" timeformat="12" filter="user_utc" translateformat="false" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" required="true" label="COM_SERVIN2_FORM_LBL_VENTA_FECHA" description="COM_SERVIN2_FORM_DESC_VENTA_FECHA" hint="COM_SERVIN2_FORM_LBL_VENTA_FECHA"/>
     <field name="total" filter="safehtml" step="0.01" type="number" required="true" label="COM_SERVIN2_FORM_LBL_VENTA_TOTAL" description="COM_SERVIN2_FORM_DESC_VENTA_TOTAL" hint="COM_SERVIN2_FORM_LBL_VENTA_TOTAL"/>
     <field name="abonado" filter="safehtml" min="0" step="0.01" type="number" default="0" disabled="true" label="COM_SERVIN2_FORM_LBL_VENTA_ABONADO" description="COM_SERVIN2_FORM_DESC_VENTA_ABONADO" hint="COM_SERVIN2_FORM_LBL_VENTA_ABONADO"/>

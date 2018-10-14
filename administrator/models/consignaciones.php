@@ -43,10 +43,8 @@ class Servin2ModelConsignaciones extends JModelList
 				'no_folio_pagare', 'a.`no_folio_pagare`',
 				'foto_pagare', 'a.`foto_pagare`',
 				'tipo_transaccion', 'a.`tipo_transaccion`',
-				'pieza', 'a.`pieza`',
-				'cantidad', 'a.`cantidad`',
-				'cliente', 'a.`cliente`',
-				'proveedor', 'a.`proveedor`',
+				'compras', 'a.`compras`',
+				'ventas', 'a.`ventas`',
 				'total', 'a.`total`',
 				'abono', 'a.`abono`',
 				'abo_dev', 'a.`abo_dev`',
@@ -90,17 +88,11 @@ class Servin2ModelConsignaciones extends JModelList
 
 		$published = $app->getUserStateFromRequest($this->context . '.filter.state', 'filter_published', '', 'string');
 		$this->setState('filter.state', $published);
-		// Filtering tipo_transaccion
-		$this->setState('filter.tipo_transaccion', $app->getUserStateFromRequest($this->context.'.filter.tipo_transaccion', 'filter_tipo_transaccion', '', 'string'));
+		// Filtering compras
+		$this->setState('filter.compras', $app->getUserStateFromRequest($this->context.'.filter.compras', 'filter_compras', '', 'string'));
 
-		// Filtering pieza
-		$this->setState('filter.pieza', $app->getUserStateFromRequest($this->context.'.filter.pieza', 'filter_pieza', '', 'string'));
-
-		// Filtering cliente
-		$this->setState('filter.cliente', $app->getUserStateFromRequest($this->context.'.filter.cliente', 'filter_cliente', '', 'string'));
-
-		// Filtering proveedor
-		$this->setState('filter.proveedor', $app->getUserStateFromRequest($this->context.'.filter.proveedor', 'filter_proveedor', '', 'string'));
+		// Filtering ventas
+		$this->setState('filter.ventas', $app->getUserStateFromRequest($this->context.'.filter.ventas', 'filter_ventas', '', 'string'));
 
 		// Filtering fecha_emision
 		$this->setState('filter.fecha_emision.from', $app->getUserStateFromRequest($this->context.'.filter.fecha_emision.from', 'filter_from_fecha_emision', '', 'string'));
@@ -121,6 +113,25 @@ class Servin2ModelConsignaciones extends JModelList
 
 		// List state information.
 		parent::populateState('a.no_folio_pagare', 'asc');
+
+        parent::populateState($ordering, $direction);
+
+        $ordering  = $app->getUserStateFromRequest($this->context . '.ordercol', 'filter_order', $ordering);
+        $direction = $app->getUserStateFromRequest($this->context . '.orderdirn', 'filter_order_Dir', $ordering);
+
+        $this->setState('list.ordering', $ordering);
+        $this->setState('list.direction', $direction);
+
+        $start = $app->getUserStateFromRequest($this->context . '.limitstart', 'limitstart', 0, 'int');
+        $limit = $app->getUserStateFromRequest($this->context . '.limit', 'limit', 0, 'int');
+
+        if ($limit == 0)
+        {
+            $limit = $app->get('list_limit', 0);
+        }
+
+        $this->setState('list.limit', $limit);
+        $this->setState('list.start', $start);
 	}
 
 	/**
@@ -176,15 +187,12 @@ class Servin2ModelConsignaciones extends JModelList
 		// Join over the user field 'modified_by'
 		$query->select('`modified_by`.name AS `modified_by`');
 		$query->join('LEFT', '#__users AS `modified_by` ON `modified_by`.id = a.`modified_by`');
-		// Join over the foreign key 'pieza'
-		$query->select('CONCAT(`#__servin_piezas2_3025094`.`descripcion`, \' \', `#__servin_piezas2_3025094`.`hechura`) AS piezas_fk_value_3025094');
-		$query->join('LEFT', '#__servin_piezas2 AS #__servin_piezas2_3025094 ON #__servin_piezas2_3025094.`id` = a.`pieza`');
-		// Join over the foreign key 'cliente'
-		$query->select('`#__servin_clientes2_3025091`.`nombre` AS clientes_fk_value_3025091');
-		$query->join('LEFT', '#__servin_clientes2 AS #__servin_clientes2_3025091 ON #__servin_clientes2_3025091.`id` = a.`cliente`');
-		// Join over the foreign key 'proveedor'
-		$query->select('CONCAT(`#__servin_proveedores2_3026599`.`empresa`, \' \', `#__servin_proveedores2_3026599`.`nombre`) AS proveedores_fk_value_3026599');
-		$query->join('LEFT', '#__servin_proveedores2 AS #__servin_proveedores2_3026599 ON #__servin_proveedores2_3026599.`id` = a.`proveedor`');
+		// Join over the foreign key 'compras'
+		$query->select('`#__servin_compras2_3109334`.`pieza` AS compras_fk_value_3109334');
+		$query->join('LEFT', '#__servin_compras2 AS #__servin_compras2_3109334 ON #__servin_compras2_3109334.`id` = a.`compras`');
+		// Join over the foreign key 'ventas'
+		$query->select('`#__servin_ventas2_3109336`.`pieza` AS ventas_fk_value_3109336');
+		$query->join('LEFT', '#__servin_ventas2 AS #__servin_ventas2_3109336 ON #__servin_ventas2_3109336.`id` = a.`ventas`');
 		// Join over the foreign key 'devoluciones'
 		$query->select('`#__servin_consignaciones2_3025097`.`no_folio_pagare` AS #__servin_consignaciones2_fk_value_3025097');
 		$query->join('LEFT', '#__servin_consignaciones2 AS #__servin_consignaciones2_3025097 ON #__servin_consignaciones2_3025097.`id` = a.`devoluciones`');
@@ -214,41 +222,25 @@ class Servin2ModelConsignaciones extends JModelList
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('( a.no_folio_pagare LIKE ' . $search . '  OR CONCAT(`#__servin_piezas2_3025094`.`descripcion`, \' \', `#__servin_piezas2_3025094`.`hechura`) LIKE ' . $search . '  OR #__servin_clientes2_3025091.nombre LIKE ' . $search . '  OR CONCAT(`#__servin_proveedores2_3026599`.`empresa`, \' \', `#__servin_proveedores2_3026599`.`nombre`) LIKE ' . $search . '  OR  a.total LIKE ' . $search . '  OR  a.abono LIKE ' . $search . '  OR  a.adeudo LIKE ' . $search . '  OR  a.fecha_emision LIKE ' . $search . '  OR  a.fecha_limite LIKE ' . $search . '  OR  a.fecha_devolucion LIKE ' . $search . '  OR  a.estatus LIKE ' . $search . ' )');
+				$query->where('( a.no_folio_pagare LIKE ' . $search . '  OR  a.total LIKE ' . $search . '  OR  a.abono LIKE ' . $search . '  OR  a.adeudo LIKE ' . $search . '  OR  a.fecha_emision LIKE ' . $search . '  OR  a.fecha_limite LIKE ' . $search . '  OR  a.fecha_devolucion LIKE ' . $search . '  OR  a.estatus LIKE ' . $search . ' )');
 			}
 		}
                 
 
-		// Filtering tipo_transaccion
-		$filter_tipo_transaccion = $this->state->get("filter.tipo_transaccion");
+		// Filtering compras
+		$filter_compras = $this->state->get("filter.compras");
 
-		if ($filter_tipo_transaccion !== null && (is_numeric($filter_tipo_transaccion) || !empty($filter_tipo_transaccion)))
+		if ($filter_compras !== null && !empty($filter_compras))
 		{
-			$query->where("a.`tipo_transaccion` = '".$db->escape($filter_tipo_transaccion)."'");
+			$query->where("a.`compras` = '".$db->escape($filter_compras)."'");
 		}
 
-		// Filtering pieza
-		$filter_pieza = $this->state->get("filter.pieza");
+		// Filtering ventas
+		$filter_ventas = $this->state->get("filter.ventas");
 
-		if ($filter_pieza !== null && !empty($filter_pieza))
+		if ($filter_ventas !== null && !empty($filter_ventas))
 		{
-			$query->where("a.`pieza` = '".$db->escape($filter_pieza)."'");
-		}
-
-		// Filtering cliente
-		$filter_cliente = $this->state->get("filter.cliente");
-
-		if ($filter_cliente !== null && !empty($filter_cliente))
-		{
-			$query->where("a.`cliente` = '".$db->escape($filter_cliente)."'");
-		}
-
-		// Filtering proveedor
-		$filter_proveedor = $this->state->get("filter.proveedor");
-
-		if ($filter_proveedor !== null && !empty($filter_proveedor))
-		{
-			$query->where("a.`proveedor` = '".$db->escape($filter_proveedor)."'");
+			$query->where("a.`ventas` = '".$db->escape($filter_ventas)."'");
 		}
 
 		// Filtering fecha_emision
@@ -317,9 +309,9 @@ class Servin2ModelConsignaciones extends JModelList
 		{
 					$oneItem->tipo_transaccion = ($oneItem->tipo_transaccion == '') ? '' : JText::_('COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_' . strtoupper($oneItem->tipo_transaccion));
 
-			if (isset($oneItem->pieza))
+			if (isset($oneItem->compras))
 			{
-				$values    = explode(',', $oneItem->pieza);
+				$values    = explode(',', $oneItem->compras);
 				$textValue = array();
 
 				foreach ($values as $value)
@@ -327,25 +319,25 @@ class Servin2ModelConsignaciones extends JModelList
 					$db    = JFactory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-						->select('CONCAT(`#__servin_piezas2_3025094`.`descripcion`, \' \', `#__servin_piezas2_3025094`.`hechura`) AS `fk_value`')
-						->from($db->quoteName('#__servin_piezas2', '#__servin_piezas2_3025094'))
-						->where($db->quoteName('#__servin_piezas2_3025094.id') . ' = '. $db->quote($db->escape($value)));
+						->select('`#__servin_compras2_3109334`.`pieza`')
+						->from($db->quoteName('#__servin_compras2', '#__servin_compras2_3109334'))
+						->where($db->quoteName('#__servin_compras2_3109334.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
 
 					if ($results)
 					{
-						$textValue[] = $results->fk_value;
+						$textValue[] = $results->pieza;
 					}
 				}
 
-				$oneItem->pieza = !empty($textValue) ? implode(', ', $textValue) : $oneItem->pieza;
+				$oneItem->compras = !empty($textValue) ? implode(', ', $textValue) : $oneItem->compras;
 			}
 
-			if (isset($oneItem->cliente))
+			if (isset($oneItem->ventas))
 			{
-				$values    = explode(',', $oneItem->cliente);
+				$values    = explode(',', $oneItem->ventas);
 				$textValue = array();
 
 				foreach ($values as $value)
@@ -353,46 +345,20 @@ class Servin2ModelConsignaciones extends JModelList
 					$db    = JFactory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-						->select('`#__servin_clientes2_3025091`.`nombre`')
-						->from($db->quoteName('#__servin_clientes2', '#__servin_clientes2_3025091'))
-						->where($db->quoteName('#__servin_clientes2_3025091.id') . ' = '. $db->quote($db->escape($value)));
+						->select('`#__servin_ventas2_3109336`.`pieza`')
+						->from($db->quoteName('#__servin_ventas2', '#__servin_ventas2_3109336'))
+						->where($db->quoteName('#__servin_ventas2_3109336.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();
 
 					if ($results)
 					{
-						$textValue[] = $results->nombre;
+						$textValue[] = $results->pieza;
 					}
 				}
 
-				$oneItem->cliente = !empty($textValue) ? implode(', ', $textValue) : $oneItem->cliente;
-			}
-
-			if (isset($oneItem->proveedor))
-			{
-				$values    = explode(',', $oneItem->proveedor);
-				$textValue = array();
-
-				foreach ($values as $value)
-				{
-					$db    = JFactory::getDbo();
-					$query = $db->getQuery(true);
-					$query
-						->select('CONCAT(`#__servin_proveedores2_3026599`.`empresa`, \' \', `#__servin_proveedores2_3026599`.`nombre`) AS `fk_value`')
-						->from($db->quoteName('#__servin_proveedores2', '#__servin_proveedores2_3026599'))
-						->where($db->quoteName('#__servin_proveedores2_3026599.id') . ' = '. $db->quote($db->escape($value)));
-
-					$db->setQuery($query);
-					$results = $db->loadObject();
-
-					if ($results)
-					{
-						$textValue[] = $results->fk_value;
-					}
-				}
-
-				$oneItem->proveedor = !empty($textValue) ? implode(', ', $textValue) : $oneItem->proveedor;
+				$oneItem->ventas = !empty($textValue) ? implode(', ', $textValue) : $oneItem->ventas;
 			}
 		}
 
