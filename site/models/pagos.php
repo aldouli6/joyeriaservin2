@@ -40,11 +40,13 @@ class Servin2ModelPagos extends JModelList
 				'created_by', 'a.created_by',
 				'modified_by', 'a.modified_by',
 				'tipo', 'a.tipo',
+				'tipo_consignacion', 'a.tipo_consignacion',
 				'compra', 'a.compra',
 				'consignacion', 'a.consignacion',
 				'venta', 'a.venta',
 				'pago', 'a.pago',
 				'metodo', 'a.metodo',
+				'datos_pago', 'a.datos_pago',
 				'fecha', 'a.fecha',
 			);
 		}
@@ -178,6 +180,14 @@ class Servin2ModelPagos extends JModelList
 			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
 		}
 
+		// Filtering tipo_consignacion
+		$filter_tipo_consignacion = $this->state->get("filter.tipo_consignacion");
+
+		if ($filter_tipo_consignacion !== null && (is_numeric($filter_tipo_consignacion) || !empty($filter_tipo_consignacion)))
+		{
+			$query->where("a.`tipo_consignacion` = '".$db->escape($filter_tipo_consignacion)."'");
+		}
+
 		// Filtering compra
 		$filter_compra = $this->state->get("filter.compra");
 
@@ -246,6 +256,7 @@ class Servin2ModelPagos extends JModelList
 		foreach ($items as $item)
 		{
 				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($item->tipo));
+				$item->tipo_consignacion = empty($item->tipo_consignacion) ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_CONSIGNACION_OPTION_' . strtoupper($item->tipo_consignacion));
 
 			if (isset($item->compra))
 			{

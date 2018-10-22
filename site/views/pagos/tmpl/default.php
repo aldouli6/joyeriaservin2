@@ -45,6 +45,9 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_PAGOS_TIPO', 'a.tipo', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
+				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_PAGOS_TIPO_CONSIGNACION', 'a.tipo_consignacion', $listDirn, $listOrder); ?>
+				</th>
+				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_SERVIN2_PAGOS_COMPRA', 'a.compra', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
@@ -106,6 +109,10 @@ $canDelete  = $user->authorise('core.delete', 'com_servin2');
 				<td>
 
 					<?php echo $item->tipo; ?>
+				</td>
+				<td>
+
+					<?php echo $item->tipo_consignacion; ?>
 				</td>
 				<td>
 

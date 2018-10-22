@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.0" method="upgrade" client="site">
     <name>MOD_SERVIN2_NAME</name>
-    <creationDate>2018-10-14</creationDate>
+    <creationDate>2018-10-22</creationDate>
     <copyright>2018 Aldo Ulises</copyright>
     <license>Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt</license>
     <author>Aldo Ulises</author>
@@ -191,11 +191,13 @@
 		<option value="created_by">created_by</option>
 		<option value="modified_by">modified_by</option>
 		<option value="tipo">tipo</option>
+		<option value="tipo_consignacion">tipo_consignacion</option>
 		<option value="compra">compra</option>
 		<option value="consignacion">consignacion</option>
 		<option value="venta">venta</option>
 		<option value="pago">pago</option>
 		<option value="metodo">metodo</option>
+		<option value="datos_pago">datos_pago</option>
 		<option value="fecha">fecha</option>
 	</group>
                 </field>

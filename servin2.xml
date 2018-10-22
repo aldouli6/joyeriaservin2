@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
     <name>com_servin2</name>
-    <creationDate>2018-10-14</creationDate>
+    <creationDate>2018-10-22</creationDate>
     <copyright>2018 Aldo Ulises</copyright>
     <license>Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt</license>
     <author>Aldo Ulises</author>

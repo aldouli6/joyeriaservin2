@@ -14,11 +14,6 @@
             <option value="">JOPTION_SELECT_PUBLISHED</option>
         </field>
 
-        <field name="tipo_transaccion" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_TIPO_TRANSACCION" type="list" onchange="this.form.submit();" default="COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_FILTER">
-  <option value="">COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_FILTER</option>
-  <option value="0">COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_0</option>
-  <option value="1">COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION_OPTION_1</option>
-</field>
         <field name="compras" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_COMPRAS" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_COMPRAS_FILTER' AS `val` UNION SELECT `id` AS `id`, `pieza` AS val FROM `#__servin_compras2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="ventas" type="sql" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_VENTAS" query="SELECT '' AS `id`, 'COM_SERVIN2_CONSIGNACIONES_VENTAS_FILTER' AS `val` UNION SELECT `id` AS `id`, `pieza` AS val FROM `#__servin_ventas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="fecha_emision.from" label="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_CONSIGNACIONES_FECHA_EMISION_FILTER_FROM"/>

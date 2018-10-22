@@ -83,6 +83,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 
 				<?php echo $this->form->renderField('created_by'); ?>
 				<?php echo $this->form->renderField('modified_by'); ?>				<?php echo $this->form->renderField('tipo'); ?>
+				<?php echo $this->form->renderField('tipo_consignacion'); ?>
 				<?php echo $this->form->renderField('compra'); ?>
 
 			<?php
@@ -109,6 +110,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 				endforeach;
 			?>				<?php echo $this->form->renderField('pago'); ?>
 				<?php echo $this->form->renderField('metodo'); ?>
+				<?php echo $this->form->renderField('datos_pago'); ?>
 				<?php echo $this->form->renderField('fecha'); ?>
 
 

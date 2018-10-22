@@ -191,11 +191,13 @@ CREATE TABLE IF NOT EXISTS `#__servin_pagos2` (
 `created_by` INT(11)  NOT NULL ,
 `modified_by` INT(11)  NOT NULL ,
 `tipo` VARCHAR(255)  NOT NULL ,
+`tipo_consignacion` VARCHAR(255)  NOT NULL ,
 `compra` INT NOT NULL ,
 `consignacion` INT NOT NULL ,
 `venta` INT NOT NULL ,
 `pago` DOUBLE,
 `metodo` VARCHAR(255)  NOT NULL ,
+`datos_pago` TEXT NOT NULL ,
 `fecha` DATETIME NOT NULL ,
 PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8mb4_unicode_ci;

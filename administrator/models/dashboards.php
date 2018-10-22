@@ -126,6 +126,7 @@ class Servin2ModelDashboards extends JModelList
 		foreach ($items as $oneItem)
 		{
 					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($oneItem->tipo));
+					$oneItem->tipo_consignacion = ($oneItem->tipo_consignacion == '') ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_CONSIGNACION_OPTION_' . strtoupper($oneItem->tipo_consignacion));
 
 			if (isset($oneItem->compra))
 			{

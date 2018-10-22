@@ -39,11 +39,13 @@ class Servin2ModelPagos extends JModelList
 				'created_by', 'a.`created_by`',
 				'modified_by', 'a.`modified_by`',
 				'tipo', 'a.`tipo`',
+				'tipo_consignacion', 'a.`tipo_consignacion`',
 				'compra', 'a.`compra`',
 				'consignacion', 'a.`consignacion`',
 				'venta', 'a.`venta`',
 				'pago', 'a.`pago`',
 				'metodo', 'a.`metodo`',
+				'datos_pago', 'a.`datos_pago`',
 				'fecha', 'a.`fecha`',
 			);
 		}
@@ -80,6 +82,9 @@ class Servin2ModelPagos extends JModelList
 		$this->setState('filter.state', $published);
 		// Filtering tipo
 		$this->setState('filter.tipo', $app->getUserStateFromRequest($this->context.'.filter.tipo', 'filter_tipo', '', 'string'));
+
+		// Filtering tipo_consignacion
+		$this->setState('filter.tipo_consignacion', $app->getUserStateFromRequest($this->context.'.filter.tipo_consignacion', 'filter_tipo_consignacion', '', 'string'));
 
 		// Filtering compra
 		$this->setState('filter.compra', $app->getUserStateFromRequest($this->context.'.filter.compra', 'filter_compra', '', 'string'));
@@ -216,7 +221,7 @@ class Servin2ModelPagos extends JModelList
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('( a.tipo LIKE ' . $search . '  OR #__servin_consignaciones2_3109333.no_folio_pagare LIKE ' . $search . '  OR  a.pago LIKE ' . $search . ' )');
+				$query->where('( a.tipo LIKE ' . $search . '  OR  a.tipo_consignacion LIKE ' . $search . '  OR #__servin_consignaciones2_3109333.no_folio_pagare LIKE ' . $search . '  OR  a.pago LIKE ' . $search . ' )');
 			}
 		}
                 
@@ -227,6 +232,14 @@ class Servin2ModelPagos extends JModelList
 		if ($filter_tipo !== null && (is_numeric($filter_tipo) || !empty($filter_tipo)))
 		{
 			$query->where("a.`tipo` = '".$db->escape($filter_tipo)."'");
+		}
+
+		// Filtering tipo_consignacion
+		$filter_tipo_consignacion = $this->state->get("filter.tipo_consignacion");
+
+		if ($filter_tipo_consignacion !== null && (is_numeric($filter_tipo_consignacion) || !empty($filter_tipo_consignacion)))
+		{
+			$query->where("a.`tipo_consignacion` = '".$db->escape($filter_tipo_consignacion)."'");
 		}
 
 		// Filtering compra
@@ -298,6 +311,7 @@ class Servin2ModelPagos extends JModelList
 		foreach ($items as $oneItem)
 		{
 					$oneItem->tipo = ($oneItem->tipo == '') ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($oneItem->tipo));
+					$oneItem->tipo_consignacion = ($oneItem->tipo_consignacion == '') ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_CONSIGNACION_OPTION_' . strtoupper($oneItem->tipo_consignacion));
 
 			if (isset($oneItem->compra))
 			{

@@ -450,6 +450,9 @@ class ModServin2Helper
 		case 'tipo':
 		$result = $field_value;
 		break;
+		case 'tipo_consignacion':
+		$result = $field_value;
+		break;
 		case 'compra':
 		$result = self::loadValueFromExternalTable('#__servin_compras2', 'id', 'pieza', $field_value);
 		break;
@@ -463,6 +466,9 @@ class ModServin2Helper
 		$result = $field_value;
 		break;
 		case 'metodo':
+		$result = $field_value;
+		break;
+		case 'datos_pago':
 		$result = $field_value;
 		break;
 		case 'fecha':

@@ -123,6 +123,7 @@ class Servin2ModelTareasautomaticass extends JModelList
 		foreach ($items as $item)
 		{
 				$item->tipo = empty($item->tipo) ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_OPTION_' . strtoupper($item->tipo));
+				$item->tipo_consignacion = empty($item->tipo_consignacion) ? '' : JText::_('COM_SERVIN2_PAGOS_TIPO_CONSIGNACION_OPTION_' . strtoupper($item->tipo_consignacion));
 
 			if (isset($item->compra))
 			{

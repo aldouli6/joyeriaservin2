@@ -20,6 +20,11 @@
   <option value="2">COM_SERVIN2_PAGOS_TIPO_OPTION_2</option>
   <option value="3">COM_SERVIN2_PAGOS_TIPO_OPTION_3</option>
 </field>
+<field name="tipo_consignacion" label="COM_SERVIN2_FORM_LBL_PAGO_TIPO_CONSIGNACION" type="list" onchange="this.form.submit();" default="COM_SERVIN2_PAGOS_TIPO_CONSIGNACION_FILTER">
+  <option value="">COM_SERVIN2_PAGOS_TIPO_CONSIGNACION_FILTER</option>
+  <option value="1">COM_SERVIN2_PAGOS_TIPO_CONSIGNACION_OPTION_1</option>
+  <option value="2">COM_SERVIN2_PAGOS_TIPO_CONSIGNACION_OPTION_2</option>
+</field>
 <field name="compra" type="sql" label="COM_SERVIN2_FORM_LBL_PAGO_COMPRA" query="SELECT '' AS `id`, 'COM_SERVIN2_PAGOS_COMPRA_FILTER' AS `val` UNION SELECT `id` AS `id`, `pieza` AS val FROM `#__servin_compras2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="consignacion" type="sql" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" query="SELECT '' AS `id`, 'COM_SERVIN2_PAGOS_CONSIGNACION_FILTER' AS `val` UNION SELECT `id` AS `id`, `no_folio_pagare` AS val FROM `#__servin_consignaciones2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 <field name="venta" type="sql" label="COM_SERVIN2_FORM_LBL_PAGO_VENTA" query="SELECT '' AS `id`, 'COM_SERVIN2_PAGOS_VENTA_FILTER' AS `val` UNION SELECT `id` AS `id`, `pieza` AS val FROM `#__servin_ventas2` WHERE state != -2" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
@@ -31,6 +36,7 @@
   <option value="3">COM_SERVIN2_PAGOS_METODO_OPTION_3</option>
   <option value="4">COM_SERVIN2_PAGOS_METODO_OPTION_4</option>
   <option value="5">COM_SERVIN2_PAGOS_METODO_OPTION_5</option>
+  <option value="6">COM_SERVIN2_PAGOS_METODO_OPTION_6</option>
 </field>
 <field name="fecha.from" label="COM_SERVIN2_PAGOS_FECHA_FILTER_FROM" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_PAGOS_FECHA_FILTER_FROM"/>
 <field name="fecha.to" label="COM_SERVIN2_PAGOS_FECHA_FILTER_TO" type="calendar" onchange="this.form.submit();" filter="safehtml" class="inputbox" showtime="false" translateformat="false" hint="COM_SERVIN2_PAGOS_FECHA_FILTER_TO"/>
@@ -48,7 +54,7 @@
                default="a.id DESC"
         >
             <option value="">JGLOBAL_SORT_BY</option>
-            <option value="a.`id` ASC">ID Ascending</option><option value="a.`id` DESC">ID Descending</option><option value="a.`ordering` ASC">Order Ascending</option><option value="a.`ordering` DESC">Order Descending</option><option value="a.`state` ASC">State Ascending</option><option value="a.`state` DESC">State Descending</option><option value="a.`tipo` ASC">Tipo Ascending</option><option value="a.`tipo` DESC">Tipo Descending</option><option value="a.`compra` ASC">Compras Ascending</option><option value="a.`compra` DESC">Compras Descending</option><option value="a.`consignacion` ASC">Pagos Ascending</option><option value="a.`consignacion` DESC">Pagos Descending</option><option value="a.`venta` ASC">Ventas Ascending</option><option value="a.`venta` DESC">Ventas Descending</option><option value="a.`pago` ASC">Pagos Ascending</option><option value="a.`pago` DESC">Pagos Descending</option><option value="a.`metodo` ASC">Metodo de pago Ascending</option><option value="a.`metodo` DESC">Metodo de pago Descending</option><option value="a.`fecha` ASC">Fecha Ascending</option><option value="a.`fecha` DESC">Fecha Descending</option>
+            <option value="a.`id` ASC">ID Ascending</option><option value="a.`id` DESC">ID Descending</option><option value="a.`ordering` ASC">Order Ascending</option><option value="a.`ordering` DESC">Order Descending</option><option value="a.`state` ASC">State Ascending</option><option value="a.`state` DESC">State Descending</option><option value="a.`tipo` ASC">Tipo Ascending</option><option value="a.`tipo` DESC">Tipo Descending</option><option value="a.`tipo_consignacion` ASC">Tipo de Consignación Ascending</option><option value="a.`tipo_consignacion` DESC">Tipo de Consignación Descending</option><option value="a.`compra` ASC">Compras Ascending</option><option value="a.`compra` DESC">Compras Descending</option><option value="a.`consignacion` ASC">Pagos Ascending</option><option value="a.`consignacion` DESC">Pagos Descending</option><option value="a.`venta` ASC">Ventas Ascending</option><option value="a.`venta` DESC">Ventas Descending</option><option value="a.`pago` ASC">Pagos Ascending</option><option value="a.`pago` DESC">Pagos Descending</option><option value="a.`metodo` ASC">Metodo de pago Ascending</option><option value="a.`metodo` DESC">Metodo de pago Descending</option><option value="a.`fecha` ASC">Fecha Ascending</option><option value="a.`fecha` DESC">Fecha Descending</option>
 
         </field>
 

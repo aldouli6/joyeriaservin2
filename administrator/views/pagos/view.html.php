@@ -153,6 +153,7 @@ class Servin2ViewPagos extends JViewLegacy
 			'a.`ordering`' => JText::_('JGRID_HEADING_ORDERING'),
 			'a.`state`' => JText::_('JSTATUS'),
 			'a.`tipo`' => JText::_('COM_SERVIN2_PAGOS_TIPO'),
+			'a.`tipo_consignacion`' => JText::_('COM_SERVIN2_PAGOS_TIPO_CONSIGNACION'),
 			'a.`compra`' => JText::_('COM_SERVIN2_PAGOS_COMPRA'),
 			'a.`consignacion`' => JText::_('COM_SERVIN2_PAGOS_CONSIGNACION'),
 			'a.`venta`' => JText::_('COM_SERVIN2_PAGOS_VENTA'),
