@@ -22,7 +22,57 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 <script type="text/javascript">
 	js = jQuery.noConflict();
 	js(document).ready(function () {
-		
+	function consultatotal(tabla,id){
+ 		js.ajax({ 
+	            url: "index.php?option=com_servin2&task=consultatotal&view=ajaxs&tmpl=ajax&id=" + id + "&string="+tabla,  
+	            async: true, 
+	            success: function(result){
+	            	var obj = result;
+				var objeto = JSON.parse(obj);
+            	console.log(objeto);
+            	js('#jform_total').val(objeto['total']);
+            	js('#jform_abono').val(objeto['abonado']);    	
+            	js('#jform_adeudo').val(objeto['adeudo']);         	
+            	},
+	            error: function(result) {
+	                console.log(result);
+	            }
+	    	});
+ 	}
+ 	function clearselects(){
+ 		js('#jform_compras').prop("selectedIndex",-1);
+ 		js('#jform_ventas').prop("selectedIndex",-1);
+ 		js('#jform_total').val('');
+ 		js('#jform_abono').val('');
+ 		js("#jform_compras").trigger("liszt:updated");
+ 		js("#jform_ventas").trigger("liszt:updated");
+ 	}
+ 	js('#jform_compras').change(function(){
+	    consultatotal('compras2', js(this).val());
+	});
+	js('#jform_ventas').change(function(){
+	    consultatotal('ventas2', js(this).val());
+	});
+	js('#jform_tipo_transaccion').change(function() {
+	    clearselects();
+	});
+	js('#jform_abo_dev').change(function() {
+		var radio=js("#jform_abo_dev input[type='radio']:checked").val();
+		console.log(radio);
+	    if(radio=='1'){
+	    	js('#jform_tipo_transaccion').addClass('readonly disabled');
+	    	js('#jform_tipo_transaccion').attr('style','pointer-events: none');
+	    	js('#jform_compras_chzn').addClass('chzn-disabled');
+	    	js('#jform_compras').attr('disabled','disabled');	    	
+ 			js("#jform_compras").trigger("liszt:updated");
+	    }else{
+	    	js('#jform_tipo_transaccion').removeClass('readonly disabled');	    	
+	    	js('#jform_tipo_transaccion').removeAttr('style');
+	    	js('#jform_compras_chzn').removeClass('chzn-disabled');
+	    	js('#jform_compras').removeAttr('disabled');	    	
+ 			js("#jform_compras").trigger("liszt:updated");
+	    }
+	});
 	js('input:hidden.compras').each(function(){
 		var name = js(this).attr('name');
 		if(name.indexOf('comprashidden')){

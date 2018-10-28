@@ -10,6 +10,13 @@ $task = $jinput->get('task', 'propiedad', 'STRING');
 $output = $jinput->get('out', 'csv', 'STRING');
 
 switch ($task) {
+  case('consultatotal'):
+    $db->setQuery("select id,total,abonado, (total-abonado) as adeudo from #__servin_".$string." where id=".$foo);
+    $result=$db->loadAssoc('id');
+    $salida='';
+    $salida = ($result);
+    echo json_encode($salida);
+  break;
   case 'costosugerido':
     // echo $foo;
     $db->setQuery("select * from #__servin_hechuras2 where id=".$foo);
