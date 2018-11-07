@@ -22,6 +22,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 <script type="text/javascript">
 	js = jQuery.noConflict();
 	js(document).ready(function () {
+	js('.abo_dev').parent().parent().hide();  
 	function consultatotal(tabla,id){
  		js.ajax({ 
 	            url: "index.php?option=com_servin2&task=consultatotal&view=ajaxs&tmpl=ajax&id=" + id + "&string="+tabla,  
@@ -30,9 +31,32 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	            	var obj = result;
 				var objeto = JSON.parse(obj);
             	console.log(objeto);
-            	js('#jform_total').val(objeto['total']);
-            	js('#jform_abono').val(objeto['abonado']);    	
-            	js('#jform_adeudo').val(objeto['adeudo']);         	
+            	js('#jform_total').val(parseFloat(objeto['total']).toFixed(2));
+            	js('#jform_abono').val(parseFloat(objeto['abonado']).toFixed(2));    	
+            	js('#jform_adeudo').val(parseFloat(objeto['adeudo']).toFixed(2)); 
+            	js('.abo_dev').parent().parent().show();     	
+            	},
+	            error: function(result) {
+	                console.log(result);
+	            }
+	    	});
+ 	}
+ 	function llenarconsigpermitidas(value){
+ 		js.ajax({ 
+	            url: "index.php?option=com_servin2&task=consigpermitidas&view=ajaxs&tmpl=ajax&id=" + value,  
+	            async: true, 
+	            success: function(result){
+	            var obj = result;
+				objeto = JSON.parse(obj);
+            	console.log(objeto); 
+            	js('#jform_devoluciones').empty();
+            	js("#jform_devoluciones").append('<option abonado="" value="">Selecciona una opción</option>');
+            	js.each( objeto, function( key, value ) {
+            		js("#jform_devoluciones").append('<option abonado="'+value['abono']+'" value="'+value['id']+'">'+value['descripcion']+'</option>');
+				});
+
+				js("#jform_devoluciones").trigger("liszt:updated");
+
             	},
 	            error: function(result) {
 	                console.log(result);
@@ -46,6 +70,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
  		js('#jform_abono').val('');
  		js("#jform_compras").trigger("liszt:updated");
  		js("#jform_ventas").trigger("liszt:updated");
+ 		js('.abo_dev').parent().parent().hide();   
  	}
  	js('#jform_compras').change(function(){
 	    consultatotal('compras2', js(this).val());
@@ -55,11 +80,19 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	});
 	js('#jform_tipo_transaccion').change(function() {
 	    clearselects();
+	    var value = js("input[name='jform[tipo_transaccion]']:checked").val();
+    	llenarconsigpermitidas(value);
+	});
+	js('#jform_devoluciones').change(function() {
+		var abonado_actual = parseFloat(js('#jform_abono').val() ).toFixed(2);
+		var abonado_devo = parseFloat(js(this).children("option:selected").attr('abonado')).toFixed(2);;
+		var abonototal = (parseFloat(abonado_actual)+parseFloat(abonado_devo)).toFixed(2);
+ 		js('#jform_abono').val( abonototal);
+ 		js('#jform_adeudo').val((parseFloat(js('#jform_total').val())-parseFloat(abonototal)).toFixed(2) );
 	});
 	js('#jform_abo_dev').change(function() {
 		var radio=js("#jform_abo_dev input[type='radio']:checked").val();
-		console.log(radio);
-	    if(radio=='1'){
+		if(radio=='1'){
 	    	js('#jform_tipo_transaccion').addClass('readonly disabled');
 	    	js('#jform_tipo_transaccion').attr('style','pointer-events: none');
 	    	js('#jform_compras_chzn').addClass('chzn-disabled');
@@ -71,6 +104,11 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	    	js('#jform_compras_chzn').removeClass('chzn-disabled');
 	    	js('#jform_compras').removeAttr('disabled');	    	
  			js("#jform_compras").trigger("liszt:updated");
+ 			var abonado_actual = parseFloat(js('#jform_abono').val() ).toFixed(2);
+			var abonado_devo = parseFloat(js('#jform_devoluciones').children("option:selected").attr('abonado')).toFixed(2);;
+			var abonototal = (parseFloat(abonado_actual)-parseFloat(abonado_devo)).toFixed(2);
+	 		js('#jform_abono').val( abonototal);
+	 		js('#jform_adeudo').val((parseFloat(js('#jform_total').val())-parseFloat(abonototal)).toFixed(2) );
 	    }
 	});
 	js('input:hidden.compras').each(function(){
@@ -165,6 +203,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 				endforeach;
 			?>				<?php echo $this->form->renderField('total'); ?>
 				<?php echo $this->form->renderField('abono'); ?>
+				<?php echo $this->form->renderField('adeudo'); ?>
 				<?php echo $this->form->renderField('abo_dev'); ?>
 				<?php echo $this->form->renderField('devoluciones'); ?>
 
@@ -174,7 +213,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 						echo '<input type="hidden" class="devoluciones" name="jform[devolucioneshidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-			?>				<?php echo $this->form->renderField('adeudo'); ?>
+			?>				
 				<?php echo $this->form->renderField('fecha_emision'); ?>
 				<?php echo $this->form->renderField('fecha_limite'); ?>
 				<?php echo $this->form->renderField('devolucion'); ?>

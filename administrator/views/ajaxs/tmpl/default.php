@@ -17,6 +17,15 @@ switch ($task) {
     $salida = ($result);
     echo json_encode($salida);
   break;
+  case('consigpermitidas'):
+    $db->setQuery("sELECT id,abono, concat(no_folio_pagare,' | $' ,abono) as descripcion FROM `#__servin_consignaciones2` WHERE 1
+      and estatus = 2
+      and tipo_transaccion= ".$foo);
+    $result=$db->loadAssocList('id');
+    $salida='';
+    $salida = ($result);
+    echo json_encode($salida);
+  break;
   case 'costosugerido':
     // echo $foo;
     $db->setQuery("select * from #__servin_hechuras2 where id=".$foo);

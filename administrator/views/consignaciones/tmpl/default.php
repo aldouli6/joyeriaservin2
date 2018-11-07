@@ -99,7 +99,7 @@ $sortFields = $this->getSortFields();
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_FECHA_LIMITE', 'a.`fecha_limite`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_DEVOLUCION', 'a.`devolucion`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('searchtools.sort',  'Estatus', 'a.`estatus`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_FECHA_DEVOLUCION', 'a.`fecha_devolucion`', $listDirn, $listOrder); ?>
@@ -197,7 +197,7 @@ $sortFields = $this->getSortFields();
 					<?php echo $item->fecha_limite; ?>
 				</td>				<td>
 
-					<?php echo $item->devolucion; ?>
+					<?php echo $item->estatus; ?>
 				</td>				<td>
 
 					<?php echo $item->fecha_devolucion; ?>

@@ -26,8 +26,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	js(document).ready(function () {
 	var costo_;
 	if (!'<?php print_r($this->item->pieza) ?>') {
-		js(".oculta").parent().parent().hide();
-	}
+		js(".oculta").parent().parent().hide(); }
 	
 	js('#jform_total').on('change',function(e){
 		calcular();
