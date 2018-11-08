@@ -19,16 +19,21 @@ JHtml::_('behavior.keepalive');
 $document = JFactory::getDocument();
 $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 ?>
+
 <script type="text/javascript">
 	js = jQuery.noConflict();
 	js(document).ready(function () {
-	js('.abo_dev').parent().parent().hide();  
+	if (!'<?php print_r($this->item->compras) ?>' || !'<?php print_r($this->item->ventas) ?>') {
+		var value = js("input[name='jform[tipo_transaccion]']:checked").val();
+    	llenarconsigpermitidas(value);
+
+	}
 	function consultatotal(tabla,id){
  		js.ajax({ 
 	            url: "index.php?option=com_servin2&task=consultatotal&view=ajaxs&tmpl=ajax&id=" + id + "&string="+tabla,  
 	            async: true, 
 	            success: function(result){
-	            	var obj = result;
+	            var obj = result;
 				var objeto = JSON.parse(obj);
             	console.log(objeto);
             	js('#jform_total').val(parseFloat(objeto['total']).toFixed(2));
@@ -52,9 +57,9 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
             	js('#jform_devoluciones').empty();
             	js("#jform_devoluciones").append('<option abonado="" value="">Selecciona una opción</option>');
             	js.each( objeto, function( key, value ) {
-            		js("#jform_devoluciones").append('<option abonado="'+value['abono']+'" value="'+value['id']+'">'+value['descripcion']+'</option>');
+            		var s = (value['id']=="<?php print_r($this->item->devoluciones) ?>")?'selected="selected"':"";
+            		js("#jform_devoluciones").append('<option '+s+' abonado="'+value['abono']+'" value="'+value['id']+'">'+value['descripcion']+'</option>');
 				});
-
 				js("#jform_devoluciones").trigger("liszt:updated");
 
             	},
@@ -68,9 +73,24 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
  		js('#jform_ventas').prop("selectedIndex",-1);
  		js('#jform_total').val('');
  		js('#jform_abono').val('');
+ 		js('input:radio[name="jform[abo_dev]"][value=0]').click();
+ 		js('input:radio[name="jform[abo_dev]"][value=0]').attr('checked', true);
+ 		js("label[for='jform_abo_dev0']").addClass('active btn-danger');
+ 		js('input:radio[name="jform[abo_dev]"][value=1]').removeAttr('checked');
+ 		js("label[for='jform_abo_dev1']").removeClass('active btn-success');
+ 		
+ 		js('#jform_devoluciones').prop("selectedIndex",-1);
+		js("#jform_devoluciones").trigger("liszt:updated");
  		js("#jform_compras").trigger("liszt:updated");
  		js("#jform_ventas").trigger("liszt:updated");
  		js('.abo_dev').parent().parent().hide();   
+ 	}
+ 	function devolucionesmas(){
+ 		 var abonado_actual = parseFloat(js('#jform_abono').val() ).toFixed(2);
+		var abonado_devo = parseFloat(js('#jform_devoluciones').children("option:selected").attr('abonado')).toFixed(2);;
+		var abonototal = (parseFloat(abonado_actual)+parseFloat(abonado_devo)).toFixed(2);
+ 		js('#jform_abono').val( abonototal);
+ 		js('#jform_adeudo').val((parseFloat(js('#jform_total').val())-parseFloat(abonototal)).toFixed(2) );
  	}
  	js('#jform_compras').change(function(){
 	    consultatotal('compras2', js(this).val());
@@ -84,32 +104,38 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
     	llenarconsigpermitidas(value);
 	});
 	js('#jform_devoluciones').change(function() {
-		var abonado_actual = parseFloat(js('#jform_abono').val() ).toFixed(2);
-		var abonado_devo = parseFloat(js(this).children("option:selected").attr('abonado')).toFixed(2);;
-		var abonototal = (parseFloat(abonado_actual)+parseFloat(abonado_devo)).toFixed(2);
- 		js('#jform_abono').val( abonototal);
- 		js('#jform_adeudo').val((parseFloat(js('#jform_total').val())-parseFloat(abonototal)).toFixed(2) );
+		devolucionesmas();
+		
 	});
 	js('#jform_abo_dev').change(function() {
 		var radio=js("#jform_abo_dev input[type='radio']:checked").val();
 		if(radio=='1'){
+			devoluciones();
 	    	js('#jform_tipo_transaccion').addClass('readonly disabled');
 	    	js('#jform_tipo_transaccion').attr('style','pointer-events: none');
 	    	js('#jform_compras_chzn').addClass('chzn-disabled');
 	    	js('#jform_compras').attr('disabled','disabled');	    	
  			js("#jform_compras").trigger("liszt:updated");
+ 			js('#jform_ventas_chzn').addClass('chzn-disabled');
+	    	js('#jform_ventas').attr('disabled','disabled');	    	
+ 			js("#jform_ventas").trigger("liszt:updated");
 	    }else{
 	    	js('#jform_tipo_transaccion').removeClass('readonly disabled');	    	
 	    	js('#jform_tipo_transaccion').removeAttr('style');
 	    	js('#jform_compras_chzn').removeClass('chzn-disabled');
 	    	js('#jform_compras').removeAttr('disabled');	    	
  			js("#jform_compras").trigger("liszt:updated");
+ 			js('#jform_ventas_chzn').removeClass('chzn-disabled');
+	    	js('#jform_ventas').removeAttr('disabled');	    	
+ 			js("#jform_ventas").trigger("liszt:updated");
  			var abonado_actual = parseFloat(js('#jform_abono').val() ).toFixed(2);
 			var abonado_devo = parseFloat(js('#jform_devoluciones').children("option:selected").attr('abonado')).toFixed(2);;
 			var abonototal = (parseFloat(abonado_actual)-parseFloat(abonado_devo)).toFixed(2);
 	 		js('#jform_abono').val( abonototal);
 	 		js('#jform_adeudo').val((parseFloat(js('#jform_total').val())-parseFloat(abonototal)).toFixed(2) );
-	    }
+	 		js('#jform_devoluciones').prop("selectedIndex",-1);
+			js("#jform_devoluciones").trigger("liszt:updated");
+	 	}
 	});
 	js('input:hidden.compras').each(function(){
 		var name = js(this).attr('name');
