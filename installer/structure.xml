@@ -16,7 +16,7 @@
     <field field_name="pago" field_type="DOUBLE" description=""/>
     <field field_name="metodo" field_type="VARCHAR" field_length="255" description=""/>
     <field field_name="datos_pago" field_type="TEXT" description=""/>
-    <field field_name="fecha" field_type="DATETIME" description=""/>
+    <field field_name="fecha" field_type="DATE" description=""/>
   </table>
   <table action="change" old_name="#__servin_materiales" new_name="#__servin_materiales2" table_name="#__servin_materiales2" storage_engine="" collation="utf8mb4_unicode_ci">
     <field action="add" field_name="id" field_type="INT" field_length="11" is_autoincrement="1" index="primary" description=""/>
