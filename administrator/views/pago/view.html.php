@@ -80,7 +80,7 @@ class Servin2ViewPago extends JViewLegacy
 		// If not checked out, can save the item.
 		if (!$checkedOut && ($canDo->get('core.edit') || ($canDo->get('core.create'))))
 		{
-			JToolBarHelper::apply('pago.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::apply('pago.save', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('pago.save', 'JTOOLBAR_SAVE');
 		}
 

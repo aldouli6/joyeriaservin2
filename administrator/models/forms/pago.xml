@@ -33,7 +33,7 @@
     <field name="consignacion" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" description="COM_SERVIN2_FORM_DESC_PAGO_CONSIGNACION" class="inputbox" input_type="list" table="#__servin_consignaciones2" key_field="id" value_field="no_folio_pagare" hide_trashed="1"  default="" showon="tipo:1"/>
     <field name="venta" 
       label="COM_SERVIN2_FORM_LBL_PAGO_VENTA" description="COM_SERVIN2_FORM_DESC_PAGO_VENTA" class="inputbox comprasventas" type="sql" input_type="list" 
-    query="select '' as id, 'Selecciona una opción' as descripcion union SELECT v.id, concat(v.cantidad,' | ' ,p.descripcion,' | ' ,v.total) as descripcion FROM #__servin_piezas2 as p inner join #__servin_ventas2 as v on v.pieza = p.id  
+    query="select '' as id, 'Selecciona una opción' as descripcion union SELECT v.id, concat(v.cantidad,' | ' ,p.descripcion,' | ' ,v.total-v.abonado) as descripcion FROM #__servin_piezas2 as p inner join #__servin_ventas2 as v on v.pieza = p.id  
     where v.pagada=0 and v.state=1 and p.state = 1"  key_field="id" value_field="descripcion" hide_trashed="1" default="0" 
       showon="tipo:3"/>
     <field name="pago" filter="safehtml" min="0" step="0.01" type="number" required="true" default="0" label="COM_SERVIN2_FORM_LBL_PAGO_PAGO" description="COM_SERVIN2_FORM_DESC_PAGO_PAGO" hint="COM_SERVIN2_FORM_LBL_PAGO_PAGO"/>

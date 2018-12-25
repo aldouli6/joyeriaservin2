@@ -56,7 +56,18 @@ class Servin2ControllerPago extends JControllerForm
 				$this->setRedirect('index.php?option=com_servin2&view=pagos');
 				break;
 			case '3':
-				# code...
+				$sql="update `#__servin_ventas2` SET `abonado` = abonado + ".$datos['pago']." WHERE id =".$datos['venta'].";";
+			    $db->setQuery($sql);
+		 	    $db->execute();
+				$sql="select total, abonado from  `#__servin_ventas2` WHERE id =".$datos['venta'].";";
+				$db->setQuery($sql);
+				$result = $db->loadAssoc();					
+				if($result['total']<=$result['abonado']){
+					$sql="update `#__servin_ventas2` SET `pagada` = 1 WHERE id =".$datos['venta'].";";
+				    $db->setQuery($sql);
+			 	    $db->execute();
+				}
+				$this->setRedirect('index.php?option=com_servin2&view=pagos');
 				break;
 			default:
 				# code...

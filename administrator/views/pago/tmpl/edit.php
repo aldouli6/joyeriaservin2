@@ -78,16 +78,20 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	});
 
 	js('.comprasventas').change(function() {
+		js('#jform_pago').removeAttr("max");
+		js('#jform_pago').val("");
 		var cadena1 = js(this).find(":selected").text();
 		var cadena2 = cadena1.slice(cadena1.lastIndexOf("|")+2, cadena1.length);
 		js('#jform_pago').attr("max", cadena2 );
-		js('#lbldatos').text('Solo se pueden pagar '+cadena2+' pesos')
-		alert(cadena2);
+		js('#lbldatos').text('Solo se pueden pagar '+cadena2+' pesos');
+		
 	});
 
 	js('#jform_tipo').change(function() {
 		clearselects();
-
+		js('#jform_pago').removeAttr("max");
+		js('#jform_pago').val("");
+		js('#lbldatos').text('');
 	});
 	js('input:hidden.compra').each(function(){
 		var name = js(this).attr('name');
