@@ -26,12 +26,12 @@
     description="COM_SERVIN2_FORM_DESC_CONSIGNACION_COMPRAS" 
     type="sql" input_type="list" 
     query="select '' as id, 'Selecciona una opción' as descripcion union SELECT c.id, concat(c.cantidad,' | ' ,p.descripcion,' | ' ,c.total) as descripcion FROM #__servin_piezas2 as p inner join #__servin_compras2 as c on c.pieza = p.id  
-    where c.pagada=0 and c.state=1 and p.state = 1" 
+    where c.pagada=0 or c.pagada=2 and c.state=1 and p.state = 1" 
     key_field="id" 
     value_field="descripcion" hide_trashed="1" default="0" showon="tipo_transaccion:0"/>
     <field name="ventas" class="inputbox"   label="COM_SERVIN2_FORM_LBL_CONSIGNACION_VENTAS" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_VENTAS"  type="sql" input_type="list" 
     query="select '' as id, 'Selecciona una opción' as descripcion union SELECT v.id, concat(v.cantidad,' | ' ,p.descripcion,' | ' ,v.total) as descripcion FROM #__servin_piezas2 as p inner join #__servin_ventas2 as v on v.pieza = p.id  
-    where v.pagada=0 and v.state=1 and p.state = 1"  key_field="id" value_field="descripcion" hide_trashed="1" default="0" showon="tipo_transaccion:1"/>
+    where v.pagada=0 or v.pagada=2 and v.state=1 and p.state = 1"  key_field="id" value_field="descripcion" hide_trashed="1" default="0" showon="tipo_transaccion:1"/>
     <field name="total" readonly="true" filter="safehtml" step="0.01" type="number" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_TOTAL" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_TOTAL" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_TOTAL"/>
     <field name="abono" readonly="true" filter="safehtml" step="0.01" type="number" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_ABONO" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_ABONO" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_ABONO"/> 
     <field name="abo_dev" default="0" type="radio" class=" btn-group btn-group-yesno btn-group-reversed abo_dev" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_ABO_DEV" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_ABO_DEV" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_ABO_DEV" >
@@ -52,7 +52,7 @@
     <field name="fecha_limite" class="inputbox" timeformat="12" filter="user_utc" translateformat="false" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" required="true" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_FECHA_LIMITE" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_FECHA_LIMITE" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_FECHA_LIMITE"/>
     <field name="devolucion" default="1" type="checkbox" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_DEVOLUCION" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_DEVOLUCION" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_DEVOLUCION"/>
     <field name="fecha_devolucion" class="inputbox" timeformat="12" filter="user_utc" translateformat="false" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_FECHA_DEVOLUCION" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_FECHA_DEVOLUCION" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_FECHA_DEVOLUCION" showon="devolucion:1"/>
-    <field name="estatus" default="1" type="radio" readonly="true" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_ESTATUS" 
+    <field name="estatus" type="radio" readonly="true" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_ESTATUS" 
       class="btn-group btn-group-yesno btn-group-reversed" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_ESTATUS" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_ESTATUS">
       <option value="1">COM_SERVIN2_CONSIGNACIONES_ESTATUS_OPTION_1</option>
       <option value="2">COM_SERVIN2_CONSIGNACIONES_ESTATUS_OPTION_2</option>

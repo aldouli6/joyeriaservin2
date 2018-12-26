@@ -17,9 +17,21 @@ switch ($task) {
     $salida = ($result);
     echo json_encode($salida);
   break;
+  case('rellenaselect'):
+    $db->setQuery("sELECT ".$string.".id, concat(".$string.".cantidad,' | ' ,p.descripcion,' | ' ,".$string.".total) as descripcion from #__servin_".$string."s2 as ".$string." inner join #__servin_piezas2 as p on ".$string.".pieza = p.id where ".$string.".id=".$foo);
+    $result=$db->loadAssoc('id');
+    $salida='';
+    $salida = ($result);
+    echo json_encode($salida);
+  break;
   case('consigpermitidas'):
-    $db->setQuery("sELECT id,abono, concat(no_folio_pagare,' | $' ,abono) as descripcion FROM `#__servin_consignaciones2` WHERE 1
-      and estatus = 2
+    $union='';
+    if($string){
+      $union="sELECT id,abono, concat(no_folio_pagare,' | $' ,abono) as descripcion FROM `#__servin_consignaciones2` WHERE 1
+      and id =".$string." union ";
+    }
+    $db->setQuery($union."sELECT id,abono, concat(no_folio_pagare,' | $' ,abono) as descripcion FROM `#__servin_consignaciones2` WHERE 1
+      and estatus = 2 
       and tipo_transaccion= ".$foo);
     $result=$db->loadAssocList('id');
     $salida='';

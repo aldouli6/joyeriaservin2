@@ -18,8 +18,9 @@ JHtml::_('behavior.keepalive');
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
-?>
 
+
+?>
 <script type="text/javascript">
 	js = jQuery.noConflict();
 	js(document).ready(function () {
@@ -27,6 +28,23 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 		var value = js("input[name='jform[tipo_transaccion]']:checked").val();
     	llenarconsigpermitidas(value);
 
+	}
+	if ('<?php print_r($this->item->estatus) ?>' >2) {
+		js('#jform_devolucion').addClass('readonly disabled');
+		js('#jform_devolucion').css( "pointer-events", "none" );
+
+	}
+	if('<?php print_r($this->item->abo_dev) ?>' =='1' || '<?php print_r($this->item->devolucion) ?>' =='1'){
+		js('#jform_abo_dev').addClass('readonly disabled');
+		js('#jform_abo_dev').css( "pointer-events", "none" );
+		js('#jform_devoluciones_chzn').addClass('readonly disabled');
+		js('#jform_devoluciones_chzn').css( "pointer-events", "none" );
+		js('#jform_tipo_transaccion').addClass('readonly disabled');
+		js('#jform_tipo_transaccion').css( "pointer-events", "none" );
+		js('#jform_compras_chzn').addClass('readonly disabled');
+		js('#jform_compras_chzn').css( "pointer-events", "none" );
+		js('#jform_ventas_chzn').addClass('readonly disabled');
+		js('#jform_ventas_chzn').css( "pointer-events", "none" );
 	}
 	function consultatotal(tabla,id){
  		js.ajax({ 
@@ -48,7 +66,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
  	}
  	function llenarconsigpermitidas(value){
  		js.ajax({ 
-	            url: "index.php?option=com_servin2&task=consigpermitidas&view=ajaxs&tmpl=ajax&id=" + value,  
+	            url: "index.php?option=com_servin2&task=consigpermitidas&view=ajaxs&tmpl=ajax&id=" + value + "&string="+"<?php print_r($this->item->devoluciones) ?>",  
 	            async: true, 
 	            success: function(result){
 	            var obj = result;
@@ -105,6 +123,22 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	});
 	js('#jform_devoluciones').change(function() {
 		devolucionesmas();
+		
+	});
+	js('#jform_devolucion').change(function() {
+		if(js(this).is(':checked')){
+			js('#jform_estatus1').attr("checked","checked");
+			js('#jform_estatus1').removeAttr("disabled");
+			js('#jform_estatus1').removeAttr("style");
+			js('#jform_estatus1').removeClass("disabled");
+			js('#jform_estatus0').removeAttr("checked");
+		}else{
+			js('#jform_estatus0').attr("checked","checked");
+			js('#jform_estatus0').removeAttr("disabled");
+			js('#jform_estatus0').removeAttr("style");
+			js('#jform_estatus0').removeClass("disabled");
+			js('#jform_estatus1').removeAttr("checked");
+		}
 		
 	});
 	js('#jform_abo_dev').change(function() {
@@ -243,6 +277,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 				<?php echo $this->form->renderField('fecha_emision'); ?>
 				<?php echo $this->form->renderField('fecha_limite'); ?>
 				<?php echo $this->form->renderField('devolucion'); ?>
+
 				<?php echo $this->form->renderField('fecha_devolucion'); ?>
 				<?php echo $this->form->renderField('estatus'); ?>
 

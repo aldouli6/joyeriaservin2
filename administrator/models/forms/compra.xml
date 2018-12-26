@@ -39,6 +39,7 @@
     <field name="pagada" default="0" readonly="true" class = "oculta btn-group btn-group-yesno btn-group-reversed radio" type="radio" label="COM_SERVIN2_FORM_LBL_COMPRA_PAGADA" description="COM_SERVIN2_FORM_DESC_COMPRA_PAGADA" hint="COM_SERVIN2_FORM_LBL_COMPRA_PAGADA">
       <option class="btn" value="0">NO</option>
       <option class="btn" value="1">SI</option>
+      <option class="btn" value="2">Consignación</option>
     </field>
     <field name="pagada2" type="label"  readonly="true" default="0" label="COM_SERVIN2_FORM_LBL_COMPRA_PAGADA" description="COM_SERVIN2_FORM_DESC_COMPRA_PAGADA" hint="COM_SERVIN2_FORM_LBL_COMPRA_PAGADA"/>
     <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
