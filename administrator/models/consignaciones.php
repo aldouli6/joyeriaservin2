@@ -112,7 +112,7 @@ class Servin2ModelConsignaciones extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::populateState('a.no_folio_pagare', 'asc');
+		//parent::populateState('a.no_folio_pagare', 'asc');
 
         parent::populateState($ordering, $direction);
 

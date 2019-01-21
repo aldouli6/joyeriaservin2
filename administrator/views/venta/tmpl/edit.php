@@ -30,6 +30,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 		calcular();
     });
     consultaprecio();
+ 	consultaexistencia();
     function calcular(){
 		js('#jform_total').attr('min',js('#jform_abono').val());
 		js('#jform_abono').attr('max',js('#jform_total').val());		
@@ -49,13 +50,30 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	            }
 	    	});
  	}
+ 	function consultaexistencia(){
+ 		js.ajax({ 
+	            url: "index.php?option=com_servin2&task=exitencia&view=ajaxs&tmpl=ajax&id=" + js("#jform_pieza").val(),  
+	            async: true, 
+	            success: function(result){
+	            	console.log(result);
+	            	cantidad=result;
+	            	js("#jform_cantidad").attr("max", cantidad );
+	
+	            },
+	            error: function(result) {
+	                console.log(result);
+	            }
+	    	});
+ 	}
  	js("#jform_pieza").change(function(){
 	    if(js(this).val() !=""){
 	    	js(".oculta").parent().parent().show();	 
-	    	consultaprecio();   	
+	    	consultaprecio();
+	    	consultaexistencia();   	
 	    }else{
 	    	js(".oculta").parent().parent().hide();
 	    	precio_=0;
+	    	js("#jform_cantidad").removeAttr("max");
 	    }
 	});
 	js("#jform_cantidad").change(function(){

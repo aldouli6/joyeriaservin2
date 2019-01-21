@@ -37,56 +37,86 @@ class Servin2ControllerPago extends JControllerForm
 		//$print=print_r( $datos, true);
 		//$mainframe->enqueueMessage ($print,'notice' );
 		$db = JFactory::getDbo();
+		$tabla='';
 		switch ($datos['tipo']) {
 			case '1':
-
-				break;
-			case '2':
-				$sql="update `#__servin_compras2` SET `abonado` = abonado + ".$datos['pago']." WHERE id =".$datos['compra'].";";
-			    $db->setQuery($sql);
-		 	    $db->execute();
-				$sql="select total, abonado from  `#__servin_compras2` WHERE id =".$datos['compra'].";";
-				$db->setQuery($sql);
-				$result = $db->loadAssoc();					
-				if($result['total']<=$result['abonado']){
-					$sql="update `#__servin_compras2` SET `pagada` = 1 WHERE id =".$datos['compra'].";";
-				    $db->setQuery($sql);
-			 	    $db->execute();
-				}
-				$this->setRedirect('index.php?option=com_servin2&view=pagos');
-				break;
-			case '3':
-				$sql="update `#__servin_ventas2` SET `abonado` = abonado + ".$datos['pago']." WHERE id =".$datos['venta'].";";
-			    $db->setQuery($sql);
-		 	    $db->execute();
-				$sql="select total, abonado from  `#__servin_ventas2` WHERE id =".$datos['venta'].";";
-				$db->setQuery($sql);
-				$result = $db->loadAssoc();					
-				if($result['total']<=$result['abonado']){
-					$sql="update `#__servin_ventas2` SET `pagada` = 1 WHERE id =".$datos['venta'].";";
-				    $db->setQuery($sql);
-			 	    $db->execute();
-				}
-				$this->setRedirect('index.php?option=com_servin2&view=pagos');
-				break;
-			default:
 				# code...
 				break;
+			case '2':
+				$tabla='compra';
+				break;
+			case '3':
+				$tabla='venta';
+				break;
+			
 		}
-		// if($datos['id']>0){
-		// 	
-		// 	$query='select id, ordering, state, checked_out, checked_out_time,created_by,modified_by,rfc,razon_social,calle,no_ext,no_int,no_int,cp,colonia,ciudad,municipio,estado,email from #__condo_dir_factur WHERE id ='.$datos['id'].';';
-		// 	$db->setQuery($query);
-		// 	$result = $db->loadAssoc();	
-		// 	/*$print=print_r( $result, true);
-		// 	$mainframe->enqueueMessage ($print,'notice' );*/
-		// 	unset($datos['actualizado']);
-		// 	if($result!=$datos){
-		// 		$sql="update `#__condo_dir_factur` SET `actualizado` = 0 WHERE id =".$datos['id'].";";
-		// 	    $db->setQuery($sql);
-		// 	    $db->execute();
-		// 	}
-		// }	
-		parent::save();   	
+		$sql="select * from `#__servin_".$tabla."s2` WHERE id =".$datos[$tabla].";";
+		$db->setQuery($sql);
+		$result = $db->loadAssoc();	
+		$adeudo=$result['total']-$result['abonado'];
+		if($datos['pago'] > $result['total']-$result['abonado'] ){
+			$mainframe->enqueueMessage ('El monto de pago debe ser menor a '.$adeudo.'.','error' );
+			$this->setRedirect('index.php?option=com_servin2&view=pago&layout=edit&id='.$datos['id']);
+		}else{	
+			switch ($datos['tipo']) {
+				case '1':
+
+					break;
+				case '2':
+					$sql="update `#__servin_compras2` SET `abonado` = abonado + ".$datos['pago']." WHERE id =".$datos['compra'].";";
+				    $db->setQuery($sql);
+			 	    $db->execute();
+					$sql="select total,cantidad,pieza, abonado from  `#__servin_compras2` WHERE id =".$datos['compra'].";";
+					$db->setQuery($sql);
+					$result = $db->loadAssoc();					
+					if($result['total']<=$result['abonado']){
+						$sql="update `#__servin_compras2` SET `pagada` = 1 WHERE id =".$datos['compra'].";";
+					    $db->setQuery($sql);
+				 	    $db->execute();
+				 	    //agregar a exisencia
+				 	    $sql="update `#__servin_piezas2` SET `existencia` =  `existencia` + ".$result['cantidad']." WHERE id =".$result['pieza'].";";
+					    $db->setQuery($sql);
+				 	    $db->execute();
+					}
+					$this->setRedirect('index.php?option=com_servin2&view=pagos');
+					break;
+				case '3':
+					$sql="update `#__servin_ventas2` SET `abonado` = abonado + ".$datos['pago']." WHERE id =".$datos['venta'].";";
+				    $db->setQuery($sql);
+			 	    $db->execute();
+					$sql="select total,cantidad,pieza, abonado from  `#__servin_ventas2` WHERE id =".$datos['venta'].";";
+					$db->setQuery($sql);
+					$result = $db->loadAssoc();					
+					if($result['total']<=$result['abonado']){
+						$sql="update `#__servin_ventas2` SET `pagada` = 1 WHERE id =".$datos['venta'].";";
+					    $db->setQuery($sql);
+				 	    $db->execute();
+				 	    //agregar a exisencia
+				 	    $sql="update `#__servin_piezas2` SET `existencia` =  `existencia` - ".$result['cantidad']." WHERE id =".$result['pieza'].";";
+					    $db->setQuery($sql);
+				 	    $db->execute();
+					}
+					$this->setRedirect('index.php?option=com_servin2&view=pagos');
+					break;
+				default:
+					# code...
+					break;
+			}
+			// if($datos['id']>0){
+			// 	
+			// 	$query='select id, ordering, state, checked_out, checked_out_time,created_by,modified_by,rfc,razon_social,calle,no_ext,no_int,no_int,cp,colonia,ciudad,municipio,estado,email from #__condo_dir_factur WHERE id ='.$datos['id'].';';
+			// 	$db->setQuery($query);
+			// 	$result = $db->loadAssoc();	
+			// 	/*$print=print_r( $result, true);
+			// 	$mainframe->enqueueMessage ($print,'notice' );*/
+			// 	unset($datos['actualizado']);
+			// 	if($result!=$datos){
+			// 		$sql="update `#__condo_dir_factur` SET `actualizado` = 0 WHERE id =".$datos['id'].";";
+			// 	    $db->setQuery($sql);
+			// 	    $db->execute();
+			// 	}
+			// }	
+			parent::save();   
+		}	
 	}
 }

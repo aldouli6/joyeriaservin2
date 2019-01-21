@@ -34,8 +34,8 @@ class Servin2ControllerConsignacion extends JControllerForm
 	    $mainframe = JFactory::getApplication();
 	    $datos = new Jregistry($mainframe -> input ->get('jform', '', 'array') );
 	    $datos=$datos;
-		$print=print_r( $datos, true);
-		$mainframe->enqueueMessage ($print,'notice' );
+		/*$print=print_r( $datos, true);
+		$mainframe->enqueueMessage ($print,'notice' );*/
 		$db = JFactory::getDbo();
 		switch ($datos['tipo_transaccion']) {
 			case 0:
@@ -70,23 +70,12 @@ class Servin2ControllerConsignacion extends JControllerForm
 				 	    $db->execute();
 					}
 				}
-				
-				$print=print_r( $datos['devolucion'], true);
-				$mainframe->enqueueMessage ($print,'notice' );
-				
+					
 				
 
 				break;
 			case 1:
 				//Ventas
-			
-				
-				$sql="select * from `#__servin_consignaciones2` WHERE id =".$datos['id'].";";
-				$db->setQuery($sql);
-				$result = $db->loadAssoc();	
-				$print=print_r( $result, true);
-				$mainframe->enqueueMessage ($print,'notice' );
-				}
 				$sql="select * from `#__servin_consignaciones2` WHERE id =".$datos['id'].";";
 				$db->setQuery($sql);
 				$result = $db->loadAssoc();	
@@ -118,7 +107,6 @@ class Servin2ControllerConsignacion extends JControllerForm
 				 	    $db->execute();
 					}
 				}
-				
 				
 				break;
 		}

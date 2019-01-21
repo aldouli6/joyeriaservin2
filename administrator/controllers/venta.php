@@ -29,4 +29,23 @@ class Servin2ControllerVenta extends JControllerForm
 		$this->view_list = 'ventas';
 		parent::__construct();
 	}
+	public function save(){  
+		//Obtener los objetos de la vista
+	    $mainframe = JFactory::getApplication();
+	    $datos = new Jregistry($mainframe -> input ->get('jform', '', 'array') );
+	    $datos=$datos;
+		//$print=print_r( $datos, true);
+		//$mainframe->enqueueMessage ($print,'notice' );
+		$db = JFactory::getDbo();
+		$sql="select * from `#__servin_piezas2` WHERE id =".$datos['pieza'].";";
+		$db->setQuery($sql);
+		$result = $db->loadAssoc();	
+		if($datos['cantidad']>$result['existencia']){
+			$mainframe->enqueueMessage ('No se cuentan con las existencias suficientes para generar la venta.','error' );
+			$this->setRedirect('index.php?option=com_servin2&view=venta&layout=edit&id='.$datos['id']);
+		}else{
+			parent::save(); 	
+		}	
+		  	
+	}
 }

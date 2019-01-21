@@ -46,6 +46,14 @@ switch ($task) {
     $salida = ($result['costo']);
     echo $salida;
   break; 
+  case 'exitencia':
+    // echo $foo;
+    $db->setQuery("select * from #__servin_piezas2 where id=".$foo);
+    $result=$db->loadAssoc();
+    $salida='';
+    $salida = ($result['existencia']);
+    echo $salida;
+  break; 
   case 'preciosugerido':
     // echo $foo;
     $db->setQuery("select * from #__servin_hechuras2 where id=".$foo);
