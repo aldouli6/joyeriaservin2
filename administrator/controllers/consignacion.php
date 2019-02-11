@@ -40,14 +40,14 @@ class Servin2ControllerConsignacion extends JControllerForm
 		switch ($datos['tipo_transaccion']) {
 			case 0:
 				//Compras
-				$sql="select * from `#__servin_consignaciones2` WHERE id =".$datos['id'].";";
-				$db->setQuery($sql);
-				$result = $db->loadAssoc();	
-				if($result['compras']!=$datos['compras']){
-					$sql="update `#__servin_compras2` SET `pagada` = 1 WHERE id =".$result['compras'].";";
-					$db->setQuery($sql);
-			 	    $db->execute();
-				}
+					// $sql="select * from `#__servin_consignaciones2` WHERE id =".$datos['id'].";";
+					// $db->setQuery($sql);
+					// $result = $db->loadAssoc();	
+					// if($result['compras']!=$datos['compras']){
+					// 	$sql="update `#__servin_compras2` SET `pagada` = 1 WHERE id =".$result['compras'].";";
+					// 	$db->setQuery($sql);
+				 // 	    $db->execute();
+					// }
 				//La compra 3 se debe cambiar el estatus a 2-Consignacion
 				$sql="update `#__servin_compras2` SET `pagada` = 2 WHERE id =".$datos['compras'].";";
 				$db->setQuery($sql);
@@ -76,14 +76,14 @@ class Servin2ControllerConsignacion extends JControllerForm
 				break;
 			case 1:
 				//Ventas
-				$sql="select * from `#__servin_consignaciones2` WHERE id =".$datos['id'].";";
-				$db->setQuery($sql);
-				$result = $db->loadAssoc();	
-				if($result['ventas']!=$datos['ventas']){
-					$sql="update `#__servin_ventas2` SET `pagada` = 1 WHERE id =".$result['ventas'].";";
-					$db->setQuery($sql);
-			 	    $db->execute();
-				}
+				// $sql="select * from `#__servin_consignaciones2` WHERE id =".$datos['id'].";";
+				// $db->setQuery($sql);
+				// $result = $db->loadAssoc();	
+				// if($result['ventas']!=$datos['ventas']){
+				// 	$sql="update `#__servin_ventas2` SET `pagada` = 1 WHERE id =".$result['ventas'].";";
+				// 	$db->setQuery($sql);
+			 // 	    $db->execute();
+				// }
 				//La venta 3 se debe cambiar el estatus a 2-Consignacion
 				$sql="update `#__servin_ventas2` SET `pagada` = 2 WHERE id =".$datos['ventas'].";";
 				$db->setQuery($sql);
@@ -109,6 +109,38 @@ class Servin2ControllerConsignacion extends JControllerForm
 				}
 				
 				break;
+		}
+		if($datos['adeudo']<=0){
+			$sql="update `#__servin_consignaciones2` SET `estatus` = 3 WHERE id =".$datos['consignacion'].";";
+		    $db->setQuery($sql);
+	 	    $db->execute();
+	 	//     $print=print_r( $sql, true);
+			// $mainframe->enqueueMessage ($print,'notice' );
+			$sql="select id,compras,ventas from  `#__servin_consignaciones2` WHERE id =".$datos['consignacion'].";";
+			// $print=print_r( $sql, true);
+			// $mainframe->enqueueMessage ($print,'notice' );
+			$db->setQuery($sql);
+			$result = $db->loadAssoc();
+			$sql="update `#__servin_".$plural."2` SET `pagada` = 1 WHERE id =".$result[$plural].";";
+			// $print=print_r( $sql, true);
+			// $mainframe->enqueueMessage ($print,'notice' );
+		    $db->setQuery($sql);
+	 	    $db->execute();
+			$sql="update `#__servin_".$plural."2` SET `abonado` = total WHERE id =".$result[$plural].";";
+			// $print=print_r( $sql, true);
+			// $mainframe->enqueueMessage ($print,'notice' );
+		    $db->setQuery($sql);
+	 	    $db->execute();
+			$sql="select total,cantidad,pieza, abonado from  `#__servin_".$plural."2` WHERE id =".$result[$plural].";";
+			// $print=print_r( $sql, true);
+			// $mainframe->enqueueMessage ($print,'notice' );
+			$db->setQuery($sql);
+			$result = $db->loadAssoc();
+			$sql="update `#__servin_piezas2` SET `existencia` =  `existencia` ".$signo.$result['cantidad']." WHERE id =".$result['pieza'].";";
+			// $print=print_r( $sql, true);
+			// $mainframe->enqueueMessage ($print,'notice' );
+		    $db->setQuery($sql);
+	 	    $db->execute();
 		}
 		parent::save();   	
 	}

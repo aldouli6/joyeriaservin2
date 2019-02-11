@@ -30,7 +30,7 @@
     where c.pagada=0 and c.state=1 and p.state = 1" 
     key_field="id" 
     value_field="descripcion" hide_trashed="1" default="0" showon="tipo:2"/>
-    <field name="consignacion" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" description="COM_SERVIN2_FORM_DESC_PAGO_CONSIGNACION" class="inputbox" input_type="list" table="#__servin_consignaciones2" key_field="id" value_field="no_folio_pagare" hide_trashed="1"  default="" showon="tipo:1"/>
+    <field name="consignacion" type="foreignkey" label="COM_SERVIN2_FORM_LBL_PAGO_CONSIGNACION" description="COM_SERVIN2_FORM_DESC_PAGO_CONSIGNACION" class="inputbox comprasventas" input_type="list" table="#__servin_consignaciones2" key_field="id" value_field="no_folio_pagare" hide_trashed="1"  default="" showon="tipo:1"/>
     <field name="venta" 
       label="COM_SERVIN2_FORM_LBL_PAGO_VENTA" description="COM_SERVIN2_FORM_DESC_PAGO_VENTA" class="inputbox comprasventas" type="sql" input_type="list" 
     query="select '' as id, 'Selecciona una opción' as descripcion union SELECT v.id, concat(v.cantidad,' | ' ,p.descripcion,' | ' ,v.total-v.abonado) as descripcion FROM #__servin_piezas2 as p inner join #__servin_ventas2 as v on v.pieza = p.id  

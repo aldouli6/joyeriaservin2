@@ -27,8 +27,40 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	if (!'<?php print_r($this->item->compras) ?>' || !'<?php print_r($this->item->ventas) ?>') {
 		var value = js("input[name='jform[tipo_transaccion]']:checked").val();
     	llenarconsigpermitidas(value);
-
+    	//llamar ajax para remover elementos que tengan pagada = 2
 	}
+	if ('<?php print_r($this->item->compras) ?>' || '<?php print_r($this->item->ventas) ?>') {
+		js('#jform_tipo_transaccion').addClass('readonly disabled');
+		js('#jform_tipo_transaccion').css( "pointer-events", "none" );
+		js('#jform_compras_chzn').addClass('readonly disabled');
+		js('#jform_compras_chzn').css( "pointer-events", "none" );
+		js('#jform_ventas_chzn').addClass('readonly disabled');
+		js('#jform_ventas_chzn').css( "pointer-events", "none" );
+	}else{
+		pagadas2('compras');
+		pagadas2('ventas');
+	}
+		
+	function pagadas2(tabla) {
+		js.ajax({ 
+	            url: "index.php?option=com_servin2&task=pagadas2&view=ajaxs&tmpl=ajax&string="+tabla,  
+	            async: true, 
+	            success: function(result){
+	            var obj = result;
+				var objeto = JSON.parse(obj);
+            	console.log(objeto);
+            	js.each( objeto, function( key, value ) {
+            		js("#jform_"+tabla+" option[value='"+value+"']").remove();
+            	});
+            	js("#jform_"+tabla).trigger("liszt:updated");
+            	},
+	            error: function(result) {
+	                console.log(result);
+	            }
+	    	});
+	}
+
+	
 	if ('<?php print_r($this->item->estatus) ?>' >2) {
 		js('#jform_devolucion').addClass('readonly disabled');
 		js('#jform_devolucion').css( "pointer-events", "none" );

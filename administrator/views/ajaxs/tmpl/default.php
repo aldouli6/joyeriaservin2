@@ -38,6 +38,31 @@ switch ($task) {
     $salida = ($result);
     echo json_encode($salida);
   break;
+  case('consi_pagos'):
+  $union='';
+    if($string){
+      $union="sELECT id,abono, concat(no_folio_pagare,' | ' ,total-abono) as descripcion FROM `#__servin_consignaciones2` WHERE 1
+      and id =".$string." union ";
+    }
+    $query=$union."sELECT id,abono, concat(no_folio_pagare,' | ' ,total-abono) as descripcion from #__servin_consignaciones2 where 
+    state = 1 and 
+    tipo_transaccion = ".$foo." and  
+    estatus = 1";
+    $db->setQuery($query);
+    $result=$db->loadAssocList('id');
+    $salida='';
+    $salida = ($result);
+    echo json_encode($salida);
+  break;
+  case('pagadas2'):
+    
+    $db->setQuery("sELECT id FROM `#__servin_".$string."2` WHERE 1
+      and pagada = 2 ");
+    $result=$db->loadColumn();
+    $salida='';
+    $salida = ($result);
+    echo json_encode($salida);
+  break;
   case 'costosugerido':
     // echo $foo;
     $db->setQuery("select * from #__servin_hechuras2 where id=".$foo);

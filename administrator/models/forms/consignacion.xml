@@ -52,7 +52,7 @@
     <field name="fecha_limite" class="inputbox" timeformat="12" filter="user_utc" translateformat="false" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" required="true" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_FECHA_LIMITE" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_FECHA_LIMITE" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_FECHA_LIMITE"/>
     <field name="devolucion" default="1" type="checkbox" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_DEVOLUCION" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_DEVOLUCION" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_DEVOLUCION"/>
     <field name="fecha_devolucion" class="inputbox" timeformat="12" filter="user_utc" translateformat="false" showtime="true" singleheader="false" todaybutton="true" weeknumbers="false" filltable="false" type="calendar" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_FECHA_DEVOLUCION" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_FECHA_DEVOLUCION" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_FECHA_DEVOLUCION" showon="devolucion:1"/>
-    <field name="estatus" type="radio" readonly="true" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_ESTATUS" 
+    <field name="estatus" default ="1" type="radio" readonly="true" label="COM_SERVIN2_FORM_LBL_CONSIGNACION_ESTATUS" 
       class="btn-group btn-group-yesno btn-group-reversed" description="COM_SERVIN2_FORM_DESC_CONSIGNACION_ESTATUS" hint="COM_SERVIN2_FORM_LBL_CONSIGNACION_ESTATUS">
       <option value="1">COM_SERVIN2_CONSIGNACIONES_ESTATUS_OPTION_1</option>
       <option value="2">COM_SERVIN2_CONSIGNACIONES_ESTATUS_OPTION_2</option>

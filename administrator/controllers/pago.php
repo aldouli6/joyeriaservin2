@@ -40,17 +40,20 @@ class Servin2ControllerPago extends JControllerForm
 		$tabla='';
 		switch ($datos['tipo']) {
 			case '1':
-				# code...
+				$tabla='consignacion';
+				$plural='consignaciones';
 				break;
 			case '2':
 				$tabla='compra';
+				$plural='compras';
 				break;
 			case '3':
 				$tabla='venta';
+				$plural='ventas';
 				break;
 			
 		}
-		$sql="select * from `#__servin_".$tabla."s2` WHERE id =".$datos[$tabla].";";
+		$sql="select * from `#__servin_".$plural."2` WHERE id =".$datos[$tabla].";";
 		$db->setQuery($sql);
 		$result = $db->loadAssoc();	
 		$adeudo=$result['total']-$result['abonado'];
@@ -60,7 +63,58 @@ class Servin2ControllerPago extends JControllerForm
 		}else{	
 			switch ($datos['tipo']) {
 				case '1':
+					if ($datos['tipo_consignacion'] == '0') {
+						$signo=' + ';
+						$plural='compras';
+					}else{
+						$signo=' - ';
+						$plural='ventas';
+					}
+						$sql="update `#__servin_consignaciones2` SET `abono` = abono + ".$datos['pago']." WHERE id =".$datos['consignacion'].";";
+					    $db->setQuery($sql);
+				 	    $db->execute();
+				 	    $sql="update `#__servin_consignaciones2` SET `adeudo` = total-abono WHERE id =".$datos['consignacion'].";";
+					    $db->setQuery($sql);
+				 	    $db->execute();
+				 	//     $print=print_r( $sql, true);
+						// $mainframe->enqueueMessage ($print,'notice' );
+						$sql="select total,compras,ventas, abono from  `#__servin_consignaciones2` WHERE id =".$datos['consignacion'].";";
+						$db->setQuery($sql);
+						$result = $db->loadAssoc();
+						if($result['total']<=$result['abono']){
+							$sql="update `#__servin_consignaciones2` SET `estatus` = 3 WHERE id =".$datos['consignacion'].";";
+						    $db->setQuery($sql);
+					 	    $db->execute();
+					 	//     $print=print_r( $sql, true);
+							// $mainframe->enqueueMessage ($print,'notice' );
+							$sql="select id,compras,ventas from  `#__servin_consignaciones2` WHERE id =".$datos['consignacion'].";";
+							// $print=print_r( $sql, true);
+							// $mainframe->enqueueMessage ($print,'notice' );
+							$db->setQuery($sql);
+							$result = $db->loadAssoc();
+							$sql="update `#__servin_".$plural."2` SET `pagada` = 1 WHERE id =".$result[$plural].";";
+							// $print=print_r( $sql, true);
+							// $mainframe->enqueueMessage ($print,'notice' );
+						    $db->setQuery($sql);
+					 	    $db->execute();
+							$sql="update `#__servin_".$plural."2` SET `abonado` = total WHERE id =".$result[$plural].";";
+							// $print=print_r( $sql, true);
+							// $mainframe->enqueueMessage ($print,'notice' );
+						    $db->setQuery($sql);
+					 	    $db->execute();
+							$sql="select total,cantidad,pieza, abonado from  `#__servin_".$plural."2` WHERE id =".$result[$plural].";";
+							// $print=print_r( $sql, true);
+							// $mainframe->enqueueMessage ($print,'notice' );
+							$db->setQuery($sql);
+							$result = $db->loadAssoc();
+							$sql="update `#__servin_piezas2` SET `existencia` =  `existencia` ".$signo.$result['cantidad']." WHERE id =".$result['pieza'].";";
+							// $print=print_r( $sql, true);
+							// $mainframe->enqueueMessage ($print,'notice' );
+						    $db->setQuery($sql);
+					 	    $db->execute();
+						}
 
+					
 					break;
 				case '2':
 					$sql="update `#__servin_compras2` SET `abonado` = abonado + ".$datos['pago']." WHERE id =".$datos['compra'].";";

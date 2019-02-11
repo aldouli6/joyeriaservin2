@@ -24,6 +24,9 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	js(document).ready(function () {
 	if (!'<?php print_r($this->item->consignacion) ?>') {		
 		bloquearchzc('#jform_consignacion');	
+	}else{
+		llenarconsignaciones('<?php print_r($this->item->tipo_consignacion) ?>');
+		
 	}
 
 	function bloquearchzc(cadena){
@@ -36,14 +39,13 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	    js(cadena).removeAttr('disabled');    	
  		js(cadena).trigger("liszt:updated");
  	}
- 	function llenarconsigpermitidas(value){
+ 	function llenarconsignaciones(value){
  		js.ajax({ 
-	            url: "index.php?option=com_servin2&task=consigpermitidas&view=ajaxs&tmpl=ajax&id=" + value,  
+	            url: "index.php?option=com_servin2&task=consi_pagos&view=ajaxs&tmpl=ajax&id=" + value + "&string="+"<?php print_r($this->item->consignacion) ?>", 
 	            async: true, 
 	            success: function(result){
 	            var obj = result;
 				objeto = JSON.parse(obj);
-            	console.log(objeto); 
             	js('#jform_consignacion').empty();
             	js("#jform_consignacion").append('<option abonado="" value="">Selecciona una opción</option>');
             	js.each( objeto, function( key, value ) {
@@ -51,7 +53,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
             		js("#jform_consignacion").append('<option '+s+' abonado="'+value['abono']+'" value="'+value['id']+'">'+value['descripcion']+'</option>');
 				});
 				js("#jform_consignacion").trigger("liszt:updated");
-
+				maximos(js('#jform_consignacion'));
             	},
 	            error: function(result) {
 	                console.log(result);
@@ -74,19 +76,21 @@ $document->addStyleSheet(JUri::root() . 'media/com_servin2/css/form.css');
 	js('#jform_tipo_consignacion').change(function() {
 		var radio=js("#jform_tipo_consignacion input[type='radio']:checked").val();
 		desbloquearchzc('#jform_consignacion');
-		llenarconsigpermitidas(radio);
+		llenarconsignaciones(radio);
 	});
 
 	js('.comprasventas').change(function() {
+		
+		maximos(js(this));
+	});
+	function maximos(eloption) {
 		js('#jform_pago').removeAttr("max");
-		js('#jform_pago').val("");
-		var cadena1 = js(this).find(":selected").text();
+		//js('#jform_pago').val("");
+		var cadena1 = eloption.find(":selected").text();
 		var cadena2 = cadena1.slice(cadena1.lastIndexOf("|")+2, cadena1.length);
 		js('#jform_pago').attr("max", cadena2 );
 		js('#lbldatos').text('Solo se pueden pagar '+cadena2+' pesos');
-		
-	});
-
+	}
 	js('#jform_tipo').change(function() {
 		clearselects();
 		js('#jform_pago').removeAttr("max");
