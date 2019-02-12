@@ -77,12 +77,12 @@ $sortFields = $this->getSortFields();
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_TIPO_TRANSACCION', 'a.`tipo_transaccion`', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<!-- <th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_COMPRAS', 'a.`compras`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_VENTAS', 'a.`ventas`', $listDirn, $listOrder); ?>
-				</th>
+				</th> -->
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_CONSIGNACIONES_TOTAL', 'a.`total`', $listDirn, $listOrder); ?>
 				</th>
@@ -174,13 +174,13 @@ $sortFields = $this->getSortFields();
 				</td>				<td>
 
 					<?php echo $item->tipo_transaccion; ?>
-				</td>				<td>
+				</td>			<!-- 	<td>
 
 					<?php echo $item->compras; ?>
 				</td>				<td>
 
 					<?php echo $item->ventas; ?>
-				</td>				<td>
+				</td> -->				<td>
 
 					<?php echo $item->total; ?>
 				</td>				<td>
@@ -197,7 +197,30 @@ $sortFields = $this->getSortFields();
 					<?php echo $item->fecha_limite; ?>
 				</td>				<td>
 
-					<?php echo $item->estatus; ?>
+					<?php switch ($item->estatus) {
+						case '1':
+							echo '<label  class="btn  btn-primary">';
+							echo "Consignación";
+							echo '</label>';
+							break;
+						case '2':
+							echo '<label  class="btn  ">';
+							echo "Devolución";
+							echo '</label>';
+							break;
+						case '3':
+							echo '<label  class="btn  btn-success">';
+							echo "Pagada";
+							echo '</label>';
+							break;
+						case '4':
+							echo '<label  class="btn  ">';
+							echo "Abonada";
+							echo '</label>';
+							break;
+					}; 
+					
+					?>	
 				</td>				<td>
 
 					<?php echo $item->fecha_devolucion; ?>

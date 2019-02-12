@@ -24,7 +24,7 @@
       <option value="0">COM_SERVIN2_PIEZAS_TIPO_OPTION_0</option>
       <option value="1">COM_SERVIN2_PIEZAS_TIPO_OPTION_1</option>
     </field>
-    <field name="existencia" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_EXISTENCIA" description="COM_SERVIN2_FORM_DESC_PIEZA_EXISTENCIA" hint="COM_SERVIN2_FORM_LBL_PIEZA_EXISTENCIA"/>
+    <field name="existencia" readonly="true" filter="safehtml" min="0" step="1" type="number" default="0" label="COM_SERVIN2_FORM_LBL_PIEZA_EXISTENCIA" description="COM_SERVIN2_FORM_DESC_PIEZA_EXISTENCIA" hint="COM_SERVIN2_FORM_LBL_PIEZA_EXISTENCIA"/>
     <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
   </fieldset>
 </form>

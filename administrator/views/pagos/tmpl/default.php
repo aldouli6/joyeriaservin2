@@ -74,7 +74,7 @@ $sortFields = $this->getSortFields();
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_PAGOS_TIPO', 'a.`tipo`', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<!-- <th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_PAGOS_TIPO_CONSIGNACION', 'a.`tipo_consignacion`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
@@ -85,7 +85,7 @@ $sortFields = $this->getSortFields();
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_PAGOS_VENTA', 'a.`venta`', $listDirn, $listOrder); ?>
-				</th>
+				</th> -->
 				<th class='left'>
 				<?php echo JHtml::_('searchtools.sort',  'COM_SERVIN2_PAGOS_PAGO', 'a.`pago`', $listDirn, $listOrder); ?>
 				</th>
@@ -154,7 +154,7 @@ $sortFields = $this->getSortFields();
 				</td>				<td>
 
 					<?php echo $item->tipo; ?>
-				</td>				<td>
+				</td>				<!-- <td>
 
 					<?php echo $item->tipo_consignacion; ?>
 				</td>				<td>
@@ -166,7 +166,7 @@ $sortFields = $this->getSortFields();
 				</td>				<td>
 
 					<?php echo $item->venta; ?>
-				</td>				<td>
+				</td> -->				<td>
 
 					<?php echo $item->pago; ?>
 				</td>				<td>

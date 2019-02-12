@@ -78,7 +78,7 @@ class Servin2ModelMateriales extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::populateState('a.nombre', 'asc');
+		parent::populateState('a.id', 'desc');
 
         parent::populateState($ordering, $direction);
 
@@ -185,7 +185,7 @@ class Servin2ModelMateriales extends JModelList
                 
 		// Add the list ordering clause.
 		$orderCol  = $this->state->get('list.ordering', "a.id");
-		$orderDirn = $this->state->get('list.direction', "ASC");
+		$orderDirn = $this->state->get('list.direction', "DESC");
 
 		if ($orderCol && $orderDirn)
 		{

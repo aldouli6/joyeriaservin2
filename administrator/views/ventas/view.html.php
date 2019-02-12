@@ -79,10 +79,10 @@ class Servin2ViewVentas extends JViewLegacy
 			{
 				JToolBarHelper::addNew('venta.add', 'JTOOLBAR_NEW');
 
-				if (isset($this->items[0]))
-				{
-					JToolbarHelper::custom('ventas.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
-				}
+				// if (isset($this->items[0]))
+				// {
+				// 	JToolbarHelper::custom('ventas.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
+				// }
 			}
 
 			if ($canDo->get('core.edit') && isset($this->items[0]))

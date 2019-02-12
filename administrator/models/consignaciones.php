@@ -286,7 +286,7 @@ class Servin2ModelConsignaciones extends JModelList
 		}
 		// Add the list ordering clause.
 		$orderCol  = $this->state->get('list.ordering', "a.id");
-		$orderDirn = $this->state->get('list.direction', "ASC");
+		$orderDirn = $this->state->get('list.direction', "DESC");
 
 		if ($orderCol && $orderDirn)
 		{

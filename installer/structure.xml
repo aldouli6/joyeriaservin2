@@ -106,7 +106,7 @@
     <field action="add" field_name="created_at" field_type="DATETIME" description=""/>
     <field action="add" field_name="modified_at" field_type="DATETIME" description=""/>
     <field action="add" field_name="proveedor" field_type="INT" field_length="11" description=""/>
-    <field action="add" field_name="fecha" field_type="DATETIME" description=""/>
+    <field action="add" field_name="fecha" field_type="DATE" description=""/>
     <field action="change" old_name="piezas" new_name="pieza" field_name="pieza" field_type="INT" field_length="11" description=""/>
     <field action="change" old_name="piezas" new_name="cantidad" field_name="cantidad" field_type="DOUBLE" description=""/>
     <field action="add" field_name="total" field_type="DOUBLE" description=""/>
@@ -142,7 +142,7 @@
     <field action="add" field_name="cliente" field_type="INT" field_length="11" description=""/>
     <field action="change" old_name="piezas" new_name="pieza" field_name="pieza" field_type="INT" field_length="11" description=""/>
     <field action="change" old_name="piezas" new_name="cantidad" field_name="cantidad" field_type="DOUBLE" description=""/>
-    <field action="add" field_name="fecha" field_type="DATETIME" description=""/>
+    <field action="add" field_name="fecha" field_type="DATE" description=""/>
     <field action="add" field_name="total" field_type="DOUBLE" description=""/>
     <field action="change" old_name="abono" new_name="abonado" field_name="abonado" field_type="DOUBLE" description=""/>
     <field action="change" field_name="pagada" field_type="VARCHAR" field_length="255" description=""/>
@@ -169,10 +169,10 @@
     <field action="change" field_name="abo_dev" field_type="VARCHAR" field_length="255" description=""/>
     <field action="add" field_name="devoluciones" field_type="VARCHAR" field_length="255" description=""/>
     <field action="add" field_name="adeudo" field_type="DOUBLE" description=""/>
-    <field action="add" field_name="fecha_emision" field_type="DATETIME" description=""/>
-    <field action="add" field_name="fecha_limite" field_type="DATETIME" description=""/>
+    <field action="add" field_name="fecha_emision" field_type="DATE" description=""/>
+    <field action="add" field_name="fecha_limite" field_type="DATE" description=""/>
     <field action="add" field_name="devolucion" field_type="VARCHAR" field_length="255" description=""/>
-    <field action="add" field_name="fecha_devolucion" field_type="DATETIME" description=""/>
+    <field action="add" field_name="fecha_devolucion" field_type="DATE" description=""/>
     <field action="add" field_name="estatus" field_type="VARCHAR" field_length="255" description=""/>
     <field action="remove" field_name="gramos"/>
   </table>

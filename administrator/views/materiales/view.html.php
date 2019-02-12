@@ -41,8 +41,8 @@ class Servin2ViewMateriales extends JViewLegacy
 		$this->pagination = $this->get('Pagination');
         $this->filterForm = $this->get('FilterForm');
         $this->activeFilters = $this->get('ActiveFilters');
-
-		// Check for errors.
+        
+        		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
 			throw new Exception(implode("\n", $errors));
@@ -58,18 +58,18 @@ class Servin2ViewMateriales extends JViewLegacy
 
 	/**
 	 * Add the page title and toolbar.
-	 *
+	 *.
 	 * @return void
 	 *
 	 * @since    1.6
 	 */
 	protected function addToolbar()
 	{
+		
 		$state = $this->get('State');
 		$canDo = Servin2Helper::getActions();
-
+		$user = JFactory::getUser();
 		JToolBarHelper::title(JText::_('COM_SERVIN2_TITLE_MATERIALES'), 'materiales.png');
-
 		// Check if the form exists before showing the add/edit buttons
 		$formPath = JPATH_COMPONENT_ADMINISTRATOR . '/views/material';
 
@@ -116,7 +116,10 @@ class Servin2ViewMateriales extends JViewLegacy
 				JToolBarHelper::custom('materiales.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 			}
 		}
-
+		// if ($canDo->get('core.delete'))
+		// {
+		// 	JToolBarHelper::trash('materiales.trash', 'JTOOLBAR_TRASH');		
+		// }
 		// Show trash and delete for components that uses the state field
 		if (isset($this->items[0]->state))
 		{

@@ -90,10 +90,10 @@ class Servin2ViewVenta extends JViewLegacy
 		}
 
 		// If an existing item, can save to a copy.
-		if (!$isNew && $canDo->get('core.create'))
-		{
-			JToolBarHelper::custom('venta.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
-		}
+		// if (!$isNew && $canDo->get('core.create'))
+		// {
+		// 	JToolBarHelper::custom('venta.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+		// }
 
 		// Button for version control
 		if ($this->state->params->get('save_history', 1) && $user->authorise('core.edit')) {

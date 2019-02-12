@@ -168,7 +168,25 @@ $sortFields = $this->getSortFields();
 					<?php echo $item->abonado; ?>
 				</td>				<td>
 
-					<?php echo $item->pagada; ?>
+					<?php switch ($item->pagada) {
+						case '0':
+							echo '<label  class="btn  btn-primary">';
+							echo "No";
+							echo '</label>';
+							break;
+						case '1':
+							echo '<label  class="btn  btn-success">';
+							echo "Si";
+							echo '</label>';
+							break;
+						case '2':
+							echo '<label  class="btn  ">';
+							echo "Consignación";
+							echo '</label>';
+							break;
+					}; 
+					
+					?>
 				</td>
 
 					</tr>
